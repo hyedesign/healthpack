@@ -1,10 +1,10 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
-  -- File: login
+  -- File: docHomepage
   -- Date Modified: 04/14/09 
-  -- Author: Alex Bassett
-  -- Description: This file allows the user to log into the
-  -- system.
+  -- Author: Taylor Evans 
+  -- Description: This file displays the homepage of the doctor   
+  -- users
   -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,7 +12,8 @@
 
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
-<title>Log In</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Doctor Information</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -20,16 +21,15 @@
 
 <div id="container">
 <div id="header"></div>
-<div id="message"></div>
+<div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
   
-  
-  
-  <ul>
-    <li><a href="#">About Us</a></li>
-    <li><a href="#">Register</a></li>
-    <li><a href="#">Login</a></li>
+   <ul>
+    <li><a href="userHomepage.html">User Information</a></li>
+    <li><a href="patientList.html">Patients</a></li>
+    <li><a href="export.jsp">Export</a></li>
+    <li><a href="logout.jsp">Log Out</a></li>
   </ul>
  
 </div>
@@ -39,22 +39,19 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
-
-<h1>Login</h1>
-<p>Please enter your login information</p>
-<form name="login" method=post action="makeSession.jsp">
+<h1>Doctor Information</h1>
 	<table border="0">
 	<tr>
-		<td>Username</td>
-		<td><input type="text" name="username" size=20 /></td>
+		<td>Last Login:</td>
+		<td>##/##/## at ##:##:##</td>
 	</tr>
 	<tr>
-		<td>Password</td>
-		<td><input type="password" name="password" size=20 /></td>
+		<td>Email:</td>
+		<td>Doctor@HealthPack.net</td>
 	</tr>
 	</table>
-<p><input type=submit /></p>
-</form>
+
+<p><a href="editDocInfo.html">Edit Doctor Info</a></p>
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 
