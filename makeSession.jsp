@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<%@page import="core.User"%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Making a Session</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
@@ -25,8 +26,10 @@
 		String password = request.getParameter( "password" );
 		if(!u.lookupUser(username, password))
 			response.sendRedirect( "login.html" );
-		session.setAttribute( "userName", u.userName );
+		else {
+		session.setAttribute( "id", u.userId);
 		response.sendRedirect( "patientList.jsp" );
+		}
 	%>
 
 	<h1>Verifying your login information</h1>
