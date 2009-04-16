@@ -1,8 +1,18 @@
+<!-- Jam Packed Inventions
+  -- Healthpack v0.2
+  -- File: regSuccess
+  -- Date Modified: 04/14/09 
+  -- Author: Alex Bassett
+  -- Description: This file displays that the 
+  -- user has successfully registered.
+  -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+<title>Registration Successful</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -10,15 +20,16 @@
 
 <div id="container">
 <div id="header"></div>
-<div id="message">UserName</div>
+<div id="message"></div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
   
+  
+  
   <ul>
-    <li><a href="#">User Information</a></li>
-    <li><a href="#">Patients</a></li>
-    <li><a href="#">Export</a></li>
-	<li><a href="#">Log Out</a></li>
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">Register</a></li>
+    <li><a href="#">Login</a></li>
   </ul>
  
 </div>
@@ -28,19 +39,9 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
-<h1>Doctor Information</h1>
-	<table border="0">
-	<tr>
-		<td>Last Login:</td>
-		<td>##/##/## at ##:##:##</td>
-	</tr>
-	<tr>
-		<td>Email:</td>
-		<td>Doctor@HealthPack.net</td>
-	</tr>
-	</table>
-
-<p><a href="editDocInfo.html">Edit Doctor Info</a></p>
+<h1>Congratulations</h1>
+<p>You are now registered for HealthPack.</p>
+<a href="homepage.html">Return to home</a> 
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 
