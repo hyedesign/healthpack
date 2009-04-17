@@ -12,7 +12,6 @@
 <div id="header"></div>
 <div id="message">UserName</div>
 <div id="navigation">
-  <%@include file="LinksInc.jsp" %>
 </div>
 
 <div id="content">
