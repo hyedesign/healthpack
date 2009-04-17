@@ -9,6 +9,10 @@
 * Edited  : 4/16/2009 by Alex Bassett
 * Changes : added comments,
 * 			added lookupUser(int id)
+* 
+* Edited  : 4/17/2009 by Alex Bassett
+* Changes : added loadUserData()
+* 			cleaned up lookupUser()
 *
 **********************************************************/
 package core;
@@ -64,38 +68,22 @@ public class User {
 			ResultSet results = statement.executeQuery ("SELECT * FROM users WHERE username='"+username+
 							"' AND userpassword='"+password+"'");
 			
-			// attempt to access first row and load user
-			if (results.next()) {	
-				userId = results.getInt("userid");
-				userName = results.getString("username");
-				userPassword = results.getString("userpassword");
-				userEmail = results.getString("useremail");
-				userPhone = results.getString("userphone");
-				userDescription = results.getString("userdescription");
-				userFirstName = results.getString("userfirstname");
-				userLastName = results.getString("userlastname");
-				// convert int into boolean
-				if (results.getInt("userisdoctor") == 0) 
-					userIsDoctor = false;
-				else userIsDoctor = true;
-			}
-			// user not found, close connections and exit
-			else {
-				results.close();
-				statement.close();
-				dba.disconnect();
-				return false;
-			}
+			// attempt to load the user from the ResultSet
+			boolean successfulLoad = loadUserData(results);
+			
+			// close connections
 			results.close();
 			statement.close();
+			dba.disconnect();
+			//return true if user was found
+			return successfulLoad;
+			
 		} catch (SQLException e) {
             System.err.println ("Method login() performed bad SQL call");
             System.err.println (e.toString());
+			dba.disconnect();
             return false;
 		}
-		// close connection and exit
-		dba.disconnect();
-		return true;
 	}
 
 	/**
@@ -116,37 +104,58 @@ public class User {
 			Statement statement = dba.connection.createStatement ();
 			ResultSet results = statement.executeQuery ("SELECT * FROM users WHERE userid='"+id+"'");
 			
-			// attempt to access first row and load user
-			if (results.next()) {	
-				userId = results.getInt("userid");
-				userName = results.getString("username");
-				userPassword = results.getString("userpassword");
-				userEmail = results.getString("useremail");
-				userPhone = results.getString("userphone");
-				userDescription = results.getString("userdescription");
-				userFirstName = results.getString("userfirstname");
-				userLastName = results.getString("userlastname");
-				// convert int into boolean
-				if (results.getInt("userisdoctor") == 0) 
-					userIsDoctor = false;
-				else userIsDoctor = true;
-			}
-			// user not found, close connections and exit
-			else {
-				results.close();
-				statement.close();
-				dba.disconnect();
-				return false;
-			}
+			// attempt to load the user from the ResultSet
+			boolean successfulLoad = loadUserData(results);
+			
+			// close connections
 			results.close();
 			statement.close();
+			dba.disconnect();
+			//return true if user was found
+			return successfulLoad;
+			
 		} catch (SQLException e) {
             System.err.println ("Method login() performed bad SQL call");
             System.err.println (e.toString());
+			dba.disconnect();
             return false;
 		}
-		// close connection and exit
-		dba.disconnect();
-		return true;
+	}
+	
+	/**
+	 * Takes a ResultSet object and loads the user data from it.
+	 * The result set must be the result of a query to the users
+	 * table.
+	 * 
+	 * @param rs the result set that contains a single user's data
+	 * @return true when the data is loaded, false when the ResultSet is
+	 * empty and there is no data to load
+	 * @author Alex Bassett
+	 */
+	private boolean loadUserData (ResultSet rs) {
+		// check that the resultset isn't empty and load the user data
+		try {
+			if (rs.first()) {
+				userId = rs.getInt("userid");
+				userName = rs.getString("username");
+				userPassword = rs.getString("userpassword");
+				userEmail = rs.getString("useremail");
+				userPhone = rs.getString("userphone");
+				userDescription = rs.getString("userdescription");
+				userFirstName = rs.getString("userfirstname");
+				userLastName = rs.getString("userlastname");
+				// convert int into boolean
+				if (rs.getInt("userisdoctor") == 0) 
+					userIsDoctor = false;
+				else userIsDoctor = true;
+				return true;
+			}
+			// the resultset is empty, no data loaded
+			else return false;
+		} catch (SQLException e) {
+			System.err.println("Bad ResultSet call from User.loadUserData()");
+            System.err.println (e.toString());
+			return false;
+		}
 	}
 }
