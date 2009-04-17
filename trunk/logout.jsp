@@ -20,7 +20,7 @@
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
 	<h1>Logging out of your account...</h1>
-	<a href="homepage.html">Continue</a>
+	<a href="index.html">Continue</a>
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 
