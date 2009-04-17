@@ -24,13 +24,7 @@
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
   
-  
-  <ul>
-    <li><a href="userHomepage.html">User Information</a></li>
-    <li><a href="patientList.html">Patients</a></li>
-    <li><a href="export.jsp">Export</a></li>
-    <li><a href="logout.jsp">Log Out</a></li>
-  </ul>
+  <%@include file="LinksInc.jsp" %>
  
 </div>
 
