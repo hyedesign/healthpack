@@ -31,9 +31,7 @@
 
 	<%
 		User u = new User();
-		String username = request.getParameter( "username" );
-		String password = request.getParameter( "password" );
-		if(!u.lookupUser(username, password))
+		if(!u.lookupUser(request.getParameter( "username" ), request.getParameter( "password" )))
 			response.sendRedirect( "login.html" );
 		else {
 		session.setAttribute( "id", u.userId);
