@@ -27,14 +27,7 @@
 <div id="message"></div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  
-  
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="register.html">Register</a></li>
-    <li><a href="login.html">Log In</a></li>
-  </ul>
- 
+  <%@include file="LinksIncHOME.jsp" %>
 </div>
 
 <div id="content">
@@ -85,8 +78,8 @@ requirements and developed a design for their aptly named HealthPack system.</p>
 
 </div>
 <div id="footer"> 
-<p>This Site is brought to you by Jam Packed Inventions Inc.</p>
-  </div>
+  <%@include file="LinksInc.jsp" %>
+</div>
 
 </div>
 

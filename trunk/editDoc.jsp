@@ -1,14 +1,5 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
-  -- File: editAppointment
-  -- Date Modified: 04/14/09 
-  -- Author: Han Dong
-  -- Description: This file allows the user to view and edit 
-  -- patient appointments
-  -->
-  
-<!-- Jam Packed Inventions
-  -- Healthpack v0.2
   -- File: editDoc
   -- Date Modified: 04/14/09 
   -- Author: Han Dong 

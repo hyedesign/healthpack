@@ -1,18 +1,18 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
-  -- File: userHomepage
+  -- File: editDocInfo
   -- Date Modified: 04/14/09 
   -- Author: Taylor Evans
-  -- Description: This file displays the user's 
-  -- basic homepage.
+  -- Description: This file allows the doctor to edit its
+  -- personal information.
   -->
-
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
-<title>User Page</title>
+<title>Edit Doctor Info</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -23,13 +23,7 @@
 <div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  
-  <ul>
-    <li><a href="userHomepage.html">User Information</a></li>
-    <li><a href="patientList.jsp">Patients</a></li>
-    <li><a href="export.jsp">Export</a></li>
-	<li><a href="logout.jsp">Log Out</a></li>
-  </ul>
+  <%@include file="LinksInc.jsp" %>
  
 </div>
 
@@ -38,26 +32,32 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
-
-<h1>User Information</h1>
-
+<h1>Edit Doctor Info</h1>
+<p>Please enter your information</p>
+<form name="editDocInfo" method=post action="verifyDocInfo.jsp">
 	<table border="0">
 	<tr>
-		<td>Last Login:</td>
-		<td>##/##/## at ##:##:##</td>
+		<td>New Email</td>
+		<td><input type="text" name="email" size=20 /></td>
 	</tr>
 	<tr>
-		<td>Email:</td>
-		<td>User@HealthPack.net</td>
+		<td>New Password</td>
+		<td><input type="password" name="password" size=20 /></td>
+	</tr>
+	<tr>
+		<td>Re-enter New PW</td>
+		<td><input type="password" name="password2" size=20 /></td>
 	</tr>
 	</table>
-<p><a href="editUserInfo.html">Edit User Info</a></p>
+<p><input type=submit /></p>
+</form>
+
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
 <div id="footer"> 
-<p>This Site is brought to you by Jam Packed Inventions Inc.</p>
-  </div>
+  <%@include file="FooterInc.jsp" %>
+</div>
 
 </div>
 
@@ -67,4 +67,3 @@
 
 </body>
 </html>
-  

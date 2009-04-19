@@ -1,19 +1,18 @@
 <!-- Jam Packed Inventions
-  -- Healthpack v0.11
-  -- File: docHomepage
+  -- Healthpack v0.2
+  -- File: userHomepage
   -- Date Modified: 04/14/09 
-  -- Author: Taylor Evans 
-  -- Description: This file displays the homepage of the doctor   
-  -- users
+  -- Author: Taylor Evans
+  -- Description: This file displays the user's 
+  -- basic homepage.
   -->
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Doctor Information</title>
+<title>User Page</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -24,14 +23,7 @@
 <div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  
-   <ul>
-    <li><a href="userHomepage.html">User Information</a></li>
-    <li><a href="patientList.jsp">Patients</a></li>
-    <li><a href="export.jsp">Export</a></li>
-    <li><a href="logout.jsp">Log Out</a></li>
-  </ul>
- 
+  <%@include file="LinksInc.jsp" %>
 </div>
 
 <div id="content">
@@ -39,8 +31,9 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
-<h1>Doctor Information</h1>
-<!-- TESTING !!!!!! -->
+
+<h1>User Information</h1>
+
 	<table border="0">
 	<tr>
 		<td>Last Login:</td>
@@ -48,18 +41,16 @@
 	</tr>
 	<tr>
 		<td>Email:</td>
-		<td>Doctor@HealthPack.net</td>
+		<td>User@HealthPack.net</td>
 	</tr>
 	</table>
-
-<p><a href="editDocInfo.html">Edit Doctor Info</a></p>
-
+<p><a href="editUserInfo.html">Edit User Info</a></p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
 <div id="footer"> 
-<p>This Site is brought to you by Jam Packed Inventions Inc.</p>
-  </div>
+  <%@include file="FooterInc.jsp" %>
+</div>
 
 </div>
 
@@ -69,3 +60,4 @@
 
 </body>
 </html>
+  

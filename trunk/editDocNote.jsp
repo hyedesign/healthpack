@@ -1,17 +1,18 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
-  -- File: docPatients
+  -- File: editDocNote
   -- Date Modified: 04/14/09 
   -- Author: Taylor Evans 
-  -- Description: This file displays patient list of a doctor   
+  -- Description: This file allows the a doctor to edit his
+  -- or her note to a patient.
   -->
-  
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
-<title>Doctor Patients</title>
+<title>Edit Doctor Note</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -22,13 +23,7 @@
 <div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  
-   <ul>
-    <li><a href="userHomepage.html">User Information</a></li>
-    <li><a href="patientList.jsp">Patients</a></li>
-    <li><a href="export.jsp">Export</a></li>
-    <li><a href="logout.jsp">Log Out</a></li>
-  </ul>
+  <%@include file="LinksInc.jsp" %>
  
 </div>
 
@@ -38,22 +33,22 @@
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
 
-<h1>Doctor Patients</h1>
-
-<table border="1">
+<p>Please enter your note for the patient</p>
+<form name="editDocNote" method=post action="verifyDocNote.jsp">
+<table border="0">
 <tr>
-	<td><b>PatientName</b></td>
-</tr>
-<tr>
-	<td><a href="docPatientHome.html">John Smith</a></td>
+	<td>Doctor's Note</td>
+	<td><input type="text" name="docnote" size=20 /></td>
 </tr>
 </table>
+<p><input type=submit /></p>
+</form>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
 <div id="footer"> 
-<p>This Site is brought to you by Jam Packed Inventions Inc.</p>
-  </div>
+  <%@include file="FooterInc.jsp" %>  
+</div>
 
 </div>
 
