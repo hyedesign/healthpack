@@ -1,10 +1,10 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
-  -- File: editDocNote
+  -- File: login
   -- Date Modified: 04/14/09 
-  -- Author: Taylor Evans 
-  -- Description: This file allows the a doctor to edit his
-  -- or her note to a patient.
+  -- Author: Alex Bassett
+  -- Description: This file allows the user to log into the
+  -- system.
   -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,7 +12,7 @@
 
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
-<title>Edit Doctor Note</title>
+<title>Log In</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -20,19 +20,11 @@
 
 <div id="container">
 <div id="header"></div>
-<div id="message">UserName</div>
+<div id="message"></div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
+  <%@include file="LinksIncHOME.jsp" %>
   
-  
-  
-  <ul>
-    <li><a href="userHomepage.html">User Information</a></li>
-    <li><a href="patientList.jsp">Patients</a></li>
-    <li><a href="export.jsp">Export</a></li>
-    <li><a href="logout.jsp">Log Out</a></li>
-  </ul>
- 
 </div>
 
 <div id="content">
@@ -41,22 +33,28 @@
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
 
-<p>Please enter your note for the patient</p>
-<form name="editDocNote" method=post action="verifyDocNote.jsp">
-<table border="0">
-<tr>
-	<td>Doctor's Note</td>
-	<td><input type="text" name="docnote" size=20 /></td>
-</tr>
-</table>
+<h1>Login</h1>
+<p>Please enter your login information</p>
+<form name="login" method=post action="makeSession.jsp">
+	<table border="0">
+	<tr>
+		<td>Username</td>
+		<td><input type="text" name="username" size=20 /></td>
+	</tr>
+	<tr>
+		<td>Password</td>
+		<td><input type="password" name="password" size=20 /></td>
+	</tr>
+	</table>
 <p><input type=submit /></p>
 </form>
+
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
 <div id="footer"> 
-<p>This Site is brought to you by Jam Packed Inventions Inc.</p>
-  </div>
+  <%@include file="LinksInc.jsp" %>
+</div>
 
 </div>
 

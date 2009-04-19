@@ -1,18 +1,19 @@
 <!-- Jam Packed Inventions
-  -- Healthpack v0.2
-  -- File: editDocInfo
+  -- Healthpack v0.11
+  -- File: docHomepage
   -- Date Modified: 04/14/09 
-  -- Author: Taylor Evans
-  -- Description: This file allows the doctor to edit its
-  -- personal information.
+  -- Author: Taylor Evans 
+  -- Description: This file displays the homepage of the doctor   
+  -- users
   -->
-  
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
-<title>Edit Doctor Info</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Doctor Information</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -23,15 +24,7 @@
 <div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  
-  
-  
-   <ul>
-    <li><a href="userHomepage.html">User Information</a></li>
-    <li><a href="patientList.jsp">Patients</a></li>
-    <li><a href="export.jsp">Export</a></li>
-    <li><a href="logout.jsp">Log Out</a></li>
-  </ul>
+  <%@include file="LinksInc.jsp" %>
  
 </div>
 
@@ -40,31 +33,26 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
-<h1>Edit Doctor Info</h1>
-<p>Please enter your information</p>
-<form name="editDocInfo" method=post action="verifyDocInfo.jsp">
+<h1>Doctor Information</h1>
+<!-- TESTING !!!!!! -->
 	<table border="0">
 	<tr>
-		<td>New Email</td>
-		<td><input type="text" name="email" size=20 /></td>
+		<td>Last Login:</td>
+		<td>##/##/## at ##:##:##</td>
 	</tr>
 	<tr>
-		<td>New Password</td>
-		<td><input type="password" name="password" size=20 /></td>
-	</tr>
-	<tr>
-		<td>Re-enter New PW</td>
-		<td><input type="password" name="password2" size=20 /></td>
+		<td>Email:</td>
+		<td>Doctor@HealthPack.net</td>
 	</tr>
 	</table>
-<p><input type=submit /></p>
-</form>
+
+<p><a href="editDocInfo.jsp">Edit Doctor Info</a></p>
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
 <div id="footer"> 
-<p>This Site is brought to you by Jam Packed Inventions Inc.</p>
+  <%@include file="FooterInc.jsp" %>
   </div>
 
 </div>

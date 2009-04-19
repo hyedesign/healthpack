@@ -23,15 +23,7 @@
 <div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  
-  
-  <ul>
-    <li><a href="userHomepage.html">User Information</a></li>
-    <li><a href="patientList.jsp">Patients</a></li>
-    <li><a href="export.jsp">Export</a></li>
-    <li><a href="logout.jsp">Log Out</a></li>
-  </ul>
- 
+  <%@include file="LinksInc.jsp" %>
 </div>
 
 <div id="content">
@@ -101,8 +93,8 @@
 
 </div>
 <div id="footer"> 
-<p>This Site is brought to you by Jam Packed Inventions Inc.</p>
-  </div>
+  <%@include file="LinksInc.jsp" %>
+</div>
 
 </div>
 

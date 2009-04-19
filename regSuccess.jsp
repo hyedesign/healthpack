@@ -1,10 +1,10 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
-  -- File: login
+  -- File: regSuccess
   -- Date Modified: 04/14/09 
   -- Author: Alex Bassett
-  -- Description: This file allows the user to log into the
-  -- system.
+  -- Description: This file displays that the 
+  -- user has successfully registered.
   -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,7 +12,7 @@
 
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
-<title>Log In</title>
+<title>Registration Successful</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -23,15 +23,8 @@
 <div id="message"></div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  
-  
-  
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="register.html">Register</a></li>
-    <li><a href="login.html">Log In</a></li>
-  </ul>
-  
+  <%@include file="LinksIncHOME.jsp" %>
+ 
 </div>
 
 <div id="content">
@@ -39,29 +32,16 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
-
-<h1>Login</h1>
-<p>Please enter your login information</p>
-<form name="login" method=post action="makeSession.jsp">
-	<table border="0">
-	<tr>
-		<td>Username</td>
-		<td><input type="text" name="username" size=20 /></td>
-	</tr>
-	<tr>
-		<td>Password</td>
-		<td><input type="password" name="password" size=20 /></td>
-	</tr>
-	</table>
-<p><input type=submit /></p>
-</form>
+<h1>Congratulations</h1>
+<p>You are now registered for HealthPack.</p>
+<a href="index.jsp">Return to home</a> 
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
 <div id="footer"> 
-<p>This Site is brought to you by Jam Packed Inventions Inc.</p>
-  </div>
+  <%@include file="FooterInc.jsp" %>
+</div>
 
 </div>
 
