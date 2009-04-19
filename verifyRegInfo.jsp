@@ -31,7 +31,7 @@
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
 	<h1>Verifying your registration information</h1>
-	<a href="regSuccess.html">Continue</a>
+	<a href="regSuccess.jsp">Continue</a>
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 

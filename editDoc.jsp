@@ -62,7 +62,7 @@
 	<input type="submit" name="Submit" value="Submit" id="submit"/>
 	<input type="reset" name="Reset" value="Reset" id="reset" onclick="document.getElementById('edit').reset();"/>
 </form>
-<p><a href="patientHome.html"> Return </a> </p>
+<p><a href="patientHome.jsp"> Return </a> </p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>

@@ -39,14 +39,14 @@
 	<td><b>PatientName</b></td>
 </tr>
 <tr>
-	<td><a href="docPatientHome.html">John Smith</a></td>
+	<td><a href="docPatientHome.jsp">John Smith</a></td>
 </tr>
 </table>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
 <div id="footer"> 
-  <%@include file="LinksInc.jsp" %>
+  <%@include file="FooterInc.jsp" %>
 </div>
 
 </div>

@@ -78,7 +78,7 @@ requirements and developed a design for their aptly named HealthPack system.</p>
 
 </div>
 <div id="footer"> 
-  <%@include file="LinksInc.jsp" %>
+  <%@include file="FooterInc.jsp" %>
 </div>
 
 </div>

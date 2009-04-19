@@ -35,7 +35,7 @@
 	%>
 	<h1>Congratulations</h1>
 	<h2>Your user information has been updated</h2>
-	<a href="userHomepage.html">Continue to HomePage</a>
+	<a href="userHomepage.jsp">Continue to HomePage</a>
 	<% } else { %>
 	<h1>Error</h1>
 	<p>Please make sure your email is of the following format XX@XX.XX</p>

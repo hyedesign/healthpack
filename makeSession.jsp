@@ -32,7 +32,7 @@
 	<%
 		User u = new User();
 		if(!u.lookupUser(request.getParameter( "username" ), request.getParameter( "password" )))
-			response.sendRedirect( "login.html" );
+			response.sendRedirect( "login.jsp" );
 		else {
 		session.setAttribute( "id", u.userId);
 		response.sendRedirect( "patientList.jsp" );

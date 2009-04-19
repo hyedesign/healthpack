@@ -21,7 +21,7 @@
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
 	<h1>Exporting your user and patient information...</h1>
-	<a href="userHomepage.html">Continue</a>
+	<a href="userHomepage.jsp">Continue</a>
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 

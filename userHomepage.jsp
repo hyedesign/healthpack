@@ -44,7 +44,7 @@
 		<td>User@HealthPack.net</td>
 	</tr>
 	</table>
-<p><a href="editUserInfo.html">Edit User Info</a></p>
+<p><a href="editUserInfo.jsp">Edit User Info</a></p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
