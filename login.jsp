@@ -53,7 +53,7 @@
 
 </div>
 <div id="footer"> 
-  <%@include file="LinksInc.jsp" %>
+  <%@include file="FooterInc.jsp" %>
 </div>
 
 </div>
