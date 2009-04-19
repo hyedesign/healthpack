@@ -21,7 +21,7 @@
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
 	<h1>Verifying your patient information</h1>
-	<a href="patientHome.html">Continue</a>
+	<a href="patientHome.jsp">Continue</a>
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 

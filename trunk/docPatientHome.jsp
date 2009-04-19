@@ -45,7 +45,7 @@
 </tr>
 </table>
 
-<a href="editDocNote.html">Edit Doctor Note</a>
+<a href="editDocNote.jsp">Edit Doctor Note</a>
 
 <p>&nbsp;</p>
 

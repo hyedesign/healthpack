@@ -54,7 +54,7 @@
 	</script>
 </form>
 
-<p><a href="patientHome.html"> Return </a> </p>
+<p><a href="patientHome.jsp"> Return </a> </p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>

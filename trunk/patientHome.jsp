@@ -105,7 +105,7 @@
 	<td>111-22-3333</td>
 </tr>
 </table>
-<a href="editPatient.html">Edit Patient Info</a>
+<a href="editPatient.jsp">Edit Patient Info</a>
 <p>&nbsp;</p>
 <h2>APPOINTMENTS</h2>
 <table border="1">
@@ -179,7 +179,7 @@
 
 </div>
 <div id="footer"> 
-  <%@include file="LinksInc.jsp" %>
+  <%@include file="FooterInc.jsp" %>
 </div>
 
 </div>

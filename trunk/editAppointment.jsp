@@ -103,7 +103,7 @@
 	<input type="reset" name="Reset" value="Reset" id="reset"/>
 </form>
 
-<p><a href="patientHome.html"> Return </a> </p>
+<p><a href="patientHome.jsp"> Return </a> </p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>

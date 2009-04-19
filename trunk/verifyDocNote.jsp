@@ -21,7 +21,7 @@
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
 	<h1>Updating Doctor Note</h1>
-	<a href="docPatientHome.html">Continue</a>
+	<a href="docPatientHome.jsp">Continue</a>
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 

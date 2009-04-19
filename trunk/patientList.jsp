@@ -23,9 +23,7 @@
 <div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  
   <%@include file="LinksInc.jsp" %>
- 
 </div>
 
 <div id="content">
@@ -36,8 +34,8 @@
 <h1>User Patients</h1>
 <table border="0">
 <tr>
-	<td><a href="editPatient.html">Add</a></td>
-	<td><a href="editPatient.html">Edit</a></td>
+	<td><a href="editPatient.jsp">Add</a></td>
+	<td><a href="editPatient.jsp">Edit</a></td>
 	<td><a href="#">Delete</a></td>
 </tr>
        </table>
@@ -46,7 +44,7 @@
 	<td><b>PatientName</b></td>
 </tr>
 <tr>
-	<td><a href="patientHome.html">John Smith</a></td>
+	<td><a href="patientHome.jsp">John Smith</a></td>
 </tr>
 </table>
 
@@ -56,8 +54,8 @@
 
 </div>
 <div id="footer"> 
-<p>This Site is brought to you by Jam Packed Inventions Inc.</p>
-  </div>
+  <%@include file="FooterInc.jsp" %>
+</div>
 
 </div>
 

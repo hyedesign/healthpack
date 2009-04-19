@@ -22,8 +22,8 @@
 
 	<h1>Verifying your login information</h1>
 	<p>Verifying your credentials and setting up your session</p>
-	<a href="userHomepage.html">Continue as User</a>
-	<a href="docHomepage.html">Continue as Doctor</a>
+	<a href="userHomepage.jsp">Continue as User</a>
+	<a href="docHomepage.jsp">Continue as Doctor</a>
 	
 <!-- ********************* STOP HERE !!!! ********************* -->
 
