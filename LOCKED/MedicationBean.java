@@ -26,13 +26,13 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 public class MedicationBean implements ActionBean {
     private ActionBeanContext context;
     @Validate(required=true) private String medicationName;
-    @Validate(required=false) private double expirationMonth;
-    @Validate(required=false) private double expirationDay;
-    @Validate(required=false) private double expirationYear;
-    @Validate(required=false) private double refillMonth;
-    @Validate(required=false) private double refillDay;
-    @Validate(required=false) private double refillYear;
-    @Validate(required=false) private String description;
+    @Validate(required=true) private double expirationMonth;
+    @Validate(required=true) private double expirationDay;
+    @Validate(required=true) private double expirationYear;
+    @Validate(required=true) private double refillMonth;
+    @Validate(required=true) private double refillDay;
+    @Validate(required=true) private double refillYear;
+    @Validate(required=false, maxlength=255) private String description;
 
     public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
