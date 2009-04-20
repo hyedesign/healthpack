@@ -1,5 +1,18 @@
 package core;
 
+/**********************************************************
+* File: core.AllergiesBean.java
+* Author: Taylor Evans
+* Date Created: 4/19/2009
+*
+* Description: The AllergiesBean class works with 
+*              editAllergies.jsp to verify form inputs
+*
+* Edited  : 4/20/2009 by Taylor Evans
+* Changes : added header comment
+*
+**********************************************************/
+
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.ForwardResolution;
