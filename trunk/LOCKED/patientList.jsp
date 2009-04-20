@@ -30,24 +30,54 @@
 <div id="text">
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
+<% 
+	
+	java.util.ArrayList<Integer> arrayOfPatients = new java.util.ArrayList<Integer>();
+	core.PatientBean patient = new core.PatientBean();
+	int userId = 0;
+	
+	try {
+	session.setAttribute( "id", 0);
+	userId = Integer.parseInt((String)session.getAttribute("id"));
+	arrayOfPatients = core.PatientBean.lookupPatientsByUserID(userId);
+	patient = new core.PatientBean();
+	}catch (Exception e){
+		
+	}
 
+	
+	
+	%>
 <h1>User Patients</h1>
-<table border="0">
-<tr>
-	<td><a href="editPatient.jsp">Add</a></td>
-	<td><a href="editPatient.jsp">Edit</a></td>
-	<td><a href="#">Delete</a></td>
-</tr>
-       </table>
-<table border="1">
-<tr>
-	<td><b>PatientName</b></td>
-</tr>
-<tr>
-	<td><a href="patientHome.jsp">John Smith</a></td>
-</tr>
-</table>
 
+<table width="400" border="1" summary="This table includes all patients for the specific user">
+  <tr>
+    <td width="250" align="center">Patient Name</td>
+    <td colspan="2"  align="center">Action</td>
+  </tr>
+  
+  <% 
+  	for (int i = 0; i < arrayOfPatients.size(); i++){
+  		patient = new core.PatientBean(userId);	
+  %>
+  
+  <tr>
+  	<%String name = patient.getPatientFirstName() + " " 
+  				  + patient.getPatientMiddleName() + " " 
+  				  + patient.getPatientLastName();%>
+  
+    <td align="center"><a href="patientHome.jsp.jsp?value=<%patient.getPatientId();%>"> 
+    						<% System.out.println(name);%> </a></td>
+    		
+    <td width="70" align="center"><a href="editPatient.jsp?value=<%patient.getPatientId();%>"> Edit </a></td>
+    <td width="70" align="center"><a href="#">Delete</a></td>
+  
+  <%}%>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><a href="editPatient.jsp?value=0">Add</a></td>
+  </tr>
+</table>
 
 
 <!-- ********************* STOP HERE !!!! ********************* -->
