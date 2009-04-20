@@ -1,12 +1,13 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.3
   -- File: editAllergies
-  -- Date Modified: 04/14/09 
+  -- Date Modified: 04/19/09 
   -- Author: Han Dong 
   -- Description: This file allows the user to view and edit 
   -- his or her's allergies   
   -->
   
+<%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -35,26 +36,27 @@
 
 <h1>Edit Allergies</h1>
 
-<h3> Current Allergies </h3>
-<ul>
-    <li>Allergy 1</li>
-    <li>Allergy 2</li>
-    <li>Allergy 3</li>
-</ul>
-
 <div></div>
-<form name="edit" method="post" >
-	<label for="month">Select an Allergy:</label>
-	<script type="text/javascript">
-	document.write('<select name="allergies" id="allergies">');
-	var allergies = ["Allergy 1", "Allergy 2", "Allergy 3"];
-	for(var i = 0; i < allergies.length; i ++)
-	{
-		document.write('<option value="' + allergies[i] + '" onclick="hello(this.value)">' + allergies[i] + '</option>');
-	}
-	document.write('</select>');
-	</script>
-</form>
+<stripes:form beanclass="core.AllergiesBean" focus="">
+<stripes:errors/>
+<style type="text/css">
+    input.error { background-color: yellow; }
+</style>
+<table>
+		<tr>
+			<td>Allergy Name:</td>
+			<td><stripes:text name="allergyName" maxlength="30"/></td>
+		</tr>
+		<tr>
+			<td>Description:</td>
+			<td><stripes:textarea name="description" /></td>
+		</tr>
+		<tr>
+			<td><stripes:submit name="update" value="Update"/>
+			    <stripes:reset name ="reset" value="Reset"/></td>
+		</tr>
+	</table>
+</stripes:form>
 
 <p><a href="patientHome.jsp"> Return </a> </p>
 <!-- ********************* STOP HERE !!!! ********************* -->
