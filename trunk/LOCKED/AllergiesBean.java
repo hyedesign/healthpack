@@ -23,8 +23,8 @@ import net.sourceforge.stripes.validation.Validate;
 
 public class AllergiesBean implements ActionBean {
     private ActionBeanContext context;
-    @Validate(required=true) private String allergyName;
-    @Validate(required=false) private String description;
+    @Validate(required=true, maxlength=30) private String allergyName;
+    @Validate(required=false, maxlength=255) private String description;
 
     public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }

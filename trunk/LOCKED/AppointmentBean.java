@@ -26,11 +26,12 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 public class AppointmentBean implements ActionBean {
     private ActionBeanContext context;
 
-    @Validate(required=false) private double appointmentMonth;
-    @Validate(required=false) private double appointmentDay;
-    @Validate(required=false) private double appointmentYear;
-	@Validate(required=false) private String description;
-
+    @Validate(required=true) private double appointmentMonth;
+    @Validate(required=true) private double appointmentDay;
+    @Validate(required=true) private double appointmentYear;
+	@Validate(required=false, maxlength=255) private String description;
+	@Validate(required=false)private boolean reminder;
+	
     public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
     
