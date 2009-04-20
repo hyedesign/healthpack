@@ -42,23 +42,10 @@ public class BeanTemplate implements ActionBean {
     
     
     /* Getters and Setters*/
-    
-	/**
-	 * Returns myString 
-	 *
-	 * @return myString
-	 * @author Alex Bassett
-	 */
+    // no comment blocks for these
 	public String getMyString() {
 		return myString;
 	}
-
-	/**
-	 * Sets myString 
-	 *
-	 * @param s the new value for myString
-	 * @author Alex Bassett
-	 */
 	public void setMyString(String s) {
 		this.myString = s;
 	}
@@ -80,6 +67,13 @@ public class BeanTemplate implements ActionBean {
 	    }
 	}
 	
+	/**
+	 * Does something when user clicks "Submit"
+	 * Maybe it calls a SQL access function?
+	 *
+	 * @return forwards its output to some JSP page
+	 * @author Alex Bassett
+	 */
 	@HandlesEvent("Submit") // must match the 'name' attribute of your stripes form
     @DefaultHandler // tells stripes to use this method when the user presses [Enter]
     public Resolution submit() {
