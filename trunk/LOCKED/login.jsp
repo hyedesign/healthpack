@@ -10,6 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
@@ -37,19 +38,33 @@
 
 <h1>Login</h1>
 <p>Please enter your login information</p>
-<form name="login" method=post action="makeSession.jsp">
+<c:if test="${actionBean.loaded}">
+	<p>We couldn't find a matching user. Please Try again</p>
+</c:if>
+<stripes:form beanclass="core.User" focus="">
 	<table border="0">
-	<tr>
-		<td>Username</td>
-		<td><input type="text" name="username" size=20 /></td>
-	</tr>
-	<tr>
-		<td>Password</td>
-		<td><input type="password" name="password" size=20 /></td>
-	</tr>
+		<tr>
+			<td>Username</td>
+			<td>
+				<stripes:text name="userName"/>
+				<stripes:errors field="userName"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td>
+				<stripes:text name="userPassword"/>
+				<stripes:errors field="userPassword"/>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<stripes:submit name="login" value="Login"/>                    
+			</td>
+		</tr>
 	</table>
-<p><input type=submit /></p>
-</form>
+</stripes:form>
+
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 
