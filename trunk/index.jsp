@@ -1,6 +1,6 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
-  -- File: homepage
+  -- File: index
   -- Date Modified: 04/14/09 
   -- Author: Taylor Evans
   -- Description: This file displays the projects 
