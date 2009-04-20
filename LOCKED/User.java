@@ -13,30 +13,41 @@
 * Edited  : 4/17/2009 by Alex Bassett
 * Changes : added loadUserData()
 * 			cleaned up lookupUser()
+* 
+* Edited  : 4/19/2009 by Alex Bassett
+* Changes : Converted to ActionBean for use with Stripes
+* 			Added Getter and Setter Methods
+* 			Added form validation methods
 *
 **********************************************************/
 package core;
 
+import net.sourceforge.stripes.action.*;
+import net.sourceforge.stripes.validation.*;
+
 import java.sql.*;
 
-public class User {
+public class User implements ActionBean {
 	
-	// variable connects to the database
+	// Declare class variables
+	private ActionBeanContext context;
 	private DBAccess dba;
-	// declare user data
-	public int userId;
-	public String userName;
-	public String userPassword;
-	public boolean userIsDoctor;
-	public String userEmail;
-	public String userPhone;
-	public String userDescription;
-	public String userFirstName;
-	public String userLastName;
+	private boolean loaded;
+	// user data
+	private int userId;
+	@Validate(required=true, minlength=4, maxlength=30) private String userName;
+	@Validate(required=true, minlength=4, maxlength=30) private String userPassword;
+	@Validate(required=true, maxlength=50) private String userEmail;
+	@Validate(required=true, maxlength=15) private String userPhone;
+	@Validate(required=true, maxlength=255) private String userDescription;
+	@Validate(required=true, maxlength=30) private String userFirstName;
+	@Validate(required=true, maxlength=30) private String userLastName;
+	@Validate(required=true) private boolean userIsDoctor;
 	
 	// constructor
 	public User () {
 		dba = new DBAccess();
+		loaded = false;
 		userId = 0;
 		userName = null;
 		userPassword = null;
@@ -47,6 +58,122 @@ public class User {
 		userFirstName = null;
 		userLastName = null;
 	}
+	
+	/* Getters and Setters*/
+	// overridden from ActionBean
+    public ActionBeanContext getContext() { return context; }
+    public void setContext(ActionBeanContext context) { this.context = context; }
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserPassword() {
+		return userPassword;
+	}
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	public String getUserPhone() {
+		return userPhone;
+	}
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+	public String getUserDescription() {
+		return userDescription;
+	}
+	public void setUserDescription(String userDescription) {
+		this.userDescription = userDescription;
+	}
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+	public String getUserLastName() {
+		return userLastName;
+	}
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
+	}
+	public boolean isUserIsDoctor() {
+		return userIsDoctor;
+	}
+	public void setUserIsDoctor(boolean userIsDoctor) {
+		this.userIsDoctor = userIsDoctor;
+	}
+	
+	
+	/* Validation (Stripes) Methods and Handlers */
+	
+	/**
+	 * Stops SQL injection of the Login form by flagging fields
+	 * that contain any special characters
+	 *
+	 * @param s the new value for myString
+	 * @author Alex Bassett
+	 */
+	@ValidationMethod(on="login")
+	public void noSpecialCharacters(ValidationErrors errors) {
+	    if (hasSpecialCharacters(this.userName))
+	        errors.add("userName", new SimpleError("These characters are not allowed: <> () {} [] \\ / | = + * @ $ # ^ : ; "));
+	    if (hasSpecialCharacters(this.userPassword))
+	    	errors.add("userPassword", new SimpleError("These characters are not allowed: <> () {} [] \\ / | = + * @ $ # ^ : ; "));
+	}
+
+	/**
+	 * Event handler for the login form. Calls SQL function
+	 * that loads user from database
+	 *
+	 * @return Resolution forwarded back to login page when
+	 * login was unsuccessful and to patient list when login
+	 * was succussful
+	 * @author Alex Bassett
+	 */
+	@HandlesEvent("login")
+	@DefaultHandler
+	public Resolution login() {	
+		if (lookupUser(this.userName, this.userPassword)) {
+			loaded = true;
+			return new ForwardResolution("patientList.jsp");
+		}
+		return new ForwardResolution("login.jsp");
+	}
+    
+	/**
+	 * Base level function that returns true when the given
+	 * input string contains a character that could be used for
+	 * a SQL injection attack
+	 *
+	 * @param s the user created string to be checked
+	 * @return true when the string contains special
+	 * characters and false if it does not
+	 * @author Alex Bassett
+	 */
+	private boolean hasSpecialCharacters(String s) {
+		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
+		return false;
+	}
+	
+	
+	
+	/* SQL Access Methods */
 	
 	/**
 	 * Connects to the 'users' table in the mySQL database using
