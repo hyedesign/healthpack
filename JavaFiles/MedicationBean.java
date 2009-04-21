@@ -25,7 +25,7 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 
 public class MedicationBean implements ActionBean {
     private ActionBeanContext context;
-    @Validate(required=true) private String medicationName;
+    @Validate(required=true, maxlength=30) private String medicationName;
     @Validate(required=true) private double expirationMonth;
     @Validate(required=true) private double expirationDay;
     @Validate(required=true) private double expirationYear;
