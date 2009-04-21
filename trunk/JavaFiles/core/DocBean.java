@@ -76,21 +76,21 @@ public class DocBean implements ActionBean {
     	//checks first name
 	    if (this.fname == null) 
 	    {
-	        errors.add("firstName", new SimpleError("Please enter a first name."));
+	        errors.add("fName", new SimpleError("Please enter a first name."));
 	    }
 	    else if (this.fname.length() > 20) 
 	    {
-	        errors.add("firstName", new SimpleError("Please make sure first name is less than 20 characters."));
+	        errors.add("fName", new SimpleError("Please make sure first name is less than 20 characters."));
 	    }
 	    
 	    //checks last name
 	    if (this.lname == null) 
 	    {
-	        errors.add("lastName", new SimpleError("Please enter a last name."));
+	        errors.add("lName", new SimpleError("Please enter a last name."));
 	    }
 	    else if (this.lname.length() > 20) 
 	    {
-	        errors.add("lasttName", new SimpleError("Please make sure first name is less than 20 characters."));
+	        errors.add("lName", new SimpleError("Please make sure first name is less than 20 characters."));
 	    }
 	    
 	    //checks phone number
