@@ -35,6 +35,13 @@ public class AppointmentBean implements ActionBean {
     public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
     
+    public boolean isReminder() {
+		return reminder;
+	}
+	public void setReminder(boolean reminder) {
+		this.reminder = reminder;
+	}
+    
     public double getAppointmentMonth() {
 		return appointmentMonth;
 	}
