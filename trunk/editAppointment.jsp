@@ -45,7 +45,10 @@
 </style>
 <table>
 		<tr>
-			<td>Appointment Date:</td>
+			<td>Appointment Date</td>
+		</tr>
+		<tr>
+			<td>(MM/DD/YYYY):</td>
 			<td><stripes:text name="appointmentMonth" size="1" maxlength = "2"/>/
 			    <stripes:text name="appointmentDay" size="1" maxlength = "2"/>/ 
 			    <stripes:text name="appointmentYear" size="2" maxlength ="4"/></td>
@@ -53,6 +56,9 @@
 		<tr>
 			<td>Description:</td>
 			<td><stripes:textarea name="description"/></td>
+		</tr>
+		<tr>
+			<td colspan=3><stripes:checkbox name="reminder"/> Would you like to be reminded of this appointment?</td>
 		</tr>
 		<tr>
 			<td><stripes:submit name="update" value="Update"/>
