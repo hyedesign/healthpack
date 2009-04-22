@@ -20,7 +20,7 @@
 <div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-<jsp:include  page="LinksInc.htm" flush="true"/>
+<jsp:include  page="LinksInc.jsp" flush="true"/>
 </div>
 
 <div id="content">
@@ -54,7 +54,7 @@
 	
 	int PATID = 0;
 	boolean newPatient = true;
-	core.PatientBean patient = new core.PatientBean();
+	core.Patient patient = new core.Patient();
 	try{
 		//Patient Id assigned
 		PATID = Integer.parseInt(session.getAttribute("patientID").toString());
@@ -62,13 +62,13 @@
 		
 		if (!newPatient){
 				//ALL VALUES
-				patient = new core.PatientBean(PATID);
+				patient = new core.Patient(PATID);
 				firstName = patient.getFirstName();
 				middleName = patient.getMiddleName();
 				lastName = patient.getLastName();
-				birthMonth = new Integer(patient.getBirthMonth()).toString();
-				birthDay = new Integer(patient.getBirthDay()).toString();
-				birthYear = new Integer(patient.getBirthYear()).toString();
+				birthMonth = new Integer(patient.getPatientDOBMonth()).toString();
+				birthDay = new Integer(patient.getPatientDOBDay()).toString();
+				birthYear = new Integer(patient.getPatientDOBYear()).toString();
 				weight = new Integer(patient.getWeight()).toString();
 				height = new Integer(patient.getHeight()).toString();
 				sex += patient.getPatientSex();
