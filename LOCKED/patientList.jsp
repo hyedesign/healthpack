@@ -5,7 +5,12 @@
   -- Author: Taylor Evans
   -- Description: This file displays the list of patients 
   -- created by the user.
+  -- 
+  -- last edited by Vahan
   -->
+
+<%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
+<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -31,18 +36,23 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 <% 
-	
+	//TEMP ATTRIBUTES FOR TESTING
+	session.setAttribute( "id", 3);
+
+
 	java.util.ArrayList<Integer> arrayOfPatients = new java.util.ArrayList<Integer>();
-	core.PatientBean patient = new core.PatientBean();
+	core.Patient patient = new core.Patient();
 	int userId = 0;
 	
+	
 	try {
-	session.setAttribute( "id", 0);
-	userId = Integer.parseInt((String)session.getAttribute("id"));
-	arrayOfPatients = core.PatientBean.lookupPatientsByUserID(userId);
-	patient = new core.PatientBean();
+		System.out.println("before userId is assigned");
+		userId = 3;//session.getAttribute("id");
+		System.out.println("after userId is assigned");
+		arrayOfPatients = core.Patient.lookupPatientsByUserID(userId);
+		System.out.println("after SQL call");
 	}catch (Exception e){
-		
+		System.out.println("\n ******* ERROR IN PATIENTLIST.JSP ******* \n");  
 	}
 
 	
@@ -50,39 +60,37 @@
 	%>
 <h1>User Patients</h1>
 
-<table width="400" border="1" summary="This table includes all patients for the specific user">
-  <tr>
-    <td width="250" align="center">Patient Name</td>
-    <td colspan="2"  align="center">Action</td>
-  </tr>
-  
-  <% 
+  <%   
   	for (int i = 0; i < arrayOfPatients.size(); i++){
-  		patient = new core.PatientBean(userId);	
+  		patient = new core.Patient(arrayOfPatients.get(i));	
+  		String PATID = new Integer(patient.getPatientId()).toString();
+  		
+  		String PATNAME = patient.PatientName();
   %>
+  <table width="431" border="1">
+		<stripes:form beanclass="core.PatientListBean" focus="">
+		    <tr>
+		      <td width="270"><%=PATNAME%>  <stripes:hidden name="patientId" value= "<%=PATID%>" /> </td>
+		      <td width="44"><stripes:submit name="view" value="View"/></td>
+		      <td width="37"><stripes:submit name="edit" value="Edit"/> </td>
+		      <td width="52"><stripes:submit name="delete" value="Delete"/> </td>
+		    </tr>
+		</stripes:form>  
+
+ 	<%}%>
+
   
-  <tr>
-  	<%String name = patient.getPatientFirstName() + " " 
-  				  + patient.getPatientMiddleName() + " " 
-  				  + patient.getPatientLastName();%>
-  
-    <td align="center"><a href="patientHome.jsp.jsp?value=<%patient.getPatientId();%>"> 
-    						<% System.out.println(name);%> </a></td>
-    		
-    <td width="70" align="center"><a href="editPatient.jsp?value=<%patient.getPatientId();%>"> Edit </a></td>
-    <td width="70" align="center"><a href="#">Delete</a></td>
-  
-  <%}%>
-  </tr>
-  <tr>
-    <td colspan="3" align="center"><a href="editPatient.jsp?value=0">Add</a></td>
-  </tr>
-</table>
+		<stripes:form beanclass="core.PatientListBean" focus="">
+		    <tr>
+		     <td colspan="4" align="center"><stripes:submit name="add" value="Add New Patient"/></td>
+		    </tr>
+		</stripes:form>
+	</table>
 
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 
-</div>
+</div> 
 <div id="footer"> 
   <%@include file="FooterInc.jsp" %>
 </div>
