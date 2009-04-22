@@ -37,18 +37,18 @@ public class PatientBean implements ActionBean {
 	
     private int patientId;
 	private int userId;
-	private String firstName ="";
-	private String lastName="";
-	private String middleName="";
+	@Validate(required=true, maxlength=30) private String firstName ="";
+	@Validate(required=true, maxlength=30) private String lastName="";
+	@Validate(required=false, maxlength=30) private String middleName="";
 	private Date patientDOB;
 	private int height;
 	private int weight;
-	private char patientSex;
-	private String emergencyContactName ="";
-	private String emergencyContactPhone="";
-	private String insurance="";
-	private String insuranceID="";
-	private String SSN="";
+	@Validate(required=true, maxlength=1) private char patientSex;
+	@Validate(required=false, maxlength=30) private String emergencyContactName ="";
+	@Validate(required=false, maxlength=10) private String emergencyContactPhone="";
+	@Validate(required=false, maxlength=30) private String insurance="";
+	@Validate(required=false, maxlength=30) private String insuranceID="";
+	@Validate(required=false, maxlength=9) private String SSN="";
     private int birthMonth;
     private int birthDay;
     private int birthYear;
@@ -59,13 +59,7 @@ public class PatientBean implements ActionBean {
 	 */
     public PatientBean() {	
     }	
-	
-	public PatientBean(int patID) {
-		if (patID != 0){
-			lookupPatient(patID);
-		}else patientId = patID;
-	}	
-	
+		
 	/*
 	 * GETTERS AND SETTERS
 	 */
@@ -180,8 +174,20 @@ public class PatientBean implements ActionBean {
    
     @DefaultHandler
     public Resolution submit() {
-    	if (this.patientId == 0) this.insertPatient(); else this.updatePatient();
-        return new ForwardResolution("verifyPatientInfo.jsp");
+    	if (this.patientId == 0) {
+    		new Patient(this.patientId, this.userId, this.firstName,
+    				this.lastName, this.middleName, this.patientDOB, this.height,
+    				this.weight, this.patientSex, this.emergencyContactName,
+    				this.emergencyContactPhone, this.insurance, this.insuranceID,
+    				this.SSN).CreateNewPatient();
+    	}else{ 
+    		new Patient(this.patientId).SetAndUpdateCurrentPatient(this.firstName,
+    				this.lastName, this.middleName, this.patientDOB, this.height,
+    				this.weight, this.patientSex, this.emergencyContactName,
+    				this.emergencyContactPhone, this.insurance, this.insuranceID,
+    				this.SSN);
+    	}
+        return new ForwardResolution("patientList.jsp");
     }
     //VALIDATION 
     @ValidationMethod(on="submit")
