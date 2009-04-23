@@ -10,7 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%> 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -31,10 +31,11 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
-	<c:if test="${actionBean.loaded}"></c:if>
+<c:set var="list" value="<%= out.println("cool?") %>" scope="page"/>
 
-	<h1>Verifying your login information</h1>
-	<p>Verifying your credentials and setting up your session</p>
+
+<h1>Verifying your login information</h1>
+<p>Verifying your credentials and setting up your session</p>
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 
@@ -44,4 +45,5 @@
 
 </div>
 </div>
-</body></html>
+</body>
+</html>
