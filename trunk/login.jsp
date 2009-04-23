@@ -10,7 +10,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%> 
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
@@ -38,6 +39,9 @@
 
 <h1>Login</h1>
 <p>Please enter your login information</p>
+<c:if test="${!empty actionBean}">
+	<p>We couldn't find a matching user. Please Try again</p>
+</c:if>
 <stripes:form beanclass="core.LoginBean" focus="">
 	<table border="0">
 		<tr>
@@ -56,7 +60,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<stripes:submit name="login" value="Login"/>                    
+				<stripes:submit name="submit" value="Submit"/>                    
 			</td>
 		</tr>
 	</table>
