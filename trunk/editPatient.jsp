@@ -29,10 +29,6 @@
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
 <% 	
-	// TEMPORARY USER INFORMATION
-	session.setAttribute("id", 3);
-	session.setAttribute("patientID", 2);
-
 	//Variables
 
 	String firstName = "";
@@ -57,32 +53,46 @@
 	core.Patient patient = new core.Patient();
 	try{
 		//Patient Id assigned
-		PATID = Integer.parseInt(session.getAttribute("patientID").toString());
+		//PATID = Integer.parseInt(request.getAttribute("patientID").toString());
+		PATID = Integer.parseInt(request.getParameter("patientID").toString());
+	}catch(Exception e){
+		System.out.println("error parsing patient id: " + PATID);
+		newPatient = true;
+	}
 		newPatient = PATID == 0;
 		
 		if (!newPatient){
 				//ALL VALUES
 				patient = new core.Patient(PATID);
+				
+				
 				firstName = patient.getFirstName();
-				middleName = patient.getMiddleName();
+				if (patient.getMiddleName() == null) middleName = ""; else middleName = patient.getMiddleName();
 				lastName = patient.getLastName();
-				birthMonth = new Integer(patient.getPatientDOBMonth()).toString();
-				birthDay = new Integer(patient.getPatientDOBDay()).toString();
-				birthYear = new Integer(patient.getPatientDOBYear()).toString();
-				weight = new Integer(patient.getWeight()).toString();
-				height = new Integer(patient.getHeight()).toString();
-				sex += patient.getPatientSex();
-				emContact = patient.getEmergencyContactName();
-				emContactPhone = patient.getEmergencyContactPhone();
-				insurace = patient.getInsurance();
-				insuranceID = patient.getInsuranceID();
-				SSN = patient.getSSN();		
+				
+				///////////////////DATE !!!!
+				String DateOfBirth = patient.getPatientDOB().toString();
+				birthYear = DateOfBirth.substring(0,4);
+				birthMonth = DateOfBirth.substring(5,7);
+				birthDay = DateOfBirth.substring(8,10); 
+				
+				// WEIGHT AND HEIGHT
+				if (patient.getWeight() != 0)weight = new Integer(patient.getWeight()).toString();
+				if (patient.getHeight() != 0)height = new Integer(patient.getHeight()).toString();
+				
+				//SEX
+				sex = "m";
+				if (patient.getPatientSex() == 1) sex = "f";
+							
+				emContact = patient.getEmergencyContactName().toString();
+				emContactPhone = patient.getEmergencyContactPhone().toString();
+				insurace = patient.getInsurance().toString();
+				insuranceID = patient.getInsuranceID().toString();
+				SSN = patient.getSSN().toString();
+				
 				BUTTONTEXT = "Update";
 			}
-	}catch(Exception e){
-		System.out.println("error parsing patient id");
-		newPatient = true;
-	}
+	
 	%>
 
 <h1>Patient Info</h1>
@@ -119,7 +129,7 @@
                 <td><stripes:text name="weight" maxlength = "3"   value="<%= weight%>" /></td> 
             </tr>
             <tr>
-                <td>Height:</td>
+                <td>Height (in):</td>
                 <td><stripes:text name="height" maxlength = "10"   value="<%= height%>" /></td> 
             </tr>
             <tr>
@@ -149,6 +159,11 @@
             <tr>
                 <td colspan="2">
                     <stripes:submit name="submit" value="<%= BUTTONTEXT%>"/>                    
+                </td>
+            </tr>         
+            <tr>
+                <td colspan="2">
+                    <stripes:submit name="deletePatient" value="DELETE PATIENT"/> (Beware, There is no going back!)                    
                 </td>
             </tr>
         </table>

@@ -91,14 +91,6 @@ public class Patient {
 	public Date getPatientDOB() {
 		return patientDOB;
 	}
-	public int getPatientDOBYear() {
-		return patientDOB.getYear();
-	}
-	public int getPatientDOBMonth() {
-		return patientDOB.getMonth();
-	}public int getPatientDOBDay() {
-		return patientDOB.getDay();
-	}
 	public int getHeight() {
 		return height;
 	}
@@ -190,15 +182,37 @@ public class Patient {
 		try {
 			// construct and execute the SQL call, retrieve the results
 			Statement statement = dba.connection.createStatement ();
+			System.out.println("\n*****************\nupdating .....\n");
+			
+			
+			System.out.println("UPDATE cmsc345.patients" +
+					" SET 	 patientfirstname='"+this.firstName+"', " +
+							"patientlastname'"+this.lastName+"', " +
+							"patientmiddlename='"+this.middleName+"', " +
+							"patientdob='"+this.patientDOB+"', " +
+							"patientweight="+this.weight+", " +
+							"patientheight="+this.height+", " +
+							"patientsex="+this.patientSex+", "+
+							"patientemergencycontactname='"+this.emergencyContactName+"', " +
+							"patientemergencycontactnumber='"+this.emergencyContactPhone+"', " +
+							"patientinsuranceprovider='"+this.insurance+"', " +
+							"patientinsuranceid='"+this.insuranceID+"'," +
+							"patientssn='"+this.SSN+"' " +
+					"WHERE patientid = " + this.patientId +";");
 			
 			statement.executeUpdate("UPDATE cmsc345.patients" +
-					" SET patientfirstname='"+firstName+"', patientlastname'"+lastName+"', " +
-						"patientmiddlename='"+middleName+"', patientdob='"+this.patientDOB+"', " +
-						"patientweight="+weight+", patientheight="+height+", patientsex="+this.patientSex+", " +
-						"patientemergencycontactname='"+emergencyContactName+"', " +
-						"patientemergencycontactnumber='"+emergencyContactPhone+"', " +
-						"patientinsuranceprovider='"+insurance+"',patientinsuranceid='"+insuranceID+"'," +
-						"patientssn='"+SSN+"' " +
+					" SET 	 patientfirstname='"+this.firstName+"', " +
+							"patientlastname='"+this.lastName+"', " +
+							"patientmiddlename='"+this.middleName+"', " +
+							"patientdob='"+this.patientDOB+"', " +
+							"patientweight="+this.weight+", " +
+							"patientheight="+this.height+", " +
+							"patientsex="+this.patientSex+", "+
+							"patientemergencycontactname='"+this.emergencyContactName+"', " +
+							"patientemergencycontactnumber='"+this.emergencyContactPhone+"', " +
+							"patientinsuranceprovider='"+this.insurance+"', " +
+							"patientinsuranceid='"+this.insuranceID+"'," +
+							"patientssn='"+this.SSN+"' " +
 					"WHERE patientid = " + this.patientId +";");
 			
 			statement.close();
@@ -220,7 +234,7 @@ public class Patient {
 			Statement statement = dba.connection.createStatement ();
 						
 			statement.executeUpdate("DELETE FROM cmsc345.patients" +
-					"WHERE patientid = " + this.patientId +";");
+					" WHERE patientid = '" + this.patientId +"';");
 			
 			statement.close();
 			dba.disconnect();
@@ -346,6 +360,8 @@ public class Patient {
 			int weight, int patientSex, String emergencyContactName,
 			String emergencyContactPhone, String insurance, String insuranceID,
 			String ssn){
+		System.out.println("patientID = " + this.patientId);
+		System.out.println("userID = " + this.userId);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.middleName = middleName;
@@ -360,7 +376,7 @@ public class Patient {
 		SSN = ssn;
 		return updatePatient();
 	}
-	public static boolean DeletePatien(int id){
+	public static boolean DeletePatient(int id){
 		return new Patient(id).deletePatient();
 	}
 }

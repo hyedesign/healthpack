@@ -28,7 +28,7 @@
 <div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  <%@include file="LinksInc.jsp" %>
+<jsp:include  page="LinksInc.jsp" flush="true"/>
 </div>
 
 <div id="content">
@@ -38,7 +38,7 @@
 <% 
 	//TEMP ATTRIBUTES FOR TESTING
 	session.setAttribute( "id", 3);
-
+	session.getId();
 
 	java.util.ArrayList<Integer> arrayOfPatients = new java.util.ArrayList<Integer>();
 	core.Patient patient = new core.Patient();
@@ -46,48 +46,38 @@
 	
 	
 	try {
-		System.out.println("before userId is assigned");
 		userId = 3;//session.getAttribute("id");
-		System.out.println("after userId is assigned");
 		arrayOfPatients = core.Patient.lookupPatientsByUserID(userId);
 		System.out.println("after SQL call");
 	}catch (Exception e){
 		System.out.println("\n ******* ERROR IN PATIENTLIST.JSP ******* \n");  
 	}
-
-	
-	
 	%>
-<h1>User Patients</h1>
 
+<h1>User Patients</h1>
+<p></p>
   <%   
   	for (int i = 0; i < arrayOfPatients.size(); i++){
   		patient = new core.Patient(arrayOfPatients.get(i));	
   		String PATID = new Integer(patient.getPatientId()).toString();
   		
   		String PATNAME = patient.PatientName();
+  		
+  		System.out.println("Patient: " + PATNAME + "  ID: " + PATID); 
+
   %>
-  <table width="431" border="1">
-		<stripes:form beanclass="core.PatientListBean" focus="">
-		    <tr>
-		      <td width="270"><%=PATNAME%>  <stripes:hidden name="patientId" value= "<%=PATID%>" /> </td>
-		      <td width="44"><stripes:submit name="view" value="View"/></td>
-		      <td width="37"><stripes:submit name="edit" value="Edit"/> </td>
-		      <td width="52"><stripes:submit name="delete" value="Delete"/> </td>
-		    </tr>
-		</stripes:form>  
-
- 	<%}%>
-
-  
-		<stripes:form beanclass="core.PatientListBean" focus="">
-		    <tr>
-		     <td colspan="4" align="center"><stripes:submit name="add" value="Add New Patient"/></td>
-		    </tr>
-		</stripes:form>
-	</table>
-
-
+	<form method="post" class="tableAll">
+	  <div class="tableValue"><input type="hidden" name="patientID" value="<%=PATID%>" /><%=PATNAME%></div>
+      <div class="tableButtons">
+	  <input type="submit" name="View" id="View" value="View" onclick="this.form.action='patientHome.jsp'"/>
+	  <input type="submit" name="Edit" id="Edit" value="Edit" onclick="this.form.action='editPatient.jsp'"/></div>
+	</form>
+<%}%>
+  	    
+  	    <form method="post">
+  	    	<input type="hidden" name="patientID" value="0" />
+  	    	<input type="submit" name="Add" id="Add" value="Add New Patient" onclick="this.form.action='editPatient.jsp'"/>
+		</form>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div> 
