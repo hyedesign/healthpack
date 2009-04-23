@@ -19,11 +19,11 @@ public class LoginBean implements ActionBean {
 
 	// Declare class variables
 	private ActionBeanContext context;
-	private DBAccess dba;
 	
 	// form fields
 	@Validate(required=true, minlength=4, maxlength=30) private String userName;
 	@Validate(required=true, minlength=4, maxlength=30) private String userPassword;
+	private int userId;
 	
 	/* Getters and Setters*/
 	// overridden from ActionBean
@@ -42,6 +42,12 @@ public class LoginBean implements ActionBean {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
     
 /* Validation (Stripes) Methods and Handlers */
 	
@@ -55,12 +61,14 @@ public class LoginBean implements ActionBean {
 	 * @author Alex Bassett
 	 */
 	@DefaultHandler
-	public Resolution login() {	
-		/*if (lookupUser(this.userName, this.userPassword)) {
-			loaded = true;
-			return new ForwardResolution("patientList.jsp");
-		}*/
-		return new ForwardResolution("login.jsp");
+	public Resolution submit() {
+		this.userId = UserSQL.loginUser(this.userName, this.userPassword);
+		
+		// check that this user exists
+		// if not, go back to login page
+		if (userId == UserSQL.NO_MATCHING_USER) return new ForwardResolution("login.jsp");
+		// user exists, forward to makeSession
+		else return new ForwardResolution("makeSession.jsp");
 	}
 	
 	/**
@@ -70,13 +78,13 @@ public class LoginBean implements ActionBean {
 	 * @param s the new value for myString
 	 * @author Alex Bassett
 	 */
-	/*@ValidationMethod(on="login")
+	@ValidationMethod(on="submit")
 	public void noSpecialCharacters(ValidationErrors errors) {
 	    if (hasSpecialCharacters(this.userName))
-	        errors.add("userName", new SimpleError("These characters are not allowed: <> () {} [] \\ / | = + * @ $ # ^ : ; "));
+	        errors.add("userName", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
 	    if (hasSpecialCharacters(this.userPassword))
-	    	errors.add("userPassword", new SimpleError("These characters are not allowed: <> () {} [] \\ / | = + * @ $ # ^ : ; "));
-	}*/
+	    	errors.add("userPassword", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+	}
     
 	/**
 	 * Base level function that returns true when the given
@@ -88,9 +96,9 @@ public class LoginBean implements ActionBean {
 	 * characters and false if it does not
 	 * @author Alex Bassett
 	 */
-	/*private boolean hasSpecialCharacters(String s) {
+	private boolean hasSpecialCharacters(String s) {
 		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
 		return false;
-	}*/
+	}
 
 }
