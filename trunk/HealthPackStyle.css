@@ -120,10 +120,10 @@ body {
 	margin: 0px;
 	padding: 0px;
 	border: 1px solid #000000;
-	width: 400px;
+	width: 460px;
 }
 .tableButtons {
-	margin-left: 275px;
+	margin-left: 330px;
 	border-left-width: 1px;
 	border-left-style: solid;
 	border-left-color: #000000;
@@ -131,8 +131,11 @@ body {
 }
 
 .tableValue {
-	width: 270px;
-	float: left;
+	
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #000000;
+	width: 330px;
 	height: auto;
 }
 
