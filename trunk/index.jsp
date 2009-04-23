@@ -64,7 +64,8 @@ background is in Java and C++. Basic knowledge of JSP, SQL, HTML, C, Assembly, P
 </p>
 
 <p>
-<b><i> Han Dong </i></b> - Acting delivery and documentation lead for Jam Packed Inventions.
+<b><i> Han Dong </i></b> - Acting delivery and documentation lead for Jam Packed Inventions. Major coding
+background is in Java, C, Ruby, JavaScript. Basic knowledge of JSP, HTML, AJAX, CGI, PHP, SQL, and Regular Expressions.  
 </p>
 
 <h3> Our Product </h3>
