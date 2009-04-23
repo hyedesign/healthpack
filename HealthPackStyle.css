@@ -113,5 +113,27 @@ body {
 
 #navigation ul {
 	padding-left: 1px;
-
 }
+
+.tableAll {
+	background-color: #FFFFCC;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid #000000;
+	width: 400px;
+}
+.tableButtons {
+	margin-left: 275px;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #000000;
+	padding-left: 10px;
+}
+
+.tableValue {
+	width: 270px;
+	float: left;
+	height: auto;
+}
+
+input.error { background-color: yellow; }
