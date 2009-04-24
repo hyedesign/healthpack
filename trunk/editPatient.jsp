@@ -50,7 +50,7 @@
 	
 	int PATID = 0;
 	boolean newPatient = true;
-	core.Patient patient = new core.Patient();
+	core.PatientSQL patient = new core.PatientSQL();
 	try{
 		//Patient Id assigned
 		//PATID = Integer.parseInt(request.getAttribute("patientID").toString());
@@ -63,7 +63,7 @@
 		
 		if (!newPatient){
 				//ALL VALUES
-				patient = new core.Patient(PATID);
+				patient = new core.PatientSQL(PATID);
 				
 				
 				firstName = patient.getFirstName();
