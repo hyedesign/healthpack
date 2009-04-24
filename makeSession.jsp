@@ -31,9 +31,6 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
-<c:set var="list" value="<%= out.println("cool?") %>" scope="page"/>
-
-
 <h1>Verifying your login information</h1>
 <p>Verifying your credentials and setting up your session</p>
 

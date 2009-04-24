@@ -32,9 +32,22 @@ public class RegisterBean implements ActionBean {
 	@Validate(required=true, maxlength=50) private String userEmail;
 	@Validate(required=true, maxlength=50) private String userEmail2;
 	@Validate(required=false, maxlength=15) private String userPhone;
-	@Validate(required=true, maxlength=30) private String userFirstName;
-	@Validate(required=true, maxlength=30) private String userLastName;
+	@Validate(required=false, maxlength=30) private String userFirstName;
+	@Validate(required=false, maxlength=30) private String userLastName;
 	@Validate(required=true) private boolean userIsDoctor;
+	
+	//constructor
+	public RegisterBean () {
+		this.userName = "";
+		this.userPassword = "";
+		this.userPassword2 = "";
+		this.userEmail = "";
+		this.userEmail2 = "";
+		this.userPhone = "";
+		this.userFirstName = "";
+		this.userLastName = "";
+		this.userIsDoctor = false;
+	}
 	
 	/* Getters and Setters*/
 	// overridden from ActionBean
@@ -75,18 +88,21 @@ public class RegisterBean implements ActionBean {
 		return userPhone;
 	}
 	public void setUserPhone(String userPhone) {
+		if (userPhone.equals(null)) userPhone = "";
 		this.userPhone = userPhone;
 	}
 	public String getUserFirstName() {
 		return userFirstName;
 	}
 	public void setUserFirstName(String userFirstName) {
+		if (userFirstName.equals(null)) userFirstName = "";
 		this.userFirstName = userFirstName;
 	}
 	public String getUserLastName() {
 		return userLastName;
 	}
 	public void setUserLastName(String userLastName) {
+		if (userLastName.equals(null)) userLastName = "";
 		this.userLastName = userLastName;
 	}
 	public boolean isUserIsDoctor() {
@@ -102,7 +118,7 @@ public class RegisterBean implements ActionBean {
 	 * Event handler for the registration form. Calls a
 	 * SQL function that adds the new user to the database.
 	 *
-	 * @return Resolution forwarded to regSuccess when th user
+	 * @return Resolution forwarded to regSuccess when the user
 	 * is registered
 	 * @author Alex Bassett
 	 */
@@ -120,31 +136,19 @@ public class RegisterBean implements ActionBean {
 	}
 	
 	@ValidationMethod(on="submit")
-	public void noSpecialCharacters(ValidationErrors errors) {
+	public void validateRegInfo(ValidationErrors errors) {
 		
 		//check that verified fields match each other
-		if (userPassword != userPassword2) {
-			errors.add("userPassword", new SimpleError("Your passwords do not match"));
-			errors.add("userPassword2", new SimpleError("Your passwords do not match"));
-		}
-		if (userEmail != userEmail2) {
-			errors.add("userEmail", new SimpleError("Your email addresses do not match"));
-			errors.add("userEmail2", new SimpleError("Your email addresses dot not match"));
-		}
+		if (!userPassword.equals(userPassword2))
+			errors.addGlobalError(new SimpleError("Your passwords do not match"));
+		if (!userEmail.equals(userEmail2))
+			errors.addGlobalError(new SimpleError("Your email addresses do not match"));
 		
 		// Check for flagged characters
-	    if (hasSpecialCharacters(this.userName))
-	        errors.add("userName", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
-	    if (hasSpecialCharacters(this.userPassword))
-	    	errors.add("userPassword", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
-	    if (hasSpecialCharacters(this.userEmail))
-	    	errors.add("userEmail", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
-	    if (hasSpecialCharacters(this.userPhone))
-	    	errors.add("userPhone", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
-	    if (hasSpecialCharacters(this.userFirstName))
-	    	errors.add("userFirstName", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
-	    if (hasSpecialCharacters(this.userLastName))
-	    	errors.add("userLastName", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+	    if (hasSpecialCharacters(this.userName) || hasSpecialCharacters(this.userPassword) ||
+	    		hasSpecialCharacters(this.userEmail) || hasSpecialCharacters(this.userPhone) ||
+	    		hasSpecialCharacters(this.userFirstName) || hasSpecialCharacters(this.userLastName))
+	        errors.addGlobalError(new SimpleError("These characters are not allowed: <> () [] \\ / | = + * $ # ^ : ; "));
 	}
 	
 	/**
@@ -158,7 +162,7 @@ public class RegisterBean implements ActionBean {
 	 * @author Alex Bassett
 	 */
 	private boolean hasSpecialCharacters(String s) {
-		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
+		if (s != s.replaceAll("([^A-Za-z0-9.,@!?~`'\"% _-]+)", "")) return true;
 		return false;
 	}
     

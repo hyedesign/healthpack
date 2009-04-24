@@ -232,7 +232,7 @@ public class UserSQL {
 		try {
 			// construct and execute the SQL call, retrieve the results
 			Statement statement = dba_s.connection.createStatement ();
-			ResultSet results = statement.executeQuery ("SELECT * FROM users WHERE username='"+username);
+			ResultSet results = statement.executeQuery ("SELECT * FROM users WHERE username='"+username+"'");
 			
 			// check to see if the user loaded
 			if (results.first())return true;
@@ -274,11 +274,11 @@ public class UserSQL {
 			// construct and execute the SQL call, retrieve the results
 			String isDoc = "0";
 			if (isDoctor) isDoc = "1";
-			String s = "INSERT INTO users (username, password, useremail," +
+			String s = "INSERT INTO users (username, userpassword, useremail," +
 					"userphone, userfirstname, userlastname, userisdoctor) " +
-					"VALUES (" + name + ", " + password + ", " + email +
-					", " + phone + ", " + firstName + ", " + lastName +
-					", " + isDoc + ")";
+					"VALUES ('" + name + "', '" + password + "', '" + email +
+					"', '" + phone + "', '" + firstName + "', '" + lastName +
+					"', '" + isDoc + "')";
 			Statement statement = dba_s.connection.createStatement ();
 			statement.executeUpdate (s);
 			
