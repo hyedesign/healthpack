@@ -47,11 +47,11 @@
 		</tr>
 		<tr>
 			<td>Password:</td>
-			<td><stripes:password name="password" size="20" /></td>
+			<td><stripes:password name="userPassword" size="20" /></td>
 		</tr>
 		<tr>
 			<td>Re-enter PW:</td>
-			<td><stripes:password name="password2" size="20" /></td>
+			<td><stripes:password name="userPassword2" size="20" /></td>
 		</tr>
 		<tr>
 			<td>First name:</td>
@@ -63,18 +63,18 @@
 		</tr>
 		<tr>
 			<td>Email:</td>
-			<td><stripes:text name="email" size="20" /></td>
+			<td><stripes:text name="userEmail" size="20" /></td>
 		</tr>
 		<tr>
 			<td>Re Enter Email:</td>
-			<td><stripes:text name="email2" size="20" /></td>
+			<td><stripes:text name="userEmail2" size="20" /></td>
 		</tr>
 		<tr>
 			<td>Phone:</td>
 			<td><stripes:text name="phone" size="20" /></td>
 		</tr>
 	</table>
-<stripes:checkbox name="doctor" value="yes" />
+<stripes:checkbox name="userIsDoctor" value="yes" />
 I would like to register as a doctor<br />
 <p><stripes:submit name="submit" value="Submit"/></p>
 <p><stripes:reset name="reset" value="Reset"/></p>
