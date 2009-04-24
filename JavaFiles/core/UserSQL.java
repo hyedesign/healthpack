@@ -101,45 +101,6 @@ public class UserSQL {
 	}
 	
 	/* SQL Access Methods */
-	
-	/**
-	 * Connects to the 'users' table in the mySQL database using
-	 * DBAccess and attempts to load the userId for the specified
-	 * username and password 
-	 * 
-	 * @param username the name of the user to look up
-	 * @param password the password associated with that user
-	 * @return the userId if the user exists or NO_MATCHING_USER
-	 * if not
-	 * @author Alex Bassett
-	 */
-	static public int loginUser(String username, String password) {
-		DBAccess dba_s = new DBAccess();
-		dba_s.connect(); // connect to the database
-		try {
-			// construct and execute the SQL call, retrieve the results
-			Statement statement = dba_s.connection.createStatement ();
-			ResultSet results = statement.executeQuery ("SELECT * FROM users WHERE username='"+username+
-							"' AND userpassword='"+password+"'");
-			
-			// attempt to load the userId from the ResultSet
-			int loadedId = NO_MATCHING_USER;
-			if (results.first())loadedId = results.getInt("userId");
-			
-			// close connections
-			results.close();
-			statement.close();
-			dba_s.disconnect();
-			//return true if user was found
-			return loadedId;
-			
-		} catch (SQLException e) {
-            System.err.println ("Method login() performed bad SQL call");
-            System.err.println (e.toString());
-			dba_s.disconnect();
-            return NO_MATCHING_USER;
-		}
-	}
 
 	/**
 	 * Connects to the 'users' table in the mySQL database using
@@ -208,9 +169,127 @@ public class UserSQL {
 			// the resultset is empty, no data loaded
 			else return false;
 		} catch (SQLException e) {
-			System.err.println("Bad ResultSet call from User.loadUserData()");
+			System.err.println("Bad ResultSet call from UserSQL.loadUserData()");
             System.err.println (e.toString());
 			return false;
+		}
+	}
+	
+	/* Statics */
+	
+	/**
+	 * Connects to the 'users' table in the mySQL database using
+	 * DBAccess and attempts to load the userId for the specified
+	 * username and password 
+	 * 
+	 * @param username the name of the user to look up
+	 * @param password the password associated with that user
+	 * @return the userId if the user exists or NO_MATCHING_USER
+	 * if not
+	 * @author Alex Bassett
+	 */
+	static public int loginUser(String username, String password) {
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try {
+			// construct and execute the SQL call, retrieve the results
+			Statement statement = dba_s.connection.createStatement ();
+			ResultSet results = statement.executeQuery ("SELECT * FROM users WHERE username='"+username+
+							"' AND userpassword='"+password+"'");
+			
+			// attempt to load the userId from the ResultSet
+			int loadedId = NO_MATCHING_USER;
+			if (results.first())loadedId = results.getInt("userId");
+			
+			// close connections
+			results.close();
+			statement.close();
+			dba_s.disconnect();
+			//return true if user was found
+			return loadedId;
+			
+		} catch (SQLException e) {
+            System.err.println ("Method UserSQL.loginUser() performed bad SQL call");
+            System.err.println (e.toString());
+			dba_s.disconnect();
+            return NO_MATCHING_USER;
+		}
+	}
+	
+	/**
+	 * Connects to the database and checks to see if the username
+	 * already exists. It returns true when the username is already
+	 * taken
+	 * 
+	 * @param username to check for
+	 * @return the userId if the user exists or NO_MATCHING_USER
+	 * if not
+	 * @author Alex Bassett
+	 */
+	static public boolean checkUserName(String username) {
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try {
+			// construct and execute the SQL call, retrieve the results
+			Statement statement = dba_s.connection.createStatement ();
+			ResultSet results = statement.executeQuery ("SELECT * FROM users WHERE username='"+username);
+			
+			// check to see if the user loaded
+			if (results.first())return true;
+			
+			// close connections
+			results.close();
+			statement.close();
+			dba_s.disconnect();
+			//return false if username is unique
+			return false;
+			
+		} catch (SQLException e) {
+            System.err.println ("Method UserSQL.checkUserName() performed bad SQL call");
+            System.err.println (e.toString());
+			dba_s.disconnect();
+            return true;
+		}
+	}
+	
+	/**
+	 * Adds new registrations to the database.
+	 * 
+	 * @param name the entered userName
+	 * @param password the entered userPassword
+	 * @param email the entered userEmail
+	 * @param phone the entered userPhone
+	 * @param firstName the entered userFirstName
+	 * @param lastName the entered userLastName
+	 * @param isDoctor the entered userIsDoctor
+	 * 
+	 * @author Alex Bassett
+	 */
+	public static void registerNewUser(String name, String password,
+			String email, String phone, String firstName,
+			String lastName, boolean isDoctor) {
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try {
+			// construct and execute the SQL call, retrieve the results
+			String isDoc = "0";
+			if (isDoctor) isDoc = "1";
+			String s = "INSERT INTO users (username, password, useremail," +
+					"userphone, userfirstname, userlastname, userisdoctor) " +
+					"VALUES (" + name + ", " + password + ", " + email +
+					", " + phone + ", " + firstName + ", " + lastName +
+					", " + isDoc + ")";
+			Statement statement = dba_s.connection.createStatement ();
+			statement.executeUpdate (s);
+			
+			// close connections
+			statement.close();
+			dba_s.disconnect();
+			
+		} catch (SQLException e) {
+            System.err.println ("Method UserSQL.registerNewUser() performed bad SQL call");
+            System.err.println (e.toString());
+			dba_s.disconnect();
 		}
 	}
 }
