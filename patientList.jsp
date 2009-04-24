@@ -41,7 +41,7 @@
 	session.getId();
 
 	java.util.ArrayList<Integer> arrayOfPatients = new java.util.ArrayList<Integer>();
-	core.Patient patient = new core.Patient();
+	core.PatientSQL patient = new core.PatientSQL();
 	int userId = 0;
 	
 	
@@ -58,7 +58,7 @@
 <p></p>
   <%   
   	for (int i = 0; i < arrayOfPatients.size(); i++){
-  		patient = new core.Patient(arrayOfPatients.get(i));	
+  		patient = new core.PatientSQL(arrayOfPatients.get(i));	
   		String PATID = new Integer(patient.getPatientId()).toString();
   		
   		String PATNAME = patient.PatientName();
@@ -88,7 +88,7 @@
 </div>
 
 
-
+ 
 </div>
 
 </body>
