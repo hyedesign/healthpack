@@ -1,5 +1,3 @@
-package core;
-
 /**********************************************************
 * File: core.MedicationBean.java
 * Author: Taylor Evans
@@ -12,6 +10,8 @@ package core;
 * Changes : added header comment
 *
 **********************************************************/
+
+package core;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.Resolution;
