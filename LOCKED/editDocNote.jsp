@@ -1,7 +1,7 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
   -- File: editDocNote
-  -- Date Modified: 04/19/09 
+  -- Date Modified: 04/24/09 
   -- Author: Taylor Evans 
   -- Description: This file allows the a doctor to edit his
   -- or her note to a patient.
@@ -21,9 +21,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Edit Doctor Note</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-    input.error { background-color: yellow; }
-</style>
 </head>
 
 <body>
@@ -34,9 +31,7 @@
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
   <%@include file="LinksInc.jsp" %>
- 
 </div>
-
 <div id="content">
 <div id="text">
 
@@ -52,10 +47,8 @@
 			<td><stripes:textarea name="docnote" /></td>
 		</tr>
 		<tr>
-                <td colspan="2">
-                    <stripes:submit name="setnote" value="Submit"/>                    
-                </td>
-            </tr>
+            <td colspan="2"><stripes:submit name="submit" value="Submit"/></td>
+        </tr>
 	</table>
 </stripes:form>
 <!-- ********************* STOP HERE !!!! ********************* -->
@@ -64,12 +57,7 @@
 <div id="footer"> 
   <%@include file="FooterInc.jsp" %>  
 </div>
-
 </div>
-
-
-
 </div>
-
 </body>
 </html>

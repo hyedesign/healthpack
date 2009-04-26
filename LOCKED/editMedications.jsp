@@ -1,10 +1,12 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
   -- File: editMedications
-  -- Date Modified: 04/19/09 
+  -- Date Modified: 04/24/09 
   -- Author: Han Dong
   -- Description: This file allows the user to view and edit
   -- his or her's Medications.
+  --
+  -- Last Edited by: Jon Conti-Vock
   -->
   
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
@@ -35,33 +37,30 @@
 <div></div>
 <stripes:form beanclass="core.MedicationBean" focus="">
 <stripes:errors/>
-<style type="text/css">
-    input.error { background-color: yellow; }
-</style>
 <table>
 		<tr>
 			<td>Medication Name:</td>
 			<td><stripes:text name="medicationName"/></td>
 		</tr>
 		<tr>
-			<td>Expiration Date:</td>
-			<td><stripes:text name="expirationMonth" size="1" maxlength = "2"/>/
-			    <stripes:text name="expirationDay" size="1" maxlength = "2"/>/ 
-			    <stripes:text name="expirationYear" size="2" maxlength ="4"/></td>
+			<td>Expiration Date (MM/DD/YYYY):</td>
+			<td><stripes:text name="expirationMonth" size="1"/>/
+			    <stripes:text name="expirationDay" size="1"/>/ 
+			    <stripes:text name="expirationYear" size="2"/></td>
 		</tr>
 
 		<tr>
-			<td>Refill Date:</td>
-			<td><stripes:text name="refillMonth" size = "1" maxlength="2"/>/
-			    <stripes:text name="refillDay" size="1" maxlength="2"/>/ 
-			    <stripes:text name="refillYear" size="2" maxlength="4"/></td>
+			<td>Refill Date (MM/DD/YYYY):</td>
+			<td><stripes:text name="refillMonth" size = "1"/>/
+			    <stripes:text name="refillDay" size="1"/>/ 
+			    <stripes:text name="refillYear" size="2"/></td>
 		</tr>
 		<tr>
 			<td>Description:</td>
 			<td><stripes:textarea name="description"/></td>
 		</tr>
 		<tr>
-			<td><stripes:submit name="update" value="Update"/>
+			<td><stripes:submit name="submit" value="Submit"/>
 			    <stripes:reset name ="reset" value="Reset"/></td>
 		</tr>
 	</table>
