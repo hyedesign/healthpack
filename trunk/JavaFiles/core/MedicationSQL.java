@@ -1,3 +1,4 @@
+
 /**********************************************************
 * File: core.MedicationSQL.java
 * Author: Jon Conti-Vock
@@ -24,97 +25,37 @@ public class MedicationSQL {
 	private DBAccess dba = new DBAccess();
 	
     //DB variables
+	private int medicationId;
 	private int patientId;
-	private int userId;
-	private String firstName = "";
-	private String lastName = "";
-	private String middleName = "";
-	private Date patientDOB = new Date(000000);
-	private int height = 0;
-	private int weight = 0;
-	private int patientSex = 0; //0 for male, 1 for female
-	private String emergencyContactName = "";
-	private String emergencyContactPhone = "";
-	private String insurance = "";
-	private String insuranceID = "";
-	private String SSN = "";
-	
+	private String medicationName = "";
+	private Date medicationExpirationDate = new Date(000000);
+	private Date medicationRefillDate = new Date(000000);
+	private String medicationDescription = 	"";
     
 	/*
 	 * CONSTRUCTORS - MAKE IT COMPATIBLE WITH DB
 	 */
     public MedicationSQL() {}	
 	
-	public MedicationSQL(int patientId, int userId, String firstName,
-			String lastName, String middleName, Date patientDOB, int height,
-			int weight, int patientSex, String emergencyContactName,
-			String emergencyContactPhone, String insurance, String insuranceID,
-			String ssn) {
+	public MedicationSQL(int patientId, int medicationId, String medicationName,
+			Date medicationExpirationDate, Date medicationRefillDate, String medicationDescription) {
 		this.patientId = patientId;
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.middleName = middleName;
-		this.patientDOB = patientDOB;
-		this.height = height;
-		this.weight = weight;
-		this.patientSex = patientSex;
-		this.emergencyContactName = emergencyContactName;
-		this.emergencyContactPhone = emergencyContactPhone;
-		this.insurance = insurance;
-		this.insuranceID = insuranceID;
-		SSN = ssn;
+		this.medicationId = medicationId;
+		this.medicationName = medicationName;
+		this.medicationExpirationDate = medicationExpirationDate;
+		this.medicationRefillDate = medicationRefillDate;
+		this.medicationDescription = medicationDescription;
 	}
 
+	/*  What does this do? */
 	public MedicationSQL(int patID) {
 		if (patID != 0){
-			lookupMedication(patID);
+			lookupPatient(patID);
 		}else this.patientId = patID;
 	}
 	
 	//GETTERS AND SETTERS
-	public int getPatientId() {
-		return patientId;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public String getMiddleName() {
-		return middleName;
-	}
-	public Date getPatientDOB() {
-		return patientDOB;
-	}
-	public int getHeight() {
-		return height;
-	}
-	public int getWeight() {
-		return weight;
-	}
-	public int getPatientSex() {
-		return patientSex;
-	}
-	public String getEmergencyContactName() {
-		return emergencyContactName;
-	}
-	public String getEmergencyContactPhone() {
-		return emergencyContactPhone;
-	}
-	public String getInsurance() {
-		return insurance;
-	}
-	public String getInsuranceID() {
-		return insuranceID;
-	}
-	public String getSSN() {
-		return SSN;
-	}
+	
 
 	//SQL CALLS
 	private String lookupMedicationNamebyID(int id){
@@ -220,7 +161,7 @@ public class MedicationSQL {
 			//return true if user was found
 			return true;
 		} catch (SQLException e) {
-            System.err.println ("Error in Updating medication where id = " + this.patientId);
+            System.err.println ("Error in Updating medication where patient id = " + this.patientId + " and medication id = " + this.medicationid);
             System.err.println (e.toString());
 			dba.disconnect();
 			return false;
