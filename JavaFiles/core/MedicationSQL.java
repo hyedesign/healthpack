@@ -1,4 +1,3 @@
-
 /**********************************************************
 * File: core.MedicationSQL.java
 * Author: Jon Conti-Vock
