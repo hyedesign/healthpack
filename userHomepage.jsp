@@ -6,8 +6,9 @@
   -- Description: This file displays the user's 
   -- basic homepage.
   -->
-
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+<%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
@@ -31,10 +32,10 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
-
+<stripes:form beanclass="core.GetUserInfoBean" focus="">
 <h1>User Information</h1>
-
-	<table border="0">
+	<input type="hidden" name="userID" value="<%=3%>" />
+	<table>
 	<tr>
 		<td>Last Login:</td>
 		<td>##/##/## at ##:##:##</td>
@@ -43,8 +44,11 @@
 		<td>Email:</td>
 		<td>User@HealthPack.net</td>
 	</tr>
+	<tr>
+		<td><stripes:submit name="submit" value="Edit" /></td>
+	</tr>
 	</table>
-<p><a href="editUserInfo.jsp">Edit User Info</a></p>
+</stripes:form>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
