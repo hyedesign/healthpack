@@ -1,5 +1,5 @@
 /**********************************************************
-* File: core.AllergiesSEL.java
+* File: core.AllergiesSQL.java
 * Author: Taylor Evans
 * Date Created: 4/24/2009
 *
