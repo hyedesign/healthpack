@@ -1,5 +1,3 @@
-package core;
-
 /**********************************************************
 * File: core.AppointmentBean.java
 * Author: Taylor Evans
@@ -12,6 +10,8 @@ package core;
 * Changes : added header comment
 *
 **********************************************************/
+
+package core;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.Resolution;
@@ -26,9 +26,9 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 public class AppointmentBean implements ActionBean {
     private ActionBeanContext context;
 
-    @Validate(required=true) private double appointmentMonth;
-    @Validate(required=true) private double appointmentDay;
-    @Validate(required=true) private double appointmentYear;
+    @Validate(required=true) private int appointmentMonth;
+    @Validate(required=true) private int appointmentDay;
+    @Validate(required=true) private int appointmentYear;
 	@Validate(required=false, maxlength=255) private String description;
 	@Validate(required=false)private boolean reminder;
 	
@@ -41,30 +41,29 @@ public class AppointmentBean implements ActionBean {
 	public void setReminder(boolean reminder) {
 		this.reminder = reminder;
 	}
-    
-    public double getAppointmentMonth() {
-		return appointmentMonth;
-	}
-	public void setAppointmentMonth(double appointmentMonth) {
-		this.appointmentMonth = appointmentMonth;
-	}
-	public double getAppointmentDay() {
+	public int getAppointmentDay() {
 		return appointmentDay;
 	}
-	public void setAppointmentDay(double appointmentDay) {
+	public void setAppointmentDay(int appointmentDay) {
 		this.appointmentDay = appointmentDay;
 	}
-	public double getAppointmentYear() {
+	public int getAppointmentYear() {
 		return appointmentYear;
 	}
-	public void setAppointmentYear(double appointmentYear) {
+	public void setAppointmentYear(int appointmentYear) {
 		this.appointmentYear = appointmentYear;
+	}
+	public int getAppointmentMonth(){
+		return appointmentMonth;
+	}
+	public void setAppointmentMonth(int appointmentMonth) {
+		this.appointmentMonth = appointmentMonth;
 	}
 	
 	public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
     
-    @ValidationMethod(on="update")
+    @ValidationMethod(on="submit")
     public void dateFormat(ValidationErrors errors) 
     {
     	if(appointmentMonth < 1 || appointmentMonth > 12)
@@ -73,10 +72,20 @@ public class AppointmentBean implements ActionBean {
     		errors.add("appointmentDay", new SimpleError("Invalid Appointment Day"));
     	if(appointmentYear < 2009)
     		errors.add("appointmentYear", new SimpleError("Invalid Appointment Year"));
+    	if (hasSpecialCharacters(description))
+	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    }
+    private boolean hasSpecialCharacters(String s) {
+		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
+		return false;
     }
     
     @DefaultHandler
-    public Resolution update() {
+    public Resolution submit() {
+    	String month = new Integer(appointmentMonth).toString();
+    	String day = new Integer(appointmentDay).toString();
+    	String year = new Integer(appointmentYear).toString();
+    	AppointmentSQL.addAppointment(month, day, year, description, reminder);
         return new ForwardResolution("patientHome.jsp");
     }
     
