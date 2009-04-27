@@ -5,6 +5,7 @@
   -- Author: Taylor Evans
   -- Description: This file allows the user to edit its
   -- personal information.
+  -- Last edited by: Han Dong
   -->
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>
@@ -15,11 +16,6 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
 <title>Edit User Info</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-    input.error { background-color: yellow; }
-</style>
-
-
 </head>
 
 <body>
@@ -28,10 +24,8 @@
 <div id="header"></div>
 <div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
-<div id="navigation">  
-  
+<div id="navigation"> 
    <%@include file="LinksInc.jsp" %>
-  
 </div>
 
 <div id="content">
@@ -39,10 +33,9 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
-
 <h1>Edit User Info</h1>
 <p>Please enter your information</p>
-<stripes:form beanclass="core.VerifyUserInfo" focus="">
+<stripes:form beanclass="core.UserInfoBean" focus="">
 	<stripes:errors/>
 	<table>
 		<tr>
@@ -58,8 +51,12 @@
 			<td><stripes:text name="email" size="20" /></td>
 		</tr>
 		<tr>
+			<td>Phone:</td>
+			<td><stripes:text name="phone" size="20" /></td>
+		</tr>
+		<tr>
 			<td>Description:</td>
-			<td><stripes:textarea name="textarea" cols="45" rows="5" /></td>
+			<td><stripes:textarea name="description" cols="45" rows="5" /></td>
 		</tr>
 		<tr>
 			<td>New Password:</td>
