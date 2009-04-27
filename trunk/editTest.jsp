@@ -9,13 +9,11 @@
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
 <title>Edit Test</title>
 <link href="HealthPackStyle.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-    input.error { background-color: yellow; }
-</style>
 </head>
 
 <body>
@@ -23,10 +21,8 @@
 <div id="header"></div>
 <div id="message">UserName</div>
 <!----------------------- NAVIGATION  ----------------------->
-<div id="navigation">  
-  
+<div id="navigation">    
    <%@include file="LinksInc.jsp" %>
-  
 </div>
 
 <div id="content">
@@ -36,10 +32,7 @@
 <stripes:form beanclass="core.EditTestBean" focus="">
 	<stripes:errors/>
 	<table>
-		<tr>
-			<td>Patient ID:</td>
-			<td><stripes:text name="patientID" size="20" /></td>
-		</tr>
+	<div><input type="hidden" name="patientID" value="<%=8%>" /><%="Han"%></div>
 		<tr>
 			<td>Test Name:</td>
 			<td><stripes:text name="testName" size="20" /></td>
@@ -55,9 +48,9 @@
 		<tr>
 			<td>Test Date:</td>
 			<td>
-	    		<stripes:text name="testMonth" size="1" maxlength = "2" />/
-				<stripes:text name="testDay" size="1" maxlength = "2" />/
-				<stripes:text name="testYear" size="2" maxlength = "4" />
+	    		<stripes:text name="testMonth" size="1" />/
+				<stripes:text name="testDay" size="1" />/
+				<stripes:text name="testYear" size="2" />
 			</td>
 		</tr>
 		<tr>
@@ -66,18 +59,12 @@
 		</tr>
 	</table>
 </stripes:form>
-	
-
 </div>
 <div id="footer"> 
 <%@include file="FooterInc.jsp" %>
-  </div>
-
 </div>
-
-
-
 </div>
-
+</div>
 </body>
+
 </html>
