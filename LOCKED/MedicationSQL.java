@@ -3,7 +3,7 @@
 * Author: Jon Conti-Vock
 * Date Created: 4/26/2009
 *
-* Description: The Medication class handles loading and updating
+* Description: The NewMedication class handles adding a medication to
 *              the patient's medication table in the HealthPack database.
 *
 **********************************************************/
@@ -44,13 +44,6 @@ public class MedicationSQL {
 		this.medicationExpirationDate = medicationExpirationDate;
 		this.medicationRefillDate = medicationRefillDate;
 		this.medicationDescription = medicationDescription;
-	}
-
-	/*  What does this do? */
-	public MedicationSQL(int patID) {
-		if (patID != 0){
-			lookupPatient(patID);
-		}else this.patientId = patID;
 	}
 	
 	//GETTERS AND SETTERS
@@ -126,7 +119,7 @@ public class MedicationSQL {
 		}
 	}
 	
-	private boolean insertMedication (){
+	private boolean insertMedication(){
 		dba.connect(); // connect to the database
 		try {
 							
@@ -134,10 +127,7 @@ public class MedicationSQL {
 			Statement statement = dba.connection.createStatement ();
 			
 			statement.executeUpdate("INSERT INTO cmsc345.medications" +
-					" VALUES ( 0 ,"+userId+",'"+firstName+"','"+lastName+"','"
-					+middleName+"','"+this.patientDOB+"',"+weight+","+height+","+this.patientSex+",'"
-					+emergencyContactName+"','"	+emergencyContactPhone+"','"+insurance+"','"
-					+insuranceID+"','"+SSN+"');");
+					" VALUES ( 0 ,);");
 			
 			statement.close();
 			dba.disconnect();
@@ -152,56 +142,6 @@ public class MedicationSQL {
 		}
 	}
 	
-	private boolean updateMedications(){
-		dba.connect(); // connect to the database
-		try {
-			// construct and execute the SQL call, retrieve the results
-			Statement statement = dba.connection.createStatement ();
-			System.out.println("\n*****************\nupdating .....\n");
-			
-			
-			System.out.println("UPDATE cmsc345.medications" +
-					" SET 	 patientfirstname='"+this.firstName+"', " +
-							"patientlastname'"+this.lastName+"', " +
-							"patientmiddlename='"+this.middleName+"', " +
-							"patientdob='"+this.patientDOB+"', " +
-							"patientweight="+this.weight+", " +
-							"patientheight="+this.height+", " +
-							"patientsex="+this.patientSex+", "+
-							"patientemergencycontactname='"+this.emergencyContactName+"', " +
-							"patientemergencycontactnumber='"+this.emergencyContactPhone+"', " +
-							"patientinsuranceprovider='"+this.insurance+"', " +
-							"patientinsuranceid='"+this.insuranceID+"'," +
-							"patientssn='"+this.SSN+"' " +
-					"WHERE patientid = " + this.patientId +";");
-			
-			statement.executeUpdate("UPDATE cmsc345.medications" +
-					" SET 	 patientfirstname='"+this.firstName+"', " +
-							"patientlastname='"+this.lastName+"', " +
-							"patientmiddlename='"+this.middleName+"', " +
-							"patientdob='"+this.patientDOB+"', " +
-							"patientweight="+this.weight+", " +
-							"patientheight="+this.height+", " +
-							"patientsex="+this.patientSex+", "+
-							"patientemergencycontactname='"+this.emergencyContactName+"', " +
-							"patientemergencycontactnumber='"+this.emergencyContactPhone+"', " +
-							"patientinsuranceprovider='"+this.insurance+"', " +
-							"patientinsuranceid='"+this.insuranceID+"'," +
-							"patientssn='"+this.SSN+"' " +
-					"WHERE patientid = " + this.patientId +";");
-			
-			statement.close();
-			dba.disconnect();
-			//return true if user was found
-			return true;
-		} catch (SQLException e) {
-            System.err.println ("Error in Updating medication where patient id = " + this.patientId + " and medication id = " + this.medicationid);
-            System.err.println (e.toString());
-			dba.disconnect();
-			return false;
-		}		
-	}
-	
 	private boolean deleteMedication(){
 		dba.connect(); // connect to the database
 		try {
@@ -209,7 +149,7 @@ public class MedicationSQL {
 			Statement statement = dba.connection.createStatement ();
 						
 			statement.executeUpdate("DELETE FROM cmsc345.medications" +
-					" WHERE patientid = '" + this.patientId +"' AND medicationid = '"+this.medicationid+"' ");
+					" WHERE patientid = '" + this.patientId +"' AND medicationid = '"+this.medicationId+"' ");
 			
 			statement.close();
 			dba.disconnect();
@@ -225,67 +165,31 @@ public class MedicationSQL {
 		
 	}
 	
-	private boolean loadPatientData (ResultSet rs) {
-		// check that the resultset isn't empty and load the patient data
-		try {
-			if (rs.first()) {
-					patientId = rs.getInt("patientid");
-					userId = rs.getInt("userid");
-					firstName = rs.getString("patientfirstname");
-					lastName = rs.getString("patientlastname");
-					middleName = rs.getString("patientmiddlename");
-					patientDOB = rs.getDate("patientdob");
-					height = rs.getInt("patientheight");
-					weight = rs.getInt("patientweight");
-					patientSex = rs.getInt("patientsex");
-					emergencyContactName = rs.getString("patientemergencycontactname");
-					emergencyContactPhone = rs.getString("patientemergencycontactnumber");
-					insurance = rs.getString("patientinsuranceprovider");
-					insuranceID = rs.getString("patientinsuranceid");
-					SSN = rs.getString("patientssn");
-					return true;
-				}else return false;
-			} catch (SQLException e) {
-				System.err.println("Error in loadPatientData (Patient.java)");
-	            System.err.println (e.toString());
-				return false;
-			}
-	}
-	
 	/*
 	 * Static Calls
 	 */
-	public static ArrayList<Integer> lookupPatientsByUserID(int UserId) {
+	public static void addNewMedication(int patientId, String medicationName, 
+			Date medicationExpirationDate, Date medicationRefillDate, 
+			String medicationDesription) {
 		DBAccess dba = new DBAccess();
 		dba.connect(); // connect to the database
 		
 		try {
-			ArrayList<Integer> arrayOfIds = new ArrayList<Integer>();
-			
-			// construct and execute the SQL call, retrieve the results
+			// construct and execute the SQL call
 			Statement statement = dba.connection.createStatement ();
-			ResultSet results = statement.executeQuery ("SELECT patientid FROM patients WHERE userid='"+UserId+"'");
-			
-			// attempt to load the patient from the ResultSet
-			while (results.next()){
-				arrayOfIds.add(results.getInt("patientid"));
-
-				System.out.println("patient: " + arrayOfIds.get(arrayOfIds.size() - 1));
-			}
-			
+			String s = "INSERT INTO medications " + "" +
+			" (patientId, medicationName, medicationExpirationDate, medicationRefillDate, medicationDescription) " + 
+			" VALUES('"+patientId+"', '"+medicationName+"', '"+medicationExpirationDate+"', '"
+			+medicationRefillDate+"', '"+medicationDesription+"')";
+			statement.executeUpdate(s);
 			
 			// close connections
-			results.close();
 			statement.close();
 			dba.disconnect();
-			//return true if user was found
-			return arrayOfIds;
-			
 		} catch (SQLException e) {
-            System.err.println ("Error in lookupPatientsByUserID (Patient.java)");
+            System.err.println ("Error in addNewMedication (editMedications.jsp)");
             System.err.println (e.toString());
 			dba.disconnect();
-            return null;
 		}
 	}
 	
