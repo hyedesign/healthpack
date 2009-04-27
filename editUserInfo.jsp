@@ -40,23 +40,23 @@
 	<table>
 		<tr>
 			<td>First Name:</td>
-			<td><stripes:text name="firstName" size="20" /></td>
+			<td><stripes:text name="firstName" size="20" value="${actionBean.firstName}"/></td>
 		</tr>
 		<tr>
 			<td>Last Name:</td>
-			<td><stripes:text name="lastName" size="20" /></td>
+			<td><stripes:text name="lastName" size="20" value="${actionBean.lastName}"/></td>
 		</tr>
 		<tr>
 			<td>New Email:</td>
-			<td><stripes:text name="email" size="20" /></td>
+			<td><stripes:text name="email" size="20" value="${actionBean.email}"/></td>
 		</tr>
 		<tr>
 			<td>Phone:</td>
-			<td><stripes:text name="phone" size="20" /></td>
+			<td><stripes:text name="phone" size="20" value="${actionBean.phone}"/></td>
 		</tr>
 		<tr>
 			<td>Description:</td>
-			<td><stripes:textarea name="description" cols="45" rows="5" /></td>
+			<td><stripes:textarea name="description" cols="45" rows="5" value="${actionBean.description}"/></td>
 		</tr>
 		<tr>
 			<td>New Password:</td>
