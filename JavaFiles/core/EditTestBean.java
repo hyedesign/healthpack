@@ -11,6 +11,9 @@
 **********************************************************/
 package core;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -24,10 +27,10 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 public class EditTestBean implements ActionBean
 {
 	private ActionBeanContext context;
-	@Validate(required=true, maxlength=30) private String patientID;
-	@Validate(required=true, maxlength=30) private String testName;
-	@Validate(required=true, maxlength=30) private String testResult;
+	@Validate(required=true, maxlength=20) private String testName;
+	@Validate(required=true, maxlength=20) private String testResult;
 	@Validate(required=false) private String testDescription;
+	private Date testDate;
 	@Validate(required=true, maxlength=2, minlength=2) private int testMonth;
 	@Validate(required=true, maxlength=2, minlength=2)  private int testDay;
 	@Validate(required=true, maxlength=4, minlength=4) private int testYear;
@@ -35,8 +38,6 @@ public class EditTestBean implements ActionBean
 	//getters and setters
 	public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
-	public String getPatientID() { return patientID; }
-	public void setPatientID(String patientID) { this.patientID = patientID; }
 	public String getTestName() { return testName; }
 	public void setTestName(String testName) { this.testName = testName; }
 	public String getTestResult() { return testResult; }
@@ -54,6 +55,11 @@ public class EditTestBean implements ActionBean
 	@DefaultHandler
     public Resolution submit()
 	{
+		Calendar cal = Calendar.getInstance();
+		cal.set(this.testYear, this.testMonth-1, this.testDay);
+		this.testDate = new Date(cal.getTime().getTime());
+		new EditTestSQL(this.testName, this.testResult,
+				this.testDescription, this.testDate).updateTest(8);
 		return new ForwardResolution("patientHome.jsp");
 	}
     
