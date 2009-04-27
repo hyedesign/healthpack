@@ -18,7 +18,10 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
+import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
+import net.sourceforge.stripes.validation.ValidationErrors;
+import net.sourceforge.stripes.validation.ValidationMethod;
 
 
 public class AllergiesBean implements ActionBean {
@@ -36,7 +39,20 @@ public class AllergiesBean implements ActionBean {
     public void setDescription(String description) { this.description = description; }
     
     @DefaultHandler
-    public Resolution update() {
+    public Resolution submit() {
+    	AllergiesSQL.addAllergies(allergyName, description);
         return new ForwardResolution("patientHome.jsp");
     }
+    @ValidationMethod(on="submit")
+    public void checkSpecialChars(ValidationErrors errors) 
+    {
+    	if (hasSpecialCharacters(allergyName))
+	    	errors.add("allergyName", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    	if (hasSpecialCharacters(description))
+	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    }
+    private boolean hasSpecialCharacters(String s) {
+		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
+		return false;
+	}
 }
