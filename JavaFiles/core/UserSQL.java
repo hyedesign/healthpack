@@ -6,6 +6,9 @@
 * Description: The UserSQL class handles loading and updating
 *              the user table in the HealthPack database.
 *
+* Edited: 4/28/09 by Alex Bassett
+* Changes: Added isDoctor() for checking that a user is a doctor
+*
 **********************************************************/
 package core;
 
@@ -213,6 +216,46 @@ public class UserSQL {
             System.err.println (e.toString());
 			dba_s.disconnect();
             return NO_MATCHING_USER;
+		}
+	}
+	
+	/**
+	 * Connects to the 'users' table in the mySQL database using
+	 * DBAccess and attempts to check to see if the user is a doctor.
+	 * 
+	 * @param id the id of the user being checked
+	 * @return true when the user is a doctor and false otherwise
+	 * @author Alex Bassett
+	 */
+	static public boolean isDoctor(int id) {
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try {
+			// construct and execute the SQL call, retrieve the results
+			Statement statement = dba_s.connection.createStatement ();
+			ResultSet results = statement.executeQuery ("SELECT * FROM users WHERE userid="+id);
+			
+			// attempt to load the userisdoctor field
+			int docint = 0;
+			boolean isDoctor;
+			if (results.first())docint = results.getInt("userisdoctor");
+			
+			// translate into boolean value
+			if (docint == 0) isDoctor = false;
+			else isDoctor = true;
+			
+			// close connections
+			results.close();
+			statement.close();
+			dba_s.disconnect();
+			//return true if user is a doctor
+			return isDoctor;
+			
+		} catch (SQLException e) {
+            System.err.println ("Method UserSQL.loginUser() performed bad SQL call");
+            System.err.println (e.toString());
+			dba_s.disconnect();
+            return false;
 		}
 	}
 	
