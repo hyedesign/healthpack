@@ -6,7 +6,7 @@
 * Description: The AllergiesSQL class works with 
 *              AllergiesBean to connect to the Database
 *
-* Edited  : 4/27/2009 by Taylor Evans
+* Edited  : 4/28/2009 by Taylor Evans
 *
 **********************************************************/
 
@@ -17,6 +17,7 @@ import java.sql.*;
 public class AllergiesSQL 
 {
 
+	//private data members
 	private DBAccess dba; 
 	
 	private int allergyID;
@@ -24,6 +25,7 @@ public class AllergiesSQL
 	private String allergyName;
 	private String description;
 	
+	//Constructor
 	public AllergiesSQL()
 	{
 		dba = new DBAccess();
@@ -33,38 +35,29 @@ public class AllergiesSQL
 		description = "";
 	}
 
+	//GETTERS AND SETTERS
+	public int getAllergyID() {	return allergyID;	}
+	public void setAllergyID(int allergyID) {	this.allergyID = allergyID;	}
 	
-	public int getAllergyID() {
-		return allergyID;
-	}
-	public void setAllergyID(int allergyID) {
-		this.allergyID = allergyID;
-	}
-	public int getPatientID() {
-		return patientID;
-	}
-	public void setPatientID(int patientID) {
-		this.patientID = patientID;
-	}
-	public DBAccess getDba() {
-		return dba;
-	}
-	public void setDba(DBAccess dba) {
-		this.dba = dba;
-	}
-	public String getAllergyName() {
-		return allergyName;
-	}
-	public void setAllergyName(String allergyName) {
-		this.allergyName = allergyName;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	public int getPatientID() {	return patientID;	}
+	public void setPatientID(int patientID) {	this.patientID = patientID;	}
+	
+	public DBAccess getDba() {	return dba;	}
+	public void setDba(DBAccess dba) {	this.dba = dba;	}
+	
+	public String getAllergyName() {	return allergyName;	}
+	public void setAllergyName(String allergyName) {	this.allergyName = allergyName;	}
+	
+	public String getDescription() {	return description;	}
+	public void setDescription(String description) {	this.description = description;	}
 
+	/**
+	 * addAllergy takes in the inputed data fields and adds
+	 * a new allergy entry into the database.
+	 * 
+	 * @param name
+	 * @param descript
+	 */
 	public static void addAllergies(String name, String descript)
 	{
 		DBAccess dba_s = new DBAccess();
@@ -72,8 +65,8 @@ public class AllergiesSQL
 		try {
 			int pID = 9;
 			// construct and execute the SQL call, retrieve the results
-			name = name.replaceAll("\\'", "''");
 			descript = descript.replaceAll("\\'", "''");
+			name = name.replaceAll("\\'", "''");
 			String s = "INSERT INTO allergies (patientid, allergy_name, allergy_description) " +
 			"VALUES ("+ pID +", '" + name + "', '" + descript + "')";
 			Statement statement = dba_s.connection.createStatement ();
@@ -90,6 +83,16 @@ public class AllergiesSQL
 		}
 	}
 	
+	/**
+	 * lookupAllergy looks in the database for the allergy
+	 * corresponding to the id inputed. It attempts to load the information
+	 * if the entry is found. Returns false otherwise.
+	 * 
+	 * @param id
+	 * @return
+	 * 
+	 * Taylor Evans
+	 */
 	public boolean lookupAllergy(int id) {
 		dba.connect(); // connect to the database
 		try {
@@ -108,7 +111,7 @@ public class AllergiesSQL
 			return successfulLoad;
 			
 		} catch (SQLException e) {
-            System.err.println ("Method login() performed bad SQL call");
+            System.err.println ("Method lookupAllergy() performed bad SQL call");
             System.err.println (e.toString());
 			dba.disconnect();
             return false;
@@ -116,14 +119,12 @@ public class AllergiesSQL
 	}
 	
 	/**
-	 * Takes a ResultSet object and loads the user data from it.
-	 * The result set must be the result of a query to the users
-	 * table.
+	 * loadAllergy attempts to load the allergy from the 
+	 * database into the SQL file.
+	 * @param rs
+	 * @return
 	 * 
-	 * @param rs the result set that contains a single user's data
-	 * @return true when the data is loaded, false when the ResultSet is
-	 * empty and there is no data to load
-	 * @author Alex Bassett
+	 * Taylor Evans
 	 */
 	private boolean loadAllergy(ResultSet rs) {
 		// check that the resultset isn't empty and load the user data
@@ -138,12 +139,20 @@ public class AllergiesSQL
 			// the resultset is empty, no data loaded
 			else return false;
 		} catch (SQLException e) {
-			System.err.println("Bad ResultSet call from UserSQL.loadUserData()");
+			System.err.println("Bad ResultSet call from AllergySQL.loadAllergy()");
             System.err.println (e.toString());
 			return false;
 		}
 	}
 	
+	/**
+	 * updateAllergy takes the inputed data fields and updates 
+	 * the corresponding allergy in the database.
+	 * 
+	 * @param id
+	 * @param allergy
+	 * @param descript
+	 */
 	public void updateAllergy(int id, String allergy, String descript)
 	{	
 		dba.connect(); // connect to the database
@@ -167,7 +176,7 @@ public class AllergiesSQL
 		catch (SQLException e)
 		{
 			System.err.println (e.toString());
-			System.out.println("Failed to update.");
+			System.out.println("Failed to update in AllergySQL.java.");
 			dba.disconnect();
 		}
 	}
