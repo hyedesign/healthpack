@@ -65,19 +65,22 @@ public class AppointmentSQL {
 		this.reminder = reminder;
 	}
 	
-	public static void addAppointment(String month,String day, String year, String descript, boolean remind)
+	public static void addAppointment(Date date, String descript, boolean remind)
 	{
 		DBAccess dba_s = new DBAccess();
 		dba_s.connect(); // connect to the database
 		try {
 			// construct and execute the SQL call, retrieve the results
+			int pID = 9;
 			String remember = "0";
 			if(remind == true)
 				remember = "1";
-			//Date date = new Date(year,month,day);
-			String s = "INSERT INTO appointments (appointmentdate, appointmentdescription, appointmentreminder," +
-			"VALUES (" + year+"-"+month+"-"+day + ", '" + descript + "', " + remember + ")";
 			
+			descript = descript.replaceAll("\\'", "''");
+			
+			String s = "INSERT INTO appointments (patientid, appointmentdate, appointmentdescription, appointmentreminder)" +
+			"VALUES (" + pID + ", '"+ date + "', '" + descript + "', " + remember + ")";
+			System.out.println(s);
 			Statement statement = dba_s.connection.createStatement ();
 			statement.executeUpdate (s);
 			
@@ -91,6 +94,92 @@ public class AppointmentSQL {
 			dba_s.disconnect();
 		}
 		
+	}
+	
+	public boolean lookupAppointment(int id) {
+		dba.connect(); // connect to the database
+		try {
+			// construct and execute the SQL call, retrieve the results
+			Statement statement = dba.connection.createStatement ();
+			ResultSet results = statement.executeQuery ("SELECT * FROM appointments WHERE appointmentid='"+id+"'");
+			
+			// attempt to load the user from the ResultSet
+			boolean successfulLoad = loadAppointment(results);
+			
+			// close connections
+			results.close();
+			statement.close();
+			dba.disconnect();
+			//return true if user was found
+			return successfulLoad;
+			
+		} catch (SQLException e) {
+            System.err.println ("Method login() performed bad SQL call");
+            System.err.println (e.toString());
+			dba.disconnect();
+            return false;
+		}
+	}
+	
+	/**
+	 * Takes a ResultSet object and loads the user data from it.
+	 * The result set must be the result of a query to the users
+	 * table.
+	 * 
+	 * @param rs the result set that contains a single user's data
+	 * @return true when the data is loaded, false when the ResultSet is
+	 * empty and there is no data to load
+	 * @author Alex Bassett
+	 */
+	private boolean loadAppointment(ResultSet rs) {
+		// check that the resultset isn't empty and load the user data
+		try {
+			if (rs.first()) {
+				appointmentID = rs.getInt("appointmentid");
+				patientID = rs.getInt("patientID");
+				date = rs.getDate("appointmentdate");
+				description = rs.getString("appointmentdescription");
+				int bool = rs.getInt("appointmentreminder");
+				if(bool == 0)
+					reminder = false;
+				else reminder = true;
+				return true;
+			}
+			// the resultset is empty, no data loaded
+			else return false;
+		} catch (SQLException e) {
+			System.err.println("Bad ResultSet call from UserSQL.loadUserData()");
+            System.err.println (e.toString());
+			return false;
+		}
+	}
+	
+	public void updateAppointment(int id, String allergy, String descript)
+	{	
+		dba.connect(); // connect to the database
+		try
+		{
+			Statement statement = dba.connection.createStatement();
+			if(description == null)
+			{
+				statement.executeUpdate("UPDATE appointment SET allergy_name='"+allergy+"' WHERE allergyid='"
+						+id+"'");
+			}
+			else
+			{
+				statement.executeUpdate("UPDATE allergies SET allergy_name='"+allergy+
+						"', allergy_description='"+descript+"' WHERE allergyid='"
+						+id+"'");
+			}
+			statement.close();
+			dba.disconnect();
+		}
+		catch (SQLException e)
+		{
+			System.err.println (e.toString());
+			System.out.println("Failed to update.");
+			dba.disconnect();
+		}
 	}
 
 }

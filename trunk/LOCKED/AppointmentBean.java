@@ -13,6 +13,9 @@
 
 package core;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -78,16 +81,14 @@ public class AppointmentBean implements ActionBean {
     private boolean hasSpecialCharacters(String s) {
 		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
 		return false;
-    }
+	}
     
     @DefaultHandler
     public Resolution submit() {
-    	String month = new Integer(appointmentMonth).toString();
-    	String day = new Integer(appointmentDay).toString();
-    	String year = new Integer(appointmentYear).toString();
-    	AppointmentSQL.addAppointment(month, day, year, description, reminder);
+    	Calendar cal = Calendar.getInstance();
+		cal.set(this.appointmentYear, this.appointmentMonth-1, this.appointmentDay);
+		Date date = new Date(cal.getTime().getTime());
+    	AppointmentSQL.addAppointment(date, description, reminder);
         return new ForwardResolution("patientHome.jsp");
     }
-    
-    
 }
