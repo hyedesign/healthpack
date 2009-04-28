@@ -1,7 +1,7 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
   -- File: editDocNote
-  -- Date Modified: 04/24/09 
+  -- Date Modified: 04/27/09 
   -- Author: Taylor Evans 
   -- Description: This file allows the a doctor to edit his
   -- or her note to a patient.
@@ -39,12 +39,12 @@
 
 
 <p>Please enter your note for the patient</p>
-<stripes:form beanclass="core.DocNoteBean" focus="">
+<stripes:form beanclass="core.AddDocNoteBean" focus="">
 	<stripes:errors/>
 	<table border="0">
 		<tr>
 			<td>Doctor's Note</td>
-			<td><stripes:textarea name="docnote" /></td>
+			<td><stripes:textarea name="description" value="${actionBean.description}"/></td>
 		</tr>
 		<tr>
             <td colspan="2"><stripes:submit name="submit" value="Submit"/></td>

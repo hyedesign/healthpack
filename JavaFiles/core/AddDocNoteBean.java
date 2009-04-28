@@ -33,9 +33,10 @@ public class AddDocNoteBean implements ActionBean {
     
     @DefaultHandler
     public Resolution submit() {
+    	int doctorpatientid = 7;
     	int patientid = 4;
 		int userid = 10;
-//    	if(patientid == 0)
+//    	if(doctorpatientid == 0)
     	DocNoteSQL.addDocNote(userid, patientid, description);
     		
         return new ForwardResolution("patientHome.jsp");
