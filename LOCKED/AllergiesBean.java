@@ -6,8 +6,8 @@
 * Description: The AllergiesBean class works with 
 *              addAllergies.jsp to verify form inputs
 *
-* Edited  : 4/20/2009 by Taylor Evans
-* Changes : added header comment
+* Edited  : 4/28/2009 by Taylor Evans
+* Changes : added comments
 *
 **********************************************************/
 
@@ -25,10 +25,12 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 
 
 public class AllergiesBean implements ActionBean {
+	//private data members
     private ActionBeanContext context;
     @Validate(required=true, maxlength=30) private String allergyName;
     @Validate(required=false, maxlength=255) private String description;
 
+    //GETTERS AND SETTERS
     public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
 
@@ -38,11 +40,18 @@ public class AllergiesBean implements ActionBean {
 	public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
     
+    /**
+     * adds a new allergy or updates an
+     * existing allergy depening on the id
+     * @return
+     * 
+     * Taylor Evans
+     */
     @DefaultHandler
     public Resolution submit() {
     	int allergyID = 4;
     	if(allergyID == 0)
-    	AllergiesSQL.addAllergies(allergyName, description);
+    		AllergiesSQL.addAllergies(allergyName, description);
     	else
     	{
     		AllergiesSQL temp = new AllergiesSQL();
@@ -51,6 +60,14 @@ public class AllergiesBean implements ActionBean {
     		
         return new ForwardResolution("patientHome.jsp");
     }
+    
+    /**
+     * Checks the inputed allergyName and the description
+     * for illegal characters. If any are found it displays
+     * an errors
+     * 
+     * Taylor Evans
+     */
     @ValidationMethod(on="submit")
     public void checkSpecialChars(ValidationErrors errors) 
     {
@@ -59,6 +76,16 @@ public class AllergiesBean implements ActionBean {
     	if (hasSpecialCharacters(description))
 	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
     }
+    
+    /**
+     * Checks the inputed string for illegal characters
+     * and returns true if any are found. Otherwise it
+     * returns false.
+     * @param s
+     * @return
+     * 
+     * Taylor Evans
+     */
     private boolean hasSpecialCharacters(String s) {
 		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
 		return false;

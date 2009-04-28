@@ -6,7 +6,7 @@
 * Description: The AppointmentSQL class works with 
 *              AppointmentBean to connect to the Database
 *
-* Edited  : 4/24/2009 by Taylor Evans
+* Edited  : 4/28/2009 by Taylor Evans
 *
 **********************************************************/
 
@@ -16,6 +16,7 @@ import java.sql.*;
 
 public class AppointmentSQL {
 	
+	//Private Data Members
 	private DBAccess dba; 
 	
 	private int patientID;
@@ -24,6 +25,7 @@ public class AppointmentSQL {
 	private String description;
 	private boolean reminder;
 	
+	//Constructor
 	public AppointmentSQL()
 	{
 		dba = new DBAccess();
@@ -34,6 +36,7 @@ public class AppointmentSQL {
 		reminder = false;
 	}
 
+	//GETTERS AND SETTERS
 	public int getPatientID() {
 		return patientID;
 	}
@@ -65,6 +68,16 @@ public class AppointmentSQL {
 		this.reminder = reminder;
 	}
 	
+	/**
+	 * addAppointment takes in the inputed data fields and adds
+	 * a new appointment entry into the database.
+	 * 
+	 * @param date
+	 * @param descript
+	 * @param remind
+	 * 
+	 * Taylor Evans
+	 */
 	public static void addAppointment(Date date, String descript, boolean remind)
 	{
 		DBAccess dba_s = new DBAccess();
@@ -96,6 +109,17 @@ public class AppointmentSQL {
 		
 	}
 	
+	
+	/**
+	 * lookupAppointment looks in the database for the appointment
+	 * corresponding to the id inputed. It attempts to load the information
+	 * if the entry is found. Returns false otherwise.
+	 * 
+	 * @param id
+	 * @return
+	 * 
+	 * Taylor Evans
+	 */
 	public boolean lookupAppointment(int id) {
 		dba.connect(); // connect to the database
 		try {
@@ -114,7 +138,7 @@ public class AppointmentSQL {
 			return successfulLoad;
 			
 		} catch (SQLException e) {
-            System.err.println ("Method login() performed bad SQL call");
+            System.err.println ("Method lookupAppointment performed bad SQL call");
             System.err.println (e.toString());
 			dba.disconnect();
             return false;
@@ -122,14 +146,12 @@ public class AppointmentSQL {
 	}
 	
 	/**
-	 * Takes a ResultSet object and loads the user data from it.
-	 * The result set must be the result of a query to the users
-	 * table.
+	 * loadAppointment attempts to load the appointment from the 
+	 * database into the SQL file.
+	 * @param rs
+	 * @return
 	 * 
-	 * @param rs the result set that contains a single user's data
-	 * @return true when the data is loaded, false when the ResultSet is
-	 * empty and there is no data to load
-	 * @author Alex Bassett
+	 * Taylor Evans
 	 */
 	private boolean loadAppointment(ResultSet rs) {
 		// check that the resultset isn't empty and load the user data
@@ -148,12 +170,23 @@ public class AppointmentSQL {
 			// the resultset is empty, no data loaded
 			else return false;
 		} catch (SQLException e) {
-			System.err.println("Bad ResultSet call from UserSQL.loadUserData()");
+			System.err.println("Bad ResultSet call from AppointmentSQL.loadAppointment()");
             System.err.println (e.toString());
 			return false;
 		}
 	}
 	
+	/**
+	 * updateAppointment takes the inputed data fields and updates 
+	 * the corresponding appointment in the database.
+	 * 
+	 * @param id
+	 * @param date
+	 * @param descript
+	 * @param remind
+	 * 
+	 * Taylor Evans
+	 */
 	public void updateAppointment(int id, Date date, String descript, boolean remind)
 	{	
 		dba.connect(); // connect to the database
@@ -182,7 +215,7 @@ public class AppointmentSQL {
 		catch (SQLException e)
 		{
 			System.err.println (e.toString());
-			System.out.println("Failed to update.");
+			System.out.println("Failed to update from AppointmentSQL.java.");
 			dba.disconnect();
 		}
 	}

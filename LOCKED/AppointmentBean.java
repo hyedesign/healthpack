@@ -6,8 +6,8 @@
 * Description: The AppointmentBean class works with 
 *              editAppointment.jsp to verify form inputs
 *
-* Edited  : 4/20/2009 by Taylor Evans
-* Changes : added header comment
+* Edited  : 4/28/2009 by Taylor Evans
+* Changes : added comments
 *
 **********************************************************/
 
@@ -29,43 +29,41 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 public class AppointmentBean implements ActionBean {
     private ActionBeanContext context;
 
-    @Validate(required=true) private int appointmentMonth;
-    @Validate(required=true) private int appointmentDay;
-    @Validate(required=true) private int appointmentYear;
+    //Initial Stripes validation methods
+    @Validate(required=true, maxlength=2) private int appointmentMonth;
+    @Validate(required=true, maxlength=2) private int appointmentDay;
+    @Validate(required=true, maxlength=4) private int appointmentYear;
 	@Validate(required=false, maxlength=255) private String description;
 	@Validate(required=false)private boolean reminder;
 	
+	//GETTERS AND SETTERS
     public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
     
-    public boolean isReminder() {
-		return reminder;
-	}
-	public void setReminder(boolean reminder) {
-		this.reminder = reminder;
-	}
-	public int getAppointmentDay() {
-		return appointmentDay;
-	}
-	public void setAppointmentDay(int appointmentDay) {
-		this.appointmentDay = appointmentDay;
-	}
-	public int getAppointmentYear() {
-		return appointmentYear;
-	}
-	public void setAppointmentYear(int appointmentYear) {
-		this.appointmentYear = appointmentYear;
-	}
-	public int getAppointmentMonth(){
-		return appointmentMonth;
-	}
-	public void setAppointmentMonth(int appointmentMonth) {
-		this.appointmentMonth = appointmentMonth;
-	}
+    public boolean isReminder() { return reminder;	}
+	public void setReminder(boolean reminder) {	this.reminder = reminder;	}
+
+	public int getAppointmentDay() { return appointmentDay; }
+	public void setAppointmentDay(int appointmentDay) {	this.appointmentDay = appointmentDay;	}
+	
+	public int getAppointmentYear() { return appointmentYear;	}
+	public void setAppointmentYear(int appointmentYear) {this.appointmentYear = appointmentYear;	}
+	
+	public int getAppointmentMonth(){	return appointmentMonth;	}
+	public void setAppointmentMonth(int appointmentMonth) {	this.appointmentMonth = appointmentMonth;}
 	
 	public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
     
+    /**
+     * The DateFormat() ensures the inputed date is valid and 
+     * checks to make sure there are no illegal characters
+     * in description.
+     * 
+     * @param errors
+     * 
+     * Taylor Evans
+     */
     @ValidationMethod(on="submit")
     public void dateFormat(ValidationErrors errors) 
     {
@@ -78,11 +76,29 @@ public class AppointmentBean implements ActionBean {
     	if (hasSpecialCharacters(description))
 	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
     }
+    
+    /**
+     * hasSpecialCharacters() checks for all illegal characters 
+     * in the inputed string.
+     * 
+     * @param s
+     * @return
+     * 
+     * Alex Bassett
+     */
     private boolean hasSpecialCharacters(String s) {
 		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
 		return false;
 	}
     
+    /**
+     * Resolution submit() adds a new appointment or
+     * updates an existing appointment depending on 
+     * the idea it receives
+     * @return
+     * 
+     * Taylor Evans
+     */
     @DefaultHandler
     public Resolution submit() {
     	int appointmentID = 4;

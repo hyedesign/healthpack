@@ -1,13 +1,13 @@
 /**********************************************************
-* File: core.AppointmentBean.java
+* File: core.EditAppointmentBean.java
 * Author: Taylor Evans
-* Date Created: 4/19/2009
+* Date Created: 4/27/2009
 *
 * Description: The AppointmentBean class works with 
 *              editAppointment.jsp to verify form inputs
 *
-* Edited  : 4/20/2009 by Taylor Evans
-* Changes : added header comment
+* Edited  : 4/28/2009 by Taylor Evans
+* Changes : added comments
 *
 **********************************************************/
 
@@ -27,46 +27,42 @@ import net.sourceforge.stripes.validation.ValidationErrors;
 import net.sourceforge.stripes.validation.ValidationMethod;
 
 public class EditAppointmentBean implements ActionBean {
-    private ActionBeanContext context;
+ 
+	//Private data members
+	private ActionBeanContext context;
 
     @Validate(required=false) private int appointmentMonth;
     @Validate(required=false) private int appointmentDay;
     @Validate(required=false) private int appointmentYear;
 	@Validate(required=false, maxlength=255) private String description;
 	@Validate(required=false)private boolean reminder;
-	
+
+	//GETTERS AND SETTERS
     public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
     
-    public boolean isReminder() {
-		return reminder;
-	}
-	public void setReminder(boolean reminder) {
-		this.reminder = reminder;
-	}
-	public int getAppointmentDay() {
-		return appointmentDay;
-	}
-	public void setAppointmentDay(int appointmentDay) {
-		this.appointmentDay = appointmentDay;
-	}
-	public int getAppointmentYear() {
-		return appointmentYear;
-	}
-	public void setAppointmentYear(int appointmentYear) {
-		this.appointmentYear = appointmentYear;
-	}
-	public int getAppointmentMonth(){
-		return appointmentMonth;
-	}
-	public void setAppointmentMonth(int appointmentMonth) {
-		this.appointmentMonth = appointmentMonth;
-	}
+    public boolean isReminder() {	return reminder;	}
+	public void setReminder(boolean reminder) {	this.reminder = reminder;	}
+	
+	public int getAppointmentDay() {	return appointmentDay;	}
+	public void setAppointmentDay(int appointmentDay) {	this.appointmentDay = appointmentDay;	}
+	
+	public int getAppointmentYear() {	return appointmentYear;	}
+	public void setAppointmentYear(int appointmentYear) {	this.appointmentYear = appointmentYear;	}
+	
+	public int getAppointmentMonth(){	return appointmentMonth;	}
+	public void setAppointmentMonth(int appointmentMonth) {	this.appointmentMonth = appointmentMonth; }
 	
 	public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
     
-    
+    /**
+     * Looks for the inputed appointment and loads the information
+     * into the bean variables.
+     * @return
+     * 
+     * Taylor Evans
+     */
     @DefaultHandler
     public Resolution submit() {
     	int appointmentID = 4;
