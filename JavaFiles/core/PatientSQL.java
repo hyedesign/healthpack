@@ -295,7 +295,6 @@ public class PatientSQL {
 			while (results.next()){
 				arrayOfIds.add(results.getInt("patientid"));
 
-				System.out.println("patient: " + arrayOfIds.get(arrayOfIds.size() - 1));
 			}
 			
 			
