@@ -154,22 +154,27 @@ public class AppointmentSQL {
 		}
 	}
 	
-	public void updateAppointment(int id, String allergy, String descript)
+	public void updateAppointment(int id, Date date, String descript, boolean remind)
 	{	
 		dba.connect(); // connect to the database
 		try
 		{
+			System.out.println(date.toString());
+			String remember = "0";
+			if(remind == true)
+				remember = "1";
 			Statement statement = dba.connection.createStatement();
 			if(description == null)
 			{
-				statement.executeUpdate("UPDATE appointment SET allergy_name='"+allergy+"' WHERE allergyid='"
-						+id+"'");
+				statement.executeUpdate("UPDATE appointments SET appointmentdate='"+date+"', appointmentreminder='"
+						+ remember + "' WHERE appointmentid='"+id+"'");
 			}
 			else
 			{
-				statement.executeUpdate("UPDATE allergies SET allergy_name='"+allergy+
-						"', allergy_description='"+descript+"' WHERE allergyid='"
-						+id+"'");
+				descript = descript.replaceAll("\\'", "''");
+				statement.executeUpdate("UPDATE appointments SET appointmentdate='"+date+
+						"', appointmentdescription='"+descript+"', appointmentreminder='"+remember+
+						"' WHERE appointmentid='" +id+"'");
 			}
 			statement.close();
 			dba.disconnect();

@@ -1,9 +1,9 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
-  -- File: editAppointment
-  -- Date Modified: 04/19/09 
-  -- Author: Han Dong
-  -- Description: This file allows the user to view and edit 
+  -- File: addAppointment
+  -- Date Modified: 04/27/09 
+  -- Author: Taylor Evans
+  -- Description: This file allows the user to add 
   -- patient appointments
   --
   -- Last Edited by: Taylor Evans
@@ -27,9 +27,6 @@
   <%@include file="LinksInc.jsp" %>
 </div>
 
-
-
-
 <div id="content">
 <div id="text">
 
@@ -46,16 +43,16 @@
 		</tr>
 		<tr>
 			<td>(MM/DD/YYYY):</td>
-			<td><stripes:text name="appointmentMonth" size="1" value="${actionBean.appointmentMonth}"/>/
-			    <stripes:text name="appointmentDay" size="1" value="${actionBean.appointmentDay}"/>/ 
-			    <stripes:text name="appointmentYear" size="2" value="${actionBean.appointmentYear}"/></td>
+			<td><stripes:text name="appointmentMonth" size="1"/>/
+			    <stripes:text name="appointmentDay" size="1"/>/ 
+			    <stripes:text name="appointmentYear" size="2"/></td>
 		</tr>
 		<tr>
 			<td>Description:</td>
-			<td><stripes:textarea name="description" value="${actionBean.description}"/></td>
+			<td><stripes:textarea name="description"/></td>
 		</tr>
 		<tr>
-			<td colspan="3"><stripes:checkbox name="reminder" value="${actionBean.reminder}"/> Would you like to be reminded of this appointment?</td>
+			<td colspan="3"><stripes:checkbox name="reminder"/> Would you like to be reminded of this appointment?</td>
 		</tr>
 		<tr>
 			<td><stripes:submit name="submit" value="Submit"/>
@@ -72,8 +69,6 @@
   </div>
 
 </div>
-
-
 
 </div>
 </body></html>
