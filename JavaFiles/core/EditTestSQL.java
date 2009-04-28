@@ -7,9 +7,7 @@ import java.sql.Statement;
 public class EditTestSQL 
 {
 	private DBAccess dba = new DBAccess();
-	private String testName;
-	private String testResult;
-	private String testDescription;
+	private Date date;
 	private Date testDate;
 	
 	public EditTestSQL(String testName, String testResult,
