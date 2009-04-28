@@ -1,11 +1,10 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.3
-  -- File: editAllergies
-  -- Date Modified: 04/19/09 
-  -- Author: Han Dong 
-  -- Description: This file allows the user to view and edit 
-  -- his or her's allergies  
-  -- Last Edited By: Taylor Evans 04/27/09 
+  -- File: addAllergies
+  -- Date Modified: 04/26/09 
+  -- Author: Taylor Evans
+  -- Description: This file allows the user add 
+  -- his or her's allergies   
   -->
   
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
@@ -35,7 +34,7 @@
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 
 
-<h1>Edit Allergies</h1>
+<h1>Add Allergies</h1>
 
 <div></div>
 <stripes:form beanclass="core.AllergiesBean" focus="">
@@ -43,11 +42,11 @@
 <table>
 		<tr>
 			<td>Allergy Name:</td>
-			<td><stripes:text name="allergyName" value="${actionBean.allergyName}"/></td>
+			<td><stripes:text name="allergyName"/></td>
 		</tr>
 		<tr>
 			<td>Description:</td>
-			<td><stripes:textarea name="description" value="${actionBean.description}" /></td>
+			<td><stripes:textarea name="description" /></td>
 		</tr>
 		<tr>
 			<td><stripes:submit name="submit" value="Submit"/>
@@ -64,8 +63,6 @@
   </div>
 
 </div>
-
-
 
 </div>
 </body></html>
