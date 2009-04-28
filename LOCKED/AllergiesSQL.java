@@ -72,6 +72,7 @@ public class AllergiesSQL
 		try {
 			int pID = 9;
 			// construct and execute the SQL call, retrieve the results
+			name = name.replaceAll("\\'", "''");
 			descript = descript.replaceAll("\\'", "''");
 			String s = "INSERT INTO allergies (patientid, allergy_name, allergy_description) " +
 			"VALUES ("+ pID +", '" + name + "', '" + descript + "')";
