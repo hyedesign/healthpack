@@ -1,17 +1,17 @@
-package core;
-
 /**********************************************************
 * File: core.AllergiesBean.java
 * Author: Taylor Evans
 * Date Created: 4/19/2009
 *
 * Description: The AllergiesBean class works with 
-*              editAllergies.jsp to verify form inputs
+*              addAllergies.jsp to verify form inputs
 *
 * Edited  : 4/20/2009 by Taylor Evans
 * Changes : added header comment
 *
 **********************************************************/
+
+package core;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.Resolution;
@@ -40,7 +40,15 @@ public class AllergiesBean implements ActionBean {
     
     @DefaultHandler
     public Resolution submit() {
+    	int allergyID = 4;
+    	if(allergyID == 0)
     	AllergiesSQL.addAllergies(allergyName, description);
+    	else
+    	{
+    		AllergiesSQL temp = new AllergiesSQL();
+    		temp.updateAllergy(allergyID, allergyName, description);
+    	}
+    		
         return new ForwardResolution("patientHome.jsp");
     }
     @ValidationMethod(on="submit")
