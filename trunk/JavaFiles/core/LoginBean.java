@@ -6,8 +6,10 @@
 * Description: This ActionBean handles the form validation
 * 				for the HealthPack login page
 *
-* Edited  : 
-* Changes : 
+* Edited  : 4/27/2009 by Alex Bassett
+* Changes : Now uses HPActionBeanContext extension. This class
+* 			saves the userid in the session and then forwards
+* 			to the user's homepage.
 *
 **********************************************************/
 package core;
@@ -18,7 +20,7 @@ import net.sourceforge.stripes.validation.*;
 public class LoginBean implements ActionBean {
 
 	// Declare class variables
-	private ActionBeanContext context;
+	private HPActionBeanContext context;
 	
 	// form fields
 	@Validate(required=true, minlength=4, maxlength=30) private String userName;
@@ -27,8 +29,8 @@ public class LoginBean implements ActionBean {
 	
 	/* Getters and Setters*/
 	// overridden from ActionBean
-    public ActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+    public HPActionBeanContext getContext() { return context; }
+    public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
     
 	public String getUserName() {
 		return userName;
@@ -53,10 +55,11 @@ public class LoginBean implements ActionBean {
 	
 	/**
 	 * Event handler for the login form. Calls SQL function
-	 * that loads user from database
+	 * that loads user from database. Saves the userid in a 
+	 * session, then it forwards to the user homepage
 	 *
 	 * @return Resolution forwarded back to login page when
-	 * login was unsuccessful and to patient list when login
+	 * login was unsuccessful and to userHomepage when login
 	 * was successful
 	 * @author Alex Bassett
 	 */
@@ -67,8 +70,11 @@ public class LoginBean implements ActionBean {
 		// check that this user exists
 		// if not, go back to login page
 		if (userId == UserSQL.NO_MATCHING_USER) return new ForwardResolution("login.jsp");
-		// user exists, forward to makeSession
-		else return new ForwardResolution("makeSession.jsp");
+		// user exists; add to session and forward
+		else  {
+			context.setUserId(userId);
+			return new ForwardResolution("userHomepage.jsp");
+		}
 	}
 	
 	/**
