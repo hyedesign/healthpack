@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public class MedicationSQL {
    
 	/*
@@ -85,63 +86,6 @@ public class MedicationSQL {
 	}
 
 	//SQL CALLS
-	private String lookupMedicationNamebyID(int id){
-		String returnString;
-		dba.connect(); // connect to the database
-		try {
-			// construct and execute the SQL call, retrieve the results
-			Statement statement = dba.connection.createStatement ();
-			ResultSet results = statement.executeQuery ("SELECT patientfirstname, " +
-					"patientmiddlename, patientlastname  " +
-					"FROM patients WHERE patientid='"+id+"'");
-			
-			// attempt to load the Medication from the ResultSet
-			if (results.first()) {
-				String firstName = results.getString("patientFirstName");
-				String lastName= results.getString("patientLastName");
-				returnString = firstName + " " + lastName;
-			}else{
-				returnString = "No Medication Found";
-			}
-			
-			// close connections
-			results.close();
-			statement.close();
-			dba.disconnect();
-			//return true if user was found
-			
-			return returnString;
-		} catch (SQLException e) {
-            System.err.println ("Error in lookupPatientNamebyID (Medication.java)");
-            System.err.println (e.toString());
-			dba.disconnect();
-			return "Error";
-		}
-	}
-	
-	private boolean insertMedication(){
-		dba.connect(); // connect to the database
-		try {
-							
-			// construct and execute the SQL call, retrieve the results
-			Statement statement = dba.connection.createStatement ();
-			
-			statement.executeUpdate("INSERT INTO cmsc345.medications" +
-					" VALUES ( 0 ,);");
-			
-			statement.close();
-			dba.disconnect();
-			//return true if user was found
-			
-			return true;
-		} catch (SQLException e) {
-            System.err.println ("Error in inserting medication");
-            System.err.println (e.toString());
-			dba.disconnect();
-			return false;
-		}
-	}
-	
 	private boolean deleteMedication(){
 		dba.connect(); // connect to the database
 		try {
@@ -178,7 +122,7 @@ public class MedicationSQL {
 			// construct and execute the SQL call
 			Statement statement = dba.connection.createStatement ();
 			String s = "INSERT INTO medications " + "" +
-			" (patientId, medicationName, medicationExpirationDate, medicationRefillDate, medicationDescription) " + 
+			" (patientid, medicationname, medicationexpirationsdate, medicationrefilldate, medicationdescription) " + 
 			" VALUES('"+patientId+"', '"+medicationName+"', '"+medicationExpirationDate+"', '"
 			+medicationRefillDate+"', '"+medicationDesription+"')";
 			statement.executeUpdate(s);
@@ -187,75 +131,58 @@ public class MedicationSQL {
 			statement.close();
 			dba.disconnect();
 		} catch (SQLException e) {
-            System.err.println ("Error in addNewMedication (editMedications.jsp)");
+            System.err.println ("Error in addNewMedication (AddMedicationBean.java)");
             System.err.println (e.toString());
 			dba.disconnect();
 		}
 	}
 	
-	private boolean lookupPatient(int id) {
+	private static void editMedication(int patientId, String medicationName, 
+			Date medicationExpirationDate, Date medicationRefillDate, 
+			String medicationDesription) {
+		DBAccess dba = new DBAccess();
 		dba.connect(); // connect to the database
 		try {
 			// construct and execute the SQL call, retrieve the results
 			Statement statement = dba.connection.createStatement ();
-			ResultSet results = statement.executeQuery ("SELECT * FROM patients WHERE patientid='"+id+"'");
-						
-			// attempt to load the patient from the ResultSet
-			boolean successfulLoad = loadPatientData(results);
+			String s = "INSERT INTO medications " + "" +
+			" (patientId, medicationName, medicationExpirationDate, medicationRefillDate, medicationDescription) " + 
+			" VALUES('"+patientId+"', '"+medicationName+"', '"+medicationExpirationDate+"', '"
+			+medicationRefillDate+"', '"+medicationDesription+"')";
+			statement.executeUpdate(s);
 			
 			// close connections
-			results.close();
 			statement.close();
 			dba.disconnect();
-			//return true if user was found
-			return successfulLoad;
+			
+		} catch (SQLException e) {
+            System.err.println ("Error in editMedication where id = " + patientId);
+            System.err.println (e.toString());
+			dba.disconnect();
+		}
+	}	
+/*
+	public static void DeleteMedication(int id){
+		DBAccess dba = new DBAccess();
+		dba.connect(); // connect to the database
+		try {
+			// construct and execute the SQL call, retrieve the results
+			Statement statement = dba.connection.createStatement ();
+			String s = "DELETE FROM medications " + "" +
+			" (patientId, medicationName, medicationExpirationDate, medicationRefillDate, medicationDescription) " + 
+			" VALUES('"+patientId+"', '"+medicationName+"', '"+medicationExpirationDate+"', '"
+			+medicationRefillDate+"', '"+medicationDesription+"')";
+			statement.executeUpdate(s);
+			
+			// close connections
+			statement.close();
+			dba.disconnect();
 			
 		} catch (SQLException e) {
             System.err.println ("Error in looking up patient where id = " +id);
             System.err.println (e.toString());
 			dba.disconnect();
-            return false;
 		}
-	}	
-	
-	/*
-	 * PUBLIC METHODS
-	 */
-
-	public String PatientName(){
-		return this.firstName + " " + this.middleName + " " + this.lastName;
 	}
-	public static String PatientNameFromID(int ID){
-		return new PatientSQL().lookupPatientNamebyID(ID);
-	}
-	public boolean CreateNewPatient(){
-		return insertPatient();
-	}
-	public boolean UpdateCurrentPatient(){
-		return updatePatient();
-	}
-	public boolean SetAndUpdateCurrentPatient(String firstName,
-			String lastName, String middleName, Date patientDOB, int height,
-			int weight, int patientSex, String emergencyContactName,
-			String emergencyContactPhone, String insurance, String insuranceID,
-			String ssn){
-		System.out.println("patientID = " + this.patientId);
-		System.out.println("userID = " + this.userId);
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.middleName = middleName;
-		this.patientDOB = patientDOB;
-		this.height = height;
-		this.weight = weight;
-		this.patientSex = patientSex;
-		this.emergencyContactName = emergencyContactName;
-		this.emergencyContactPhone = emergencyContactPhone;
-		this.insurance = insurance;
-		this.insuranceID = insuranceID;
-		SSN = ssn;
-		return updatePatient();
-	}
-	public static boolean DeletePatient(int id){
-		return new PatientSQL(id).deletePatient();
-	}
+*/
 }
