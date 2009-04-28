@@ -6,10 +6,9 @@
 * Description: This ActionBean handles the form validation
 * 				for the HealthPack login page
 *
-* Edited  : 4/27/2009 by Alex Bassett
-* Changes : Now uses HPActionBeanContext extension. This class
-* 			saves the userid in the session and then forwards
-* 			to the user's homepage.
+* Edited  : 4/27/09 by Alex Bassett
+* Changes : Added HPActionBeanContext to handle setting
+* 			userid in the session
 *
 **********************************************************/
 package core;
@@ -30,7 +29,7 @@ public class LoginBean implements ActionBean {
 	/* Getters and Setters*/
 	// overridden from ActionBean
     public HPActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
+    public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext)context; }
     
 	public String getUserName() {
 		return userName;
@@ -50,16 +49,16 @@ public class LoginBean implements ActionBean {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-    
+
 /* Validation (Stripes) Methods and Handlers */
 	
 	/**
 	 * Event handler for the login form. Calls SQL function
-	 * that loads user from database. Saves the userid in a 
-	 * session, then it forwards to the user homepage
+	 * that loads user from database, and saves their id
+	 * and whether or not they are a doctor to the session
 	 *
 	 * @return Resolution forwarded back to login page when
-	 * login was unsuccessful and to userHomepage when login
+	 * login was unsuccessful and to patient list when login
 	 * was successful
 	 * @author Alex Bassett
 	 */
@@ -70,9 +69,10 @@ public class LoginBean implements ActionBean {
 		// check that this user exists
 		// if not, go back to login page
 		if (userId == UserSQL.NO_MATCHING_USER) return new ForwardResolution("login.jsp");
-		// user exists; add to session and forward
-		else  {
+		// user exists, save to session and forward to user homepage
+		else {
 			context.setUserId(userId);
+			context.setUserIsDoctor(UserSQL.isDoctor(userId));
 			return new ForwardResolution("userHomepage.jsp");
 		}
 	}
