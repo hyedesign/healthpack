@@ -44,11 +44,11 @@
 	<stripes:errors/>
 	<table>
 		<tr>
-			<td>First Name:</td>
+			<td>*First Name:</td>
 			<td><stripes:text name="firstName" size="20" value="${actionBean.firstName}"/></td>
 		</tr>
 		<tr>
-			<td>Last Name:</td>
+			<td>*Last Name:</td>
 			<td><stripes:text name="lastName" size="20" value="${actionBean.lastName}"/></td>
 		</tr>
 		<tr>

@@ -27,8 +27,8 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 public class UserInfoBean implements ActionBean
 {
 	private HPActionBeanContext context;
-	@Validate(required=false, maxlength=30) private String firstName;
-	@Validate(required=false, maxlength=30) private String lastName;
+	@Validate(required=true, maxlength=30) private String firstName;
+	@Validate(required=true, maxlength=30) private String lastName;
 	@Validate(required=true, maxlength=50) private String email;
 	@Validate(required=false, minlength=10, maxlength=15) private String phone;
 	@Validate(required=false, maxlength=255) private String description;

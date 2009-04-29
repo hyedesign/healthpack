@@ -64,11 +64,11 @@
 			<td><stripes:text name="userEmail2" size="20" /></td>
 		</tr>
 		<tr>
-			<td>First name:</td>
+			<td>*First name:</td>
 			<td><stripes:text name="userFirstName" size="20" /></td>
 		</tr>
 		<tr>
-			<td>Last name:</td>
+			<td>*Last name:</td>
 			<td><stripes:text name="userLastName" size="20" /></td>
 		</tr>
 		<tr>

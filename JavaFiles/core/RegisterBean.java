@@ -35,8 +35,8 @@ public class RegisterBean implements ActionBean {
 	@Validate(required=true, maxlength=50) private String userEmail;
 	@Validate(required=true, maxlength=50) private String userEmail2;
 	@Validate(required=false, maxlength=15) private String userPhone;
-	@Validate(required=false, maxlength=30) private String userFirstName;
-	@Validate(required=false, maxlength=30) private String userLastName;
+	@Validate(required=true, maxlength=30) private String userFirstName;
+	@Validate(required=true, maxlength=30) private String userLastName;
 	@Validate(required=true) private boolean userIsDoctor;
 	
 	//constructor
