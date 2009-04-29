@@ -39,9 +39,8 @@
 
 
 <h1>Login</h1>
-<p>Please enter your login information</p>
 <c:if test="${!empty actionBean}">
-	<p>We couldn't find a matching user. Please Try again</p>
+	<h2>We couldn't find a matching user. Please Try again</h2>
 </c:if>
 <stripes:form beanclass="core.LoginBean" focus="">
 	<table border="0">
@@ -66,6 +65,7 @@
 		</tr>
 	</table>
 </stripes:form>
+<p>Need to register? <a href="register.jsp">Click Here!</a></p>
 
 
 <!-- ********************* STOP HERE !!!! ********************* -->
