@@ -29,4 +29,11 @@ public class HPActionBeanContext extends ActionBeanContext{
         return (Boolean) getRequest().getSession().getAttribute("userisdoctor");
     }
 
+    public void setPatientId(int patientid) {
+        getRequest().getSession().setAttribute("patientid", patientid);
+    }
+
+    public Integer getPatientId() {
+        return (Integer) getRequest().getSession().getAttribute("patientid");
+    }
 }

@@ -63,7 +63,7 @@ public class PatientSQL {
 		this.emergencyContactPhone = emergencyContactPhone;
 		this.insurance = insurance;
 		this.insuranceID = insuranceID;
-		SSN = ssn;
+		this.SSN = ssn;
 	}
 
 	public PatientSQL(int patID) {
@@ -313,7 +313,7 @@ public class PatientSQL {
 		}
 	}
 	
-	private boolean lookupPatient(int id) {
+	public boolean lookupPatient(int id) {
 		dba.connect(); // connect to the database
 		try {
 			// construct and execute the SQL call, retrieve the results
@@ -372,7 +372,7 @@ public class PatientSQL {
 		this.emergencyContactPhone = emergencyContactPhone;
 		this.insurance = insurance;
 		this.insuranceID = insuranceID;
-		SSN = ssn;
+		this.SSN = ssn;
 		return updatePatient();
 	}
 	public static boolean DeletePatient(int id){

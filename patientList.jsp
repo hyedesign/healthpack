@@ -11,6 +11,7 @@
 
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -35,60 +36,47 @@
 <div id="text">
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
-<% 
-	//TEMP ATTRIBUTES FOR TESTING
-	session.setAttribute( "id", 3);
-	session.getId();
 
-	java.util.ArrayList<Integer> arrayOfPatients = new java.util.ArrayList<Integer>();
-	core.PatientSQL patient = new core.PatientSQL();
-	int userId = 0;
-	
-	
-	try {
-		userId = 3;//session.getAttribute("id");
-		arrayOfPatients = core.Patient.lookupPatientsByUserID(userId);
-		System.out.println("after SQL call");
-	}catch (Exception e){
-		System.out.println("\n ******* ERROR IN PATIENTLIST.JSP ******* \n");  
-	}
-	%>
+<jsp:useBean id="patientList" scope="page" class="core.PatientListBean"/>
+<jsp:setProperty name="patientList" property="userId" value="${sessionScope.userid}"/>
+<c:set var="names" value="${patientList.patientNames}" scope="page"/>
+<c:set var="Ids" value="${patientList.patientIds}" scope="page"/>
 
-<h1>User Patients</h1>
-<p></p>
-  <%   
-  	for (int i = 0; i < arrayOfPatients.size(); i++){
-  		patient = new core.PatientSQL(arrayOfPatients.get(i));	
-  		String PATID = new Integer(patient.getPatientId()).toString();
-  		
-  		String PATNAME = patient.PatientName();
-  		
-  		System.out.println("Patient: " + PATNAME + "  ID: " + PATID); 
+<h1>Patient List</h1>
 
-  %>
-	<form method="post" class="tableAll">
-	  <div class="tableValue"><input type="hidden" name="patientID" value="<%=PATID%>" /><%=PATNAME%></div>
-      <div class="tableButtons">
-	  <input type="submit" name="View" id="View" value="View" onclick="this.form.action='patientHome.jsp'"/>
-	  <input type="submit" name="Edit" id="Edit" value="Edit" onclick="this.form.action='editPatient.jsp'"/></div>
-	</form>
-<%}%>
-  	    
-  	    <form method="post">
-  	    	<input type="hidden" name="patientID" value="0" />
-  	    	<input type="submit" name="Add" id="Add" value="Add New Patient" onclick="this.form.action='editPatient.jsp'"/>
-		</form>
+<c:if test="${!sessionScope.userisdoctor}">
+	<a href="addPatient.jsp">Add New Patient</a>
+</c:if>
+
+<table border="1">
+	<c:forEach items="${names}" var="patientName" varStatus="loop">
+		<tr>
+			<td>${patientName}</td>
+			<td>
+				<stripes:form beanclass="core.PatientSelectBean">
+					<stripes:hidden name="patientId" value="${Ids[loop.index]}"/>
+					<c:choose>
+						<c:when test="${!sessionScope.userisdoctor}">
+							<stripes:submit name="edit" value="Edit"/>
+							<stripes:submit name="delete" value="Delete"/>
+						</c:when>
+						<c:otherwise>
+							<stripes:submit name="edit" value="View"/>
+						</c:otherwise>
+					</c:choose>
+				</stripes:form >
+			</td>
+		</tr>
+	</c:forEach>
+</table>
+
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div> 
 <div id="footer"> 
   <%@include file="FooterInc.jsp" %>
 </div>
-
 </div>
-
-
- 
 </div>
 
 </body>
