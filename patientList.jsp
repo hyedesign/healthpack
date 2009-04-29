@@ -1,12 +1,12 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
   -- File: patientList
-  -- Date Modified: 04/14/09 
+  -- Date Modified: 04/28/09 
   -- Author: Taylor Evans
   -- Description: This file displays the list of patients 
   -- created by the user.
   -- 
-  -- last edited by Vahan
+  -- last edited by Alex
   -->
 
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
@@ -36,6 +36,9 @@
 <div id="text">
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
+<c:if test="${empty sessionScope.userid}">
+	<% response.sendRedirect("login.jsp"); %>
+</c:if>
 
 <jsp:useBean id="patientList" scope="page" class="core.PatientListBean"/>
 <jsp:setProperty name="patientList" property="userId" value="${sessionScope.userid}"/>

@@ -26,7 +26,7 @@ public class PatientSelectBean implements ActionBean {
 	private java.util.Date patientDOB;
 	private int patientWeight;
 	private int patientHeight;
-	private boolean patientSex;
+	private String patientSex;
 	private String patientEmergencyContactName;
 	private String patientEmergencyContactNumber;
 	private String patientInsuranceProvider;
@@ -86,10 +86,10 @@ public class PatientSelectBean implements ActionBean {
 	public void setPatientHeight(int patientHeight) {
 		this.patientHeight = patientHeight;
 	}
-	public boolean isPatientSex() {
+	public String getPatientSex() {
 		return patientSex;
 	}
-	public void setPatientSex(boolean patientSex) {
+	public void setPatientSex(String patientSex) {
 		this.patientSex = patientSex;
 	}
 	public String getPatientEmergencyContactName() {
@@ -152,8 +152,9 @@ public class PatientSelectBean implements ActionBean {
 			 this.patientEmergencyContactNumber = p.getEmergencyContactPhone();
 			 this.patientInsuranceProvider = p.getInsurance();
 			 this.patientSSN = p.getSSN();
-			 if (p.getPatientSex() == 1) this.patientSex = true;
-			 else this.patientSex = false;
+			 this.patientNote = p.getNote();
+			 if (p.getPatientSex() == 1) this.patientSex = "Female";
+			 else this.patientSex = "Male";
 			 
 			 return new ForwardResolution("patientHome.jsp");
 		 }

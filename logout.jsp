@@ -18,9 +18,12 @@
 <div id="text">
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
-	<% session.invalidate(); %>
 	<h1>Logging out of your account...</h1>
 	<a href="index.jsp">Continue</a>
+	<% 
+		session.invalidate();
+		response.sendRedirect("index.jsp");
+	%>
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 

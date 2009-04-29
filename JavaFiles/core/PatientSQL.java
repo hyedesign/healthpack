@@ -38,6 +38,7 @@ public class PatientSQL {
 	private String insurance = "";
 	private String insuranceID = "";
 	private String SSN = "";
+	private String docNote = "";
 	
     
 	/*
@@ -114,6 +115,9 @@ public class PatientSQL {
 	}
 	public String getSSN() {
 		return SSN;
+	}
+	public String getNote() {
+		return docNote;
 	}
 
 	//SQL CALLS
@@ -268,6 +272,7 @@ public class PatientSQL {
 					insurance = rs.getString("patientinsuranceprovider");
 					insuranceID = rs.getString("patientinsuranceid");
 					SSN = rs.getString("patientssn");
+					docNote = rs.getString("patientnote");
 					return true;
 				}else return false;
 			} catch (SQLException e) {
