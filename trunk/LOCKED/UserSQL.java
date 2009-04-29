@@ -13,6 +13,9 @@
 package core;
 
 import java.sql.*;
+import java.util.ArrayList;
+
+import core.DBAccess;
 
 public class UserSQL {
 	
@@ -335,4 +338,76 @@ public class UserSQL {
 			dba_s.disconnect();
 		}
 	}
+	
+	/**
+	 * Returns first and last name of the user id passed
+	 * 
+	 * @param id
+	 *            The id for which name is needed
+	 * 
+	 * @author Vahan Kristosturyan
+	 */
+	public static String getUserFirstAndLastName(String id) {
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try {
+			// construct and execute the SQL call, retrieve the results
+			String s = "SELECT userfirstname, userlastname FROM users WHERE userid = "
+					+ id + ";";
+			Statement statement = dba_s.connection.createStatement();
+			ResultSet rs = statement.executeQuery(s);
+
+			String UserName = "Unknown Name";
+
+			if (rs.first())
+				UserName = rs.getString("userfirstname") + " "
+						+ rs.getString("userlastname");
+
+			// close connections
+			statement.close();
+			dba_s.disconnect();
+			return UserName;
+
+		} catch (SQLException e) {
+			System.err
+					.println("Method UserSQL.registerNewUser() performed bad SQL call");
+			System.err.println(e.toString());
+			dba_s.disconnect();
+			return "Unknown Name";
+		}
+	}
+
+	/**
+	 * Returns a List of all doctors by their Ids
+	 * 
+	 * @author Vahan Kristosturyan
+	 */
+	public static ArrayList<String> getDoctorList() {
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try {
+			// construct and execute the SQL call, retrieve the results
+			String s = "SELECT userid FROM users WHERE userisdoctor = 001;";
+			Statement statement = dba_s.connection.createStatement();
+			ResultSet rs = statement.executeQuery(s);
+
+			ArrayList<String> listOfDoctors = new ArrayList<String>();
+
+			while (rs.next())
+				listOfDoctors.add(rs.getString("userid"));
+
+			// close connections
+			statement.close();
+			dba_s.disconnect();
+			return listOfDoctors;
+
+		} catch (SQLException e) {
+			System.err
+					.println("Method UserSQL.registerNewUser() performed bad SQL call");
+			System.err.println(e.toString());
+			dba_s.disconnect();
+			return new ArrayList<String>();
+		}
+	}
+	
 }
