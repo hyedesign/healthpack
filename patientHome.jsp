@@ -25,7 +25,7 @@
 
 <div id="container">
 <div id="header"></div>
-<div id="message">UserName</div>
+<div id="message">${sessionScope.username}</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
   <%@include file="LinksInc.jsp" %>  
@@ -100,7 +100,7 @@
 		<td>${actionBean.patientInsuranceProvider}</td>
 	</tr>
 	<tr>
-		<td>Insurance DN Number:</td>
+		<td>Insurance ID Number:</td>
 		<td>${actionBean.patientInsuranceID}</td>
 	</tr>
 	<tr>
