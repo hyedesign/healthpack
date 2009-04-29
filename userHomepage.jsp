@@ -37,30 +37,20 @@
 	<% response.sendRedirect("login.jsp"); %>
 </c:if>
 
-<stripes:form beanclass="core.GetUserInfoBean" focus="">
 <h1>User Information</h1>
-	<input type="hidden" name="userID" value="<%=3%>" />
-	<table>
-	<tr>
-		<td>User ID: </td>
-		<td>${sessionScope.userid}</td>
-	</tr>
-		<tr>
-		<td>User is a doctor?: </td>
-		<td>${sessionScope.userisdoctor}</td>
-	</tr>
-	<tr>
-		<td>Last Login:</td>
-		<td>##/##/## at ##:##:##</td>
-	</tr>
-	<tr>
-		<td>Email:</td>
-		<td>User@HealthPack.net</td>
-	</tr>
-	<tr>
-		<td><stripes:submit name="submit" value="Edit" /></td>
-	</tr>
-	</table>
+<p>Welcome to HealthPack ${sessionScope.username}</p>
+<c:choose>
+	<c:when test="${sessionScope.userisdoctor}">
+		<p>You are logged in with doctor level privileges</p>
+	</c:when>
+	<c:otherwise>
+		<p>You are logged in with user level privileges</p>
+	</c:otherwise>
+</c:choose>
+
+<stripes:form beanclass="core.GetUserInfoBean" focus="">
+<stripes:hidden name="userID" value= "${sessionScope.userid}" /> 
+<stripes:submit name="submit" value="Edit User Information" />
 </stripes:form>
 <!-- ********************* STOP HERE !!!! ********************* -->
 

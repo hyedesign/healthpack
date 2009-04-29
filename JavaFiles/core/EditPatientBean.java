@@ -167,6 +167,7 @@ public class EditPatientBean implements ActionBean {
     	//this is a new patient
     	if (this.patientId == -1) {
 
+    		// add patient information to the database
     		new PatientSQL(this.patientId, this.userId, this.firstName,
     				this.lastName, this.middleName, date, this.height,
     				this.weight, sex, this.emergencyContactName,
@@ -176,7 +177,7 @@ public class EditPatientBean implements ActionBean {
     	//this is an old patient
     	else {
         	
-    		// add patient information to the database
+    		// edit existing patient
     		new PatientSQL(this.patientId).SetAndUpdateCurrentPatient(this.firstName,
     				this.lastName, this.middleName, date, this.height,
     				this.weight, sex, this.emergencyContactName,
@@ -208,7 +209,7 @@ public class EditPatientBean implements ActionBean {
 	    if (hasSpecialCharacters(this.firstName) || hasSpecialCharacters(this.lastName) ||
 	    		hasSpecialCharacters(this.middleName) || hasSpecialCharacters(this.emergencyContactName) ||
 	    		hasSpecialCharacters(this.emergencyContactPhone) || hasSpecialCharacters(this.insurance) ||
-	    		hasSpecialCharacters(this.insuranceID) || hasSpecialCharacters(this.SSN));
+	    		hasSpecialCharacters(this.insuranceID) || hasSpecialCharacters(this.SSN))
 	        errors.addGlobalError(new SimpleError("These characters are not allowed: <> () [] \\ / | = + * $ # ^ : ; "));
     }
     
@@ -223,7 +224,9 @@ public class EditPatientBean implements ActionBean {
 	 * @author Alex Bassett
 	 */
 	private boolean hasSpecialCharacters(String s) {
-		if (s != s.replaceAll("([^A-Za-z0-9.,@!?~`'\"% _-]+)", "")) return true;
+		if (s != null)
+			if (s != s.replaceAll("([^A-Za-z0-9.,@!?~`'\"% _-]+)", ""))
+				return true;
 		return false;
 	}
 }

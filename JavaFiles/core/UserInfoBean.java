@@ -26,17 +26,17 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 
 public class UserInfoBean implements ActionBean
 {
-	private ActionBeanContext context;
-	@Validate(required=true, maxlength=20) private String firstName;
-	@Validate(required=true, maxlength=20) private String lastName;
-	@Validate(required=true, maxlength=20) private String email;
-	@Validate(required=true, maxlength=10) private String phone;
-	@Validate(required=false) private String description;
-	@Validate(required=true, maxlength=20) private String password;
-	@Validate(required=true, maxlength=20) private String password2;
+	private HPActionBeanContext context;
+	@Validate(required=false, maxlength=30) private String firstName;
+	@Validate(required=false, maxlength=30) private String lastName;
+	@Validate(required=true, maxlength=50) private String email;
+	@Validate(required=false, minlength=10, maxlength=15) private String phone;
+	@Validate(required=false, maxlength=255) private String description;
+	@Validate(required=true, minlength=4, maxlength=30) private String password;
+	@Validate(required=true, minlength=4, maxlength=30) private String password2;
 	
-	public ActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+	public HPActionBeanContext getContext() { return context; }
+    public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext)context; }
 	
     /* getters and setters for instance variables */
     public String getFirstName() { return firstName; }
@@ -58,9 +58,13 @@ public class UserInfoBean implements ActionBean
     public Resolution submit() 
 	{
 		new UserInfoSQL(this.firstName, this.lastName, this.email,
-				this.phone, this.description, this.password, this.password2).updateUserInfo(3);
+				this.phone, this.description, this.password, this.password2).updateUserInfo(context.getUserId());
 
-        return new ForwardResolution("verifyUserInfo.jsp");
+        return new ForwardResolution("userHomepage.jsp");
+    }
+    public Resolution cancel() 
+	{
+        return new ForwardResolution("userHomepage.jsp");
     }
 	
 	/**
@@ -70,24 +74,18 @@ public class UserInfoBean implements ActionBean
 	@ValidationMethod(on="submit")
 	public void checksUserInfo(ValidationErrors errors) 
 	{	    
-		if(hasNumber(this.firstName))
-	    {
-	        errors.add("firstName", 
-	        		new SimpleError("Please make sure there " +
-	        				"are no numbers in your first name."));
-	    }
-		
-		if(hasNumber(this.lastName))
-	    {
-	        errors.add("lastName", 
-	        		new SimpleError("Please make sure there " +
-	        				"are no numbers in your last name."));
-	    }
+		// Check for flagged characters
+	    if (hasSpecialCharacters(this.firstName) || hasSpecialCharacters(this.lastName) ||
+	    		hasSpecialCharacters(this.email) || hasSpecialCharacters(this.phone) ||
+	    		hasSpecialCharacters(this.description) || hasSpecialCharacters(this.password) ||
+	    		hasSpecialCharacters(this.password2))
+	        errors.addGlobalError(new SimpleError("These characters are not allowed: <> () [] \\ / | = + * $ # ^ : ; "));
 	    
-		if(checksEmail(this.email)) 
+	    // checks email address
+		if(notValidEmail(this.email)) 
     	{
     		errors.add("email", 
-    				new SimpleError("Please enter a email in the following format: XX@XX.XX ."));
+    				new SimpleError("Please enter a email in the following format: X@X.X ."));
     	}
 	    
 	    //checks password
@@ -96,33 +94,9 @@ public class UserInfoBean implements ActionBean
 			errors.add("password", new SimpleError("Please make sure both passwords are identical."));
 		}
 		
-		if(isPhone(this.phone))
-		{
-			errors.add("phone", new SimpleError("Integers only."));
-		}
 	}
 	
-	private boolean hasNumber(String s) {
-		for (int j = 0;j < s.length();j++) {
-			if (Character.isDigit(s.charAt(j))) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private boolean isPhone(String s) {
-		String ptrStr = "\\d{10}";
-    	Pattern p = Pattern.compile(ptrStr);
-    	Matcher m = p.matcher(s);
-    	boolean bool = false;
-    	if(!m.find()) {
-    		bool = true;
-    	}
-		return bool;
-	}
-	
-	private boolean checksEmail(String s) {
+	private boolean notValidEmail(String s) {
 		String ptrStr = "(.*)@(.*)\\.(.*)";
     	Pattern p = Pattern.compile(ptrStr);
     	Matcher m = p.matcher(s);
@@ -131,5 +105,22 @@ public class UserInfoBean implements ActionBean
     		bool = true;
     	}
 		return bool;
+	}
+	
+	/**
+	 * Base level function that returns true when the given
+	 * input string contains a character that could be used for
+	 * a SQL injection attack
+	 *
+	 * @param s the user created string to be checked
+	 * @return true when the string contains special
+	 * characters and false if it does not
+	 * @author Alex Bassett
+	 */
+	private boolean hasSpecialCharacters(String s) {
+		if (s != null)
+			if (s != s.replaceAll("([^A-Za-z0-9.,@!?~`'\"% _-]+)", ""))
+				return true;
+		return false;
 	}
 }
