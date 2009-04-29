@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import core.DBAccess;
+
 public class PatientSQL {
    
 	/*
@@ -382,5 +384,42 @@ public class PatientSQL {
 	}
 	public static boolean DeletePatient(int id){
 		return new PatientSQL(id).deletePatient();
+	}
+	
+	/**
+	 * 
+	 * This SQL method updates a patients doctor connection
+	 * 
+	 * @param patId patient that needs to update doctor
+	 * @param docId the doctor that the patient is being assigned to
+	 * @return false if an error was found, true if everything works
+	 * 
+	 * @author Vahan Kristosturyan
+	 */
+	public static boolean updatePatientDoctor(int patId, int docId){
+		DBAccess dba = new DBAccess();
+		dba.connect(); // connect to the database
+		
+		try {
+			// construct and execute the SQL call, retrieve the results
+			Statement statement = dba.connection.createStatement ();
+			ResultSet results = statement.executeQuery ("SELECT * FROM doctorpatient WHERE patientid="+patId+";");
+			
+			if (results.first()) statement.executeUpdate("UPDATE doctorpatient" +
+														 " SET 	 userid ="+docId+
+														 " WHERE patientid = " + patId +";");
+			else statement.executeUpdate("INSERT INTO doctorpatient" +
+					"VALUES (0, "+docId+", "+patId + ", '');");
+			System.out.println("SUCCESS !!!");
+			statement.close();
+			dba.disconnect();
+			//return true if user was found
+			return true;
+		} catch (SQLException e) {
+            System.err.println ("Error in updatePatientDoctor");
+            System.err.println (e.toString());
+			dba.disconnect();
+			return false;
+		}		
 	}
 }
