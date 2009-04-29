@@ -11,6 +11,9 @@
 **********************************************************/
 package core;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -144,11 +147,26 @@ public class RegisterBean implements ActionBean {
 		if (!userEmail.equals(userEmail2))
 			errors.addGlobalError(new SimpleError("Your email addresses do not match"));
 		
+		//check for valid email
+		if(notValidEmail(this.userEmail) || notValidEmail(this.userEmail2))
+			errors.addGlobalError(new SimpleError("Please enter a valid email address"));
+		
 		// Check for flagged characters
 	    if (hasSpecialCharacters(this.userName) || hasSpecialCharacters(this.userPassword) ||
 	    		hasSpecialCharacters(this.userEmail) || hasSpecialCharacters(this.userPhone) ||
 	    		hasSpecialCharacters(this.userFirstName) || hasSpecialCharacters(this.userLastName))
 	        errors.addGlobalError(new SimpleError("These characters are not allowed: <> () [] \\ / | = + * $ # ^ : ; "));
+	}
+	
+	private boolean notValidEmail(String s) {
+		String ptrStr = "(.*)@(.*)\\.(.*)";
+    	Pattern p = Pattern.compile(ptrStr);
+    	Matcher m = p.matcher(s);
+    	boolean bool = false;
+    	if(!m.find()) {
+    		bool = true;
+    	}
+		return bool;
 	}
 	
 	/**

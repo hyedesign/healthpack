@@ -159,11 +159,20 @@
 
 <p>&nbsp;</p>
 <h2>DOCTORS</h2>
-
-(PATIENT NAME) has doctor (DOCTOR NAME)
-<stripes:form beanclass="core.ChangeDocForPatientBean" focus="">
-		<stripes:submit name="submit" value="Change Doctor" onclick="this.form.action='addDocToPatient.jsp'" />
-</stripes:form>
+<table border="1">
+<tr>
+	<td><b>DATE</b></td>
+	<td><b>NAME</b></td>
+	<td>SPECIALTY</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td>03/08/09</td>
+	<td>Dr. No</td>
+	<td>Pissing off 007</td>
+	<td>VIEW | EDIT | DELETE</td>
+</tr>
+</table>
 
 <a href="editDoctorInfo.jsp"> Edit Doctors </a>
 

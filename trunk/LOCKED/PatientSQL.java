@@ -5,6 +5,11 @@
 *
 * Description: The Patient class handles loading and updating
 *              the patient table in the HealthPack database.
+*              
+* Edited: 4/29/2009
+* Changed: Moved some methods around, cleaned up some code
+* 			removed extraneous methods and made some private
+* 			ones public/static.
 *
 **********************************************************/
 
@@ -123,60 +128,31 @@ public class PatientSQL {
 	}
 
 	//SQL CALLS
-	private String lookupPatientNamebyID(int id){
-		String returnString;
-		dba.connect(); // connect to the database
-		try {
-			// construct and execute the SQL call, retrieve the results
-			Statement statement = dba.connection.createStatement ();
-			ResultSet results = statement.executeQuery ("SELECT patientfirstname, " +
-					"patientmiddlename, patientlastname  " +
-					"FROM patients WHERE patientid='"+id+"'");
-			
-			// attempt to load the patient from the ResultSet
-			if (results.first()) {
-				String firstName = results.getString("patientFirstName");
-				String lastName= results.getString("patientLastName");
-				returnString = firstName + " " + lastName;
-			}else{
-				returnString = "No Patient Found";
-			}
-			
-			// close connections
-			results.close();
-			statement.close();
-			dba.disconnect();
-			//return true if user was found
-			
-			return returnString;
-		} catch (SQLException e) {
-            System.err.println ("Error in lookupPatientNamebyID (Patient.java)");
-            System.err.println (e.toString());
-			dba.disconnect();
-			return "Error";
-		}
-	}
 	
 	private boolean insertPatient (){
 		dba.connect(); // connect to the database
 		try {
 							
 			// construct and execute the SQL call, retrieve the results
-			Statement statement = dba.connection.createStatement ();
+			String s = "INSERT INTO patients (userid, patientfirstname, patientmiddlename, " +
+			"patientlastname, patientdob, patientweight, patientheight, " +
+			"patientsex, patientemergencycontactname, patientemergencycontactnumber, " +
+			"patientinsuranceprovider, patientinsuranceid, patientssn) " +
+			"VALUES ('" + userId + "', '" + firstName + "', '" + middleName +
+			"', '" + lastName + "', '" + patientDOB + "', '" + weight +
+			"', '" + height + "', '" + patientSex + "', '" + emergencyContactName +
+			"', '" + emergencyContactPhone + "', '" + insurance + "', '" + insuranceID +
+			"', '" + SSN + "')";
 			
-			statement.executeUpdate("INSERT INTO cmsc345.patients" +
-					" VALUES ( 0 ,"+userId+",'"+firstName+"','"+lastName+"','"
-					+middleName+"','"+this.patientDOB+"',"+weight+","+height+","+this.patientSex+",'"
-					+emergencyContactName+"','"	+emergencyContactPhone+"','"+insurance+"','"
-					+insuranceID+"','"+SSN+"');");
+			Statement statement = dba.connection.createStatement ();
+			statement.executeUpdate(s);
 			
 			statement.close();
 			dba.disconnect();
-			//return true if user was found
-			
+			//return true if the patient inserted properly
 			return true;
 		} catch (SQLException e) {
-            System.err.println ("Error in inserting patient");
+            System.err.println ("PatientSQL.insertPatient(): Malformed SQL statement");
             System.err.println (e.toString());
 			dba.disconnect();
 			return false;
@@ -233,29 +209,6 @@ public class PatientSQL {
 		}		
 	}
 	
-	private boolean deletePatient(){
-		dba.connect(); // connect to the database
-		try {
-			// construct and execute the SQL call, retrieve the results
-			Statement statement = dba.connection.createStatement ();
-						
-			statement.executeUpdate("DELETE FROM cmsc345.patients" +
-					" WHERE patientid = '" + this.patientId +"';");
-			
-			statement.close();
-			dba.disconnect();
-			//return true if user was found
-			return true;
-		} catch (SQLException e) {
-            System.err.println ("Error in Deleting a patient");
-            System.err.println (e.toString());
-			dba.disconnect();
-			return false;
-		}		
-		
-		
-	}
-	
 	private boolean loadPatientData (ResultSet rs) {
 		// check that the resultset isn't empty and load the patient data
 		try {
@@ -285,40 +238,8 @@ public class PatientSQL {
 	}
 	
 	/*
-	 * Static Calls
+	 * PUBLIC METHODS
 	 */
-	public static ArrayList<Integer> lookupPatientsByUserID(int UserId) {
-		DBAccess dba = new DBAccess();
-		dba.connect(); // connect to the database
-		
-		try {
-			ArrayList<Integer> arrayOfIds = new ArrayList<Integer>();
-			
-			// construct and execute the SQL call, retrieve the results
-			Statement statement = dba.connection.createStatement ();
-			ResultSet results = statement.executeQuery ("SELECT patientid FROM patients WHERE userid='"+UserId+"'");
-			
-			// attempt to load the patient from the ResultSet
-			while (results.next()){
-				arrayOfIds.add(results.getInt("patientid"));
-
-			}
-			
-			
-			// close connections
-			results.close();
-			statement.close();
-			dba.disconnect();
-			//return true if user was found
-			return arrayOfIds;
-			
-		} catch (SQLException e) {
-            System.err.println ("Error in lookupPatientsByUserID (Patient.java)");
-            System.err.println (e.toString());
-			dba.disconnect();
-            return null;
-		}
-	}
 	
 	public boolean lookupPatient(int id) {
 		dba.connect(); // connect to the database
@@ -344,20 +265,15 @@ public class PatientSQL {
             return false;
 		}
 	}	
-	
-	/*
-	 * PUBLIC METHODS
-	 */
 
 	public String PatientName(){
 		return this.firstName + " " + this.middleName + " " + this.lastName;
 	}
-	public static String PatientNameFromID(int ID){
-		return new PatientSQL().lookupPatientNamebyID(ID);
-	}
+
 	public boolean CreateNewPatient(){
 		return insertPatient();
 	}
+	
 	public boolean UpdateCurrentPatient(){
 		return updatePatient();
 	}
@@ -382,8 +298,105 @@ public class PatientSQL {
 		this.SSN = ssn;
 		return updatePatient();
 	}
-	public static boolean DeletePatient(int id){
-		return new PatientSQL(id).deletePatient();
+
+	/* Statics */
+	
+	public static ArrayList<Integer> lookupPatientsByUserID(int UserId) {
+		DBAccess dba = new DBAccess();
+		dba.connect(); // connect to the database
+		
+		try {
+			ArrayList<Integer> arrayOfIds = new ArrayList<Integer>();
+			
+			// construct and execute the SQL call, retrieve the results
+			Statement statement = dba.connection.createStatement ();
+			ResultSet results = statement.executeQuery ("SELECT patientid FROM patients WHERE userid='"+UserId+"'");
+			
+			// attempt to load the patient from the ResultSet
+			while (results.next()){
+				arrayOfIds.add(results.getInt("patientid"));
+
+			}
+			
+			// close connections
+			results.close();
+			statement.close();
+			dba.disconnect();
+			//return true if user was found
+			return arrayOfIds;
+			
+		} catch (SQLException e) {
+            System.err.println ("Error in lookupPatientsByUserID (Patient.java)");
+            System.err.println (e.toString());
+			dba.disconnect();
+            return null;
+		}
+	}
+	
+	public static String lookupPatientNamebyID(int id){
+		String returnString;
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try {
+			// construct and execute the SQL call, retrieve the results
+			Statement statement = dba_s.connection.createStatement ();
+			
+			ResultSet results = statement.executeQuery ("SELECT patientfirstname, " +
+					"patientmiddlename, patientlastname  " +
+					"FROM patients WHERE patientid='"+id+"'");
+			
+			// attempt to load the patient from the ResultSet
+			
+			if (results.first()) {
+				String firstName = results.getString("patientFirstName");
+				String middleName = results.getString("patientMiddleName");
+				String lastName= results.getString("patientLastName");
+				
+				// Construct the name string
+				char middleInitial;
+				if (middleName.length() > 0) {
+					middleInitial = middleName.charAt(0);
+					returnString = firstName + " " + middleInitial + " " + lastName;
+				}
+				else returnString = firstName + " " + lastName;
+			}
+			else returnString = "No Patient Found";
+			
+			// close connections
+			results.close();
+			statement.close();
+			dba_s.disconnect();
+			//return true if user was found
+			
+			return returnString;
+		} catch (SQLException e) {
+            System.err.println ("Error in lookupPatientNamebyID (Patient.java)");
+            System.err.println (e.toString());
+			dba_s.disconnect();
+			return "Error";
+		}
+	}
+	
+	static boolean deletePatient(int patientid){
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try {
+			// construct and execute the SQL call, retrieve the results
+			Statement statement = dba_s.connection.createStatement ();
+						
+			statement.executeUpdate("DELETE FROM patients" +
+					" WHERE patientid = '" + patientid +"';");
+			
+			statement.close();
+			dba_s.disconnect();
+			//return true if user was found
+			return true;
+		} catch (SQLException e) {
+            System.err.println ("Error in Deleting a patient");
+            System.err.println (e.toString());
+			dba_s.disconnect();
+			return false;
+		}
 	}
 	
 	/**

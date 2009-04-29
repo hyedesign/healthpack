@@ -36,6 +36,7 @@
 
 <h1>Register</h1>
 <p>Please enter your information</p>
+<p>Fields marked with * are required</p>
 <c:if test="${!empty actionBean}">
 	<p>We're sorry, but this username has already been taken</p>
 </c:if>
@@ -43,23 +44,23 @@
 	<stripes:errors/>
 	<table>
 		<tr>
-			<td>User name:</td>
+			<td>*User name:</td>
 			<td><stripes:text name="userName" size="20" /></td>
 		</tr>
 		<tr>
-			<td>Password:</td>
+			<td>*Password:</td>
 			<td><stripes:password name="userPassword" size="20" /></td>
 		</tr>
 		<tr>
-			<td>Re-enter PW:</td>
+			<td>*Re-enter PW:</td>
 			<td><stripes:password name="userPassword2" size="20" /></td>
 		</tr>
 		<tr>
-			<td>Email:</td>
+			<td>*Email:</td>
 			<td><stripes:text name="userEmail" size="20" /></td>
 		</tr>
 		<tr>
-			<td>Re Enter Email:</td>
+			<td>*Re Enter Email:</td>
 			<td><stripes:text name="userEmail2" size="20" /></td>
 		</tr>
 		<tr>
@@ -78,7 +79,6 @@
 	<stripes:checkbox name="userIsDoctor" value="yes" />
 	I would like to register as a doctor<br />
 	<p><stripes:submit name="submit" value="Submit"/></p>
-	<p><stripes:reset name="reset" value="Reset"/></p>
 </stripes:form>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
