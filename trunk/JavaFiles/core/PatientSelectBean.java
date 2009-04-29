@@ -151,6 +151,7 @@ public class PatientSelectBean implements ActionBean {
 			 this.patientEmergencyContactName = p.getEmergencyContactName();
 			 this.patientEmergencyContactNumber = p.getEmergencyContactPhone();
 			 this.patientInsuranceProvider = p.getInsurance();
+			 this.patientInsuranceID = p.getInsuranceID();
 			 this.patientSSN = p.getSSN();
 			 this.patientNote = p.getNote();
 			 if (p.getPatientSex() == 1) this.patientSex = "Female";
@@ -174,7 +175,7 @@ public class PatientSelectBean implements ActionBean {
 	 * @author Alex Bassett
 	 */
 	public Resolution delete() {
-		PatientSQL.DeletePatient(patientId);
+		PatientSQL.deletePatient(patientId);
 		return new ForwardResolution("patientList.jsp");
 	}
 }

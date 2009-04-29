@@ -30,7 +30,7 @@ public class PatientListBean {
 	public ArrayList<String> getPatientNames() {
 		patientIds = PatientSQL.lookupPatientsByUserID(userId);
 		for (Integer i : patientIds)
-			patientNames.add(PatientSQL.PatientNameFromID(i));
+			patientNames.add(PatientSQL.lookupPatientNamebyID(i));
 		return patientNames;
 	}	
 }

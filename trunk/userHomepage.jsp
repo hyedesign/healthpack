@@ -23,7 +23,7 @@
 
 <div id="container">
 <div id="header"></div>
-<div id="message">UserName</div>
+<div id="message">${sessionScope.username}</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
   <%@include file="LinksInc.jsp" %>

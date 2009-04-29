@@ -71,6 +71,7 @@ public class LoginBean implements ActionBean {
 		if (userId == UserSQL.NO_MATCHING_USER) return new ForwardResolution("login.jsp");
 		// user exists, save to session and forward to user homepage
 		else {
+			context.setUsername(userName);
 			context.setUserId(userId);
 			context.setUserIsDoctor(UserSQL.isDoctor(userId));
 			return new ForwardResolution("userHomepage.jsp");
