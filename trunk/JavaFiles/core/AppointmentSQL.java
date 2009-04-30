@@ -26,6 +26,7 @@ public class AppointmentSQL {
 	private boolean reminder;
 	
 	//Constructor
+	@SuppressWarnings("deprecation")
 	public AppointmentSQL()
 	{
 		dba = new DBAccess();

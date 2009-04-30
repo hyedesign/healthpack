@@ -14,17 +14,13 @@
 package core;
 
 import java.sql.Date;
-import java.util.Calendar;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
-import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
-import net.sourceforge.stripes.validation.ValidationErrors;
-import net.sourceforge.stripes.validation.ValidationMethod;
 
 public class EditAppointmentBean implements ActionBean {
  
@@ -72,12 +68,11 @@ public class EditAppointmentBean implements ActionBean {
     		Date date = temp.getDate();
     		String s = date.toString();
     		int index = s.indexOf('-');
-    		Integer i = new Integer(0);
-    		appointmentYear = i.parseInt(s.substring(0, index));
+    		appointmentYear = Integer.parseInt(s.substring(0, index));
     		s = s.substring(index+1, s.length());
     		index = s.indexOf('-');
-    		appointmentMonth = i.parseInt(s.substring(0,index));
-    		appointmentDay = i.parseInt(s.substring(index + 1, s.length()));
+    		appointmentMonth = Integer.parseInt(s.substring(0,index));
+    		appointmentDay = Integer.parseInt(s.substring(index + 1, s.length()));
     		description = temp.getDescription();
     		reminder = temp.isReminder();
     	}
