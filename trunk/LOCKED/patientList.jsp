@@ -29,7 +29,7 @@
 <div id="message">${sessionScope.username}</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-<jsp:include  page="LinksInc.jsp" flush="true"/>
+<jsp:include  page="LinksInc.jsp" flush="false"/>
 </div>
 
 <div id="content">
@@ -37,7 +37,7 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 <c:if test="${empty sessionScope.userid}">
-	<% response.sendRedirect("login.jsp"); %>
+	<jsp:forward page="login.jsp" />
 </c:if>
 
 <jsp:useBean id="patientList" scope="page" class="core.PatientListBean"/>
