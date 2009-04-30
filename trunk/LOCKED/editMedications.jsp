@@ -1,7 +1,7 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
   -- File: editMedications
-  -- Date Modified: 04/24/09 
+  -- Date Modified: 04/29/09 
   -- Author: Han Dong
   -- Description: This file allows the user to view and edit
   -- his or her's Medications.
@@ -35,7 +35,7 @@
 <h1>Edit Medications</h1>
 
 <div></div>
-<stripes:form beanclass="core.MedicationBean" focus="">
+<stripes:form beanclass="core.AddMedicationBean" focus="">
 <stripes:errors/>
 <table>
 		<tr>
