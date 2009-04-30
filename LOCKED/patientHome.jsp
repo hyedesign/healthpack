@@ -28,7 +28,7 @@
 <div id="message">${sessionScope.username}</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  <%@include file="LinksInc.jsp" %>  
+  <jsp:include  page="LinksInc.jsp" flush="false"/>  
 </div>
 
 <div id="content">
@@ -36,25 +36,27 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 <c:if test="${empty sessionScope.userid}">
-	<% response.sendRedirect("login.jsp"); %>
+	<jsp:forward page="login.jsp" />
 </c:if>
 
 <h1>Patient Info</h1>
 <h2>${actionBean.patientFirstName} ${actionBean.patientLastName}</h2>
 
-<a href="editPatient.jsp">Edit Patient Info</a>
+<c:if test="${!sessionScope.userisdoctor}">
+	<a href="editPatient.jsp">Edit Patient Information</a>
+</c:if>
 <table border="1">
 	<tr>
 		<td colspan="2"><b><u>MESSAGE FROM THE DOCTOR:</u></b></td>
 	</tr>
 	<tr>
-		<td colspan="2">: ${actionBean.patientNote}</td>
+		<td colspan="2">TODO</td>
 	</tr>
 	<tr>
 		<td colspan="2"><b><u>REMINDERS:</u></b></td>
 	</tr>
 	<tr>
-		<td>Annual Checkup - 05/05/05</td>
+		<td colspan="2">Annual Checkup - 05/05/05</td>
 	</tr>
 	<tr>
 		<td colspan="2"><b><u>PATIENT INFORMATION</u></b></td>

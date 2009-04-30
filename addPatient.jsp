@@ -1,11 +1,9 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.6
+<!-- Jam Packed Inventions -->
+<!-- Healthpack v0.6
   -- File: addPatient
   -- Date Modified: 04/28/09 
   -- Author: Alex Bassett
   -- Description: This file allows users to add new patients
-  -- 
-  -- last edited by Alex
   -->
 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
@@ -24,11 +22,10 @@
 
 <div id="container">
 <div id="header"></div>
-<div id="message"></div>
+<div id="message">${sessionScope.username}</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">  
-  <%@include file="LinksInc.jsp" %>
- 
+  <jsp:include  page="LinksInc.jsp" flush="false"/>  
 </div>
 
 <div id="content">
@@ -36,20 +33,21 @@
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
 <c:if test="${empty sessionScope.userid}">
-	<% response.sendRedirect("login.jsp"); %>
+	<jsp:forward page="login.jsp" />
 </c:if>
 <c:if test="${sessionScope.userisdoctor}">
-	<% response.sendRedirect("login.jsp"); %>
+	<jsp:forward page="login.jsp" />
 </c:if>
 
 <h1>New Patient</h1>
+<p>Fields marked with * are required</p>
 
 <stripes:form beanclass="core.EditPatientBean" focus="">
 		<stripes:errors/>
         <table>
         	<stripes:hidden name="userId" value= "${sessionScope.userid}" />     	
            <tr>
-                <td>First Name:</td>
+                <td>*First Name:</td>
                 <td><stripes:text name="firstName"/></td>
             </tr>
             <tr>
@@ -57,27 +55,27 @@
                 <td><stripes:text name="middleName"/></td>
             </tr>
             <tr>
-                <td>Last Name:</td>
+                <td>*Last Name:</td>
                 <td><stripes:text name="lastName"/> </td>
             </tr> 
          	<tr>  
-                <td>Date Of Birth:</td>
+                <td>*Date Of Birth MM/DD/YYYY:</td>
     			<td>
-	    			<stripes:text name="birthMonth" size="1"/>/
-				    <stripes:text name="birthDay" size="1"/>/
+	    			<stripes:text name="birthMonth" size="1"/>
+				    <stripes:text name="birthDay" size="1"/>
 				    <stripes:text name="birthYear" size="2"/>
 				</td>
 	        </tr>
             <tr>
-                <td>Weight:</td>
+                <td>*Weight (lbs):</td>
                 <td><stripes:text name="weight"/></td> 
             </tr>
             <tr>
-                <td>Height (in):</td>
+                <td>*Height (in):</td>
                 <td><stripes:text name="height"/></td> 
             </tr>
             <tr>
-                <td>Sex (m/f):</td>
+                <td>*Sex (m/f):</td>
                 <td><stripes:text name="patientSex"/></td> 
             </tr>
             <tr>
