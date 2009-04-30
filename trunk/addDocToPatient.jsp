@@ -36,7 +36,7 @@ possible for the doctor to see your patient's data</p>
 <jsp:useBean id="docs" class="core.ChangeDocForPatientBean" scope="application" />
 <stripes:form beanclass="core.ChangeDocForPatientBean" focus="">
 								<!-- HARDCODED ID BELOW -->
-	<stripes:hidden name="patientId" value="2"/>
+	<stripes:hidden name="patientId" value="${sessionScope.patientid}"/>
 	SELECT A DOCTOR:
 	<stripes:select name="docId" size="1">
 		<stripes:options-collection collection="${docs.allDoctors}" label="name" value="id"/>
