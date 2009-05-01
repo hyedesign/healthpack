@@ -32,7 +32,7 @@
 <stripes:form beanclass="core.EditTestBean" focus="">
 	<stripes:errors/>
 	<table>
-	<div><input type="hidden" name="patientID" value="<%=2%>" /></div>
+	<div><input type="hidden" name="testID" value="${actionBean.testID}" /></div>
 		<tr>
 			<td>Test Name:</td>
 			<td><stripes:text name="testName" size="20" value="${actionBean.testName}"/></td>
