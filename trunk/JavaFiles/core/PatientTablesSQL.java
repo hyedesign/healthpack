@@ -25,33 +25,33 @@ public class PatientTablesSQL {
 	//declare local variables
 	DBAccess dba_s;
 	
-	String doctorNote;
-	String doctorName;
-	String doctorPhone;
-	String doctorEmail;
-	String doctorDescription;
+	private String doctorNote;
+	private String doctorName;
+	private String doctorPhone;
+	private String doctorEmail;
+	private String doctorDescription;
 	
-	ArrayList<Boolean> appointmentReminders;
+	private ArrayList<Boolean> appointmentReminders;
 	
-	ArrayList<Integer> appointmentIDs;
-	ArrayList<String> appointmentDescriptions;
-	ArrayList<Date> appointmentDates;
+	private ArrayList<Integer> appointmentIDs;
+	private ArrayList<String> appointmentDescriptions;
+	private ArrayList<Date> appointmentDates;
 	
-	ArrayList<Integer> allergyIDs;
-	ArrayList<String> allergyNames;
-	ArrayList<String> allergyDescriptions;
+	private ArrayList<Integer> allergyIDs;
+	private ArrayList<String> allergyNames;
+	private ArrayList<String> allergyDescriptions;
 	
-	ArrayList<Integer> medicationIDs;
-	ArrayList<String> medicationNames;
-	ArrayList<String> medicationDescriptions;
-	ArrayList<Date> medicationRefillDates;
-	ArrayList<Date> medicationExpirationDates;
+	private ArrayList<Integer> medicationIDs;
+	private ArrayList<String> medicationNames;
+	private ArrayList<String> medicationDescriptions;
+	private ArrayList<Date> medicationRefillDates;
+	private ArrayList<Date> medicationExpirationDates;
 	
-	ArrayList<Integer> testIDs;
-	ArrayList<String> testNames;
-	ArrayList<String> testDescriptions;
-	ArrayList<String> testResults;
-	ArrayList<Date> testDate;
+	private ArrayList<Integer> testIDs;
+	private ArrayList<String> testNames;
+	private ArrayList<String> testDescriptions;
+	private ArrayList<String> testResults;
+	private ArrayList<Date> testDate;
 	
 	//constructor
 	public PatientTablesSQL() {
