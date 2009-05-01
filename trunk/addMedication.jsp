@@ -59,7 +59,7 @@
 		</tr>
 		<tr>
 			<td><stripes:submit name="submit" value="Submit"/>
-			    <stripes:reset name ="reset" value="Reset"/></td>
+			<p><a href="patientList.jsp">Return to List</a></p></td>
 		</tr>
 	</table>
 </stripes:form>
