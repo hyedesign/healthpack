@@ -6,9 +6,16 @@
 * Description: This ActionBean controls loading the
 * 				patient information after a user has
 * 				selected one from the patient list
+* 
+* Edited: 4/30/2009 by Alex Bassett
+* Changes: Added functionality to load information off of
+* 			patient's subtables (ie appointments, tests, etc)
 *
 **********************************************************/
 package core;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 import net.sourceforge.stripes.action.*;
 
@@ -17,9 +24,8 @@ public class PatientSelectBean implements ActionBean {
 	// Declare class variables
 	private HPActionBeanContext context;
 	
-	// bean fields
+	// fields from patients
 	private int patientId;
-	private String patientNote;
 	private String patientFirstName;
 	private String patientMiddleName;
 	private String patientLastName;
@@ -33,6 +39,36 @@ public class PatientSelectBean implements ActionBean {
 	private String patientInsuranceID;
 	private String patientSSN;
 	
+	// doctor fields
+	private String doctorNote;
+	private String doctorName;
+	private String doctorPhone;
+	private String doctorEmail;
+	private String doctorDescription;
+	
+	// subtables
+	private ArrayList<Boolean> appointmentReminders;
+	
+	private ArrayList<Integer> appointmentIDs;
+	private ArrayList<String> appointmentDescriptions;
+	private ArrayList<Date> appointmentDates;
+	
+	private ArrayList<Integer> allergyIDs;
+	private ArrayList<String> allergyNames;
+	private ArrayList<String> allergyDescriptions;
+	
+	private ArrayList<Integer> medicationIDs;
+	private ArrayList<String> medicationNames;
+	private ArrayList<String> medicationDescriptions;
+	private ArrayList<Date> medicationRefillDates;
+	private ArrayList<Date> medicationExpirationDates;
+	
+	private ArrayList<Integer> testIDs;
+	private ArrayList<String> testNames;
+	private ArrayList<String> testDescriptions;
+	private ArrayList<String> testResults;
+	private ArrayList<Date> testDates;
+	
 	/* Getters and Setters*/
 	// overridden from ActionBean
     public HPActionBeanContext getContext() { return context; }
@@ -44,92 +80,115 @@ public class PatientSelectBean implements ActionBean {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
-	public String getPatientNote() {
-		return patientNote;
-	}
-	public void setPatientNote(String patientNote) {
-		this.patientNote = patientNote;
-	}
 	public String getPatientFirstName() {
 		return patientFirstName;
-	}
-	public void setPatientFirstName(String patientFirstName) {
-		this.patientFirstName = patientFirstName;
 	}
 	public String getPatientMiddleName() {
 		return patientMiddleName;
 	}
-	public void setPatientMiddleName(String patientMiddleName) {
-		this.patientMiddleName = patientMiddleName;
-	}
 	public String getPatientLastName() {
 		return patientLastName;
-	}
-	public void setPatientLastName(String patientLastName) {
-		this.patientLastName = patientLastName;
 	}
 	public java.util.Date getPatientDOB() {
 		return patientDOB;
 	}
-	public void setPatientDOB(java.util.Date patientDOB) {
-		this.patientDOB = patientDOB;
-	}
 	public int getPatientWeight() {
 		return patientWeight;
-	}
-	public void setPatientWeight(int patientWeight) {
-		this.patientWeight = patientWeight;
 	}
 	public int getPatientHeight() {
 		return patientHeight;
 	}
-	public void setPatientHeight(int patientHeight) {
-		this.patientHeight = patientHeight;
-	}
 	public String getPatientSex() {
 		return patientSex;
-	}
-	public void setPatientSex(String patientSex) {
-		this.patientSex = patientSex;
 	}
 	public String getPatientEmergencyContactName() {
 		return patientEmergencyContactName;
 	}
-	public void setPatientEmergencyContactName(String patientEmergencyContactName) {
-		this.patientEmergencyContactName = patientEmergencyContactName;
-	}
 	public String getPatientEmergencyContactNumber() {
 		return patientEmergencyContactNumber;
-	}
-	public void setPatientEmergencyContactNumber(
-			String patientEmergencyContactNumber) {
-		this.patientEmergencyContactNumber = patientEmergencyContactNumber;
 	}
 	public String getPatientInsuranceProvider() {
 		return patientInsuranceProvider;
 	}
-	public void setPatientInsuranceProvider(String patientInsuranceProvider) {
-		this.patientInsuranceProvider = patientInsuranceProvider;
-	}
 	public String getPatientInsuranceID() {
 		return patientInsuranceID;
-	}
-	public void setPatientInsuranceID(String patientInsuranceNumber) {
-		this.patientInsuranceID = patientInsuranceNumber;
 	}
 	public String getPatientSSN() {
 		return patientSSN;
 	}
-	public void setPatientSSN(String patientSSN) {
-		this.patientSSN = patientSSN;
+	public String getDoctorNote() {
+		return doctorNote;
 	}
-	
+	public String getDoctorName() {
+		return doctorName;
+	}
+	public String getDoctorPhone() {
+		return doctorPhone;
+	}
+	public String getDoctorEmail() {
+		return doctorEmail;
+	}
+	public String getDoctorDescription() {
+		return doctorDescription;
+	}
+	public ArrayList<Boolean> getAppointmentReminders() {
+		return appointmentReminders;
+	}
+	public ArrayList<Integer> getAppointmentIDs() {
+		return appointmentIDs;
+	}
+	public ArrayList<Date> getAppointmentDates() {
+		return appointmentDates;
+	}
+	public ArrayList<String> getAppointmentDescriptions() {
+		return appointmentDescriptions;
+	}
+	public ArrayList<Integer> getAllergyIDs() {
+		return allergyIDs;
+	}
+	public ArrayList<String> getAllergyNames() {
+		return allergyNames;
+	}
+	public ArrayList<String> getAllergyDescriptions() {
+		return allergyDescriptions;
+	}
+	public ArrayList<Integer> getMedicationIDs() {
+		return medicationIDs;
+	}
+	public ArrayList<String> getMedicationNames() {
+		return medicationNames;
+	}
+	public ArrayList<String> getMedicationDescriptions() {
+		return medicationDescriptions;
+	}
+	public ArrayList<Date> getMedicationRefillDates() {
+		return medicationRefillDates;
+	}
+	public ArrayList<Date> getMedicationExpirationDates() {
+		return medicationExpirationDates;
+	}
+	public ArrayList<Integer> getTestIDs() {
+		return testIDs;
+	}
+	public ArrayList<String> getTestNames() {
+		return testNames;
+	}
+	public ArrayList<String> getTestDescriptions() {
+		return testDescriptions;
+	}
+	public ArrayList<String> getTestResults() {
+		return testResults;
+	}
+	public ArrayList<Date> getTestDates() {
+		return testDates;
+	}
 	
 /* Validation (Stripes) Methods and Handlers */
 	
-
+	
 	/**
-	 * Saves the patientId in the session and forwards to
+	 * Saves the patientId in the session and loads relevant
+	 * patient data and patient subtables before forwarding to
 	 * patientHome for a more detailed look at the patient
 	 *
 	 * @return Resolution forwarded to patient home
@@ -153,17 +212,49 @@ public class PatientSelectBean implements ActionBean {
 			 this.patientInsuranceProvider = p.getInsurance();
 			 this.patientInsuranceID = p.getInsuranceID();
 			 this.patientSSN = p.getSSN();
-			 this.patientNote = p.getNote();
 			 if (p.getPatientSex() == 1) this.patientSex = "Female";
 			 else this.patientSex = "Male";
-			 
-			 return new ForwardResolution("patientHome.jsp");
 		 }
 		 // patient can't be loaded
 		 else {
 			 System.err.println("PatientSelectBean.java: Patient selected from patientList.jsp could not be loaded");
 			 return new ForwardResolution("patientList.jsp");
 		 }
+		 
+		 // load patient's subtable data
+		 PatientTablesSQL pt = new PatientTablesSQL();
+		 pt.getAllSubtables(patientId);
+		 
+		 this.doctorName = pt.getDoctorName();
+		 this.doctorPhone = pt.getDoctorPhone();
+		 this.doctorEmail = pt.getDoctorEmail();
+		 this.doctorDescription = pt.getDoctorDescription();
+		 this.doctorNote = pt.getDoctorNote();
+		 
+		this.appointmentReminders = pt.getAppointmentReminders();
+		
+		this.appointmentIDs = pt.getAppointmentIDs();
+		this.appointmentDescriptions = pt.getAppointmentDescriptions();
+		this.appointmentDates = pt.getAppointmentDates();
+		
+		this.allergyIDs = pt.getAllergyIDs();
+		this.allergyNames = pt.getAllergyNames();
+		this.allergyDescriptions = pt.getAllergyDescriptions();
+		
+		this.medicationIDs = pt.getMedicationIDs();
+		this.medicationNames = pt.getMedicationNames();
+		this.medicationDescriptions = pt.getMedicationDescriptions();
+		this.medicationRefillDates = pt.getMedicationRefillDates();
+		this.medicationExpirationDates = pt.getMedicationExpirationDates();
+		
+		this.testIDs = pt.getTestIDs();
+		this.testNames = pt.getTestNames();
+		this.testDescriptions = pt.getTestDescriptions();
+		this.testResults = pt.getTestResults();
+		this.testDates = pt.getTestDates();
+
+		 // forward to patientHome
+		 return new ForwardResolution("patientHome.jsp");
 	}
 
 	/**
