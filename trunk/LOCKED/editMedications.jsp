@@ -37,27 +37,28 @@
 <div></div>
 <stripes:form beanclass="core.AddMedicationBean" focus="">
 <stripes:errors/>
+<stripes:hidden name="medicationid" value="${actionBean.medicationid}"/>
 <table>
 		<tr>
 			<td>Medication Name:</td>
-			<td><stripes:text name="medicationName"/></td>
+			<td><stripes:text name="medicationName" value="${actionBean.medicationName}"/></td>
 		</tr>
 		<tr>
 			<td>Expiration Date (MM/DD/YYYY):</td>
-			<td><stripes:text name="expirationMonth" size="1"/>/
-			    <stripes:text name="expirationDay" size="1"/>/ 
-			    <stripes:text name="expirationYear" size="2"/></td>
+			<td><stripes:text name="expirationMonth" size="1" value="${actionBean.expirationMonth}"/>/
+			    <stripes:text name="expirationDay" size="1" value="${actionBean.expirationDay}"/>/ 
+			    <stripes:text name="expirationYear" size="2" value="${actionBean.expirationYear}"/></td>
 		</tr>
 
 		<tr>
 			<td>Refill Date (MM/DD/YYYY):</td>
-			<td><stripes:text name="refillMonth" size = "1"/>/
-			    <stripes:text name="refillDay" size="1"/>/ 
-			    <stripes:text name="refillYear" size="2"/></td>
+			<td><stripes:text name="refillMonth" size = "1" value="${actionBean.refillMonth}"/>/
+			    <stripes:text name="refillDay" size="1" value="${actionBean.refillDay}"/>/ 
+			    <stripes:text name="refillYear" size="2" value="${actionBean.refillYear}"/></td>
 		</tr>
 		<tr>
 			<td>Description:</td>
-			<td><stripes:textarea name="description"/></td>
+			<td><stripes:textarea name="description" value="${actionBean.description}"/></td>
 		</tr>
 		<tr>
 			<td><stripes:submit name="submit" value="Submit"/>

@@ -22,7 +22,7 @@ import net.sourceforge.stripes.validation.Validate;
 
 
 public class EditMedicationBean implements ActionBean {
-    private ActionBeanContext context;
+    private HPActionBeanContext context;
     @Validate(required=false) private int medicationId;
     @Validate(required=false) private int patientId;
     @Validate(required=false, maxlength=255) private String medicationName = "";
@@ -34,8 +34,8 @@ public class EditMedicationBean implements ActionBean {
     @Validate(required=false, maxlength=4) private int refillYear;
     @Validate(required=false, maxlength=255) private String description = 	"";
     
-    public HPActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+    public HPActionBeanContext getContext() { return this.context; }
+    public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
 
 //    public int getAllergyID() {	return allergyID;	}
 //	public void setAllergyID(int allergyID) {this.allergyID = allergyID; }

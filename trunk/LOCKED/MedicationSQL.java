@@ -112,7 +112,7 @@ public class MedicationSQL {
 	/*
 	 * Static Calls
 	 */
-	public static void addNewMedication(int medicationId, int patientId, String medicationName, 
+	public static void addNewMedication(int patientId, String medicationName, 
 			Date medicationExpirationDate, Date medicationRefillDate, 
 			String medicationDesription) {
 		DBAccess dba = new DBAccess();
@@ -122,8 +122,8 @@ public class MedicationSQL {
 			// construct and execute the SQL call
 			Statement statement = dba.connection.createStatement ();
 			String s = "INSERT INTO medications " + "" +
-			" (medicationid, patientid, medicationname, medicationexpirationsdate, medicationrefilldate, medicationdescription) " + 
-			" VALUES('"+medicationId+"', '"+patientId+"', '"+medicationName+"', '"+medicationExpirationDate+"', '"
+			" (patientid, medicationname, medicationexpirationsdate, medicationrefilldate, medicationdescription) " + 
+			" VALUES('"+patientId+"', '"+medicationName+"', '"+medicationExpirationDate+"', '"
 			+medicationRefillDate+"', '"+medicationDesription+"')";
 			statement.executeUpdate(s);
 			
