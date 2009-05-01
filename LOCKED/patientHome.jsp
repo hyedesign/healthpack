@@ -130,7 +130,7 @@
 		<td colspan="2">${actionBean.doctorNote}</td>
 	</tr>
 </table>
-<a href="addDocToPatient.jsp">Change Patient Doctor</a>
+<a href="addDocToPatient.jsp">Change Patient's Doctor</a>
 
 <p>&nbsp;</p>
 <h2>APPOINTMENTS</h2>
@@ -164,6 +164,14 @@
 		<tr>
 			<td>${actionBean.allergyNames[ loop2.index ]}</td>
 			<td>${actionBean.allergyDescriptions[ loop2.index ]}</td>
+			<td>
+				<c:if test="${!sessionScope.userisdoctor}">
+					<stripes:form beanclass="core.EditAllergyBean">
+						<stripes:hidden name="allergyId" value="${id2}"/>
+						<stripes:submit name="submit" value="edit"/>
+					</stripes:form>
+				</c:if>
+			</td>
 			<td>${id2}</td>
 		</tr>
 	</c:forEach>
