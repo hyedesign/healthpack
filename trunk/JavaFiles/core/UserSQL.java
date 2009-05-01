@@ -8,6 +8,7 @@
 *
 * Edited: 4/28/09 by Alex Bassett
 * Changes: Added isDoctor() for checking that a user is a doctor
+*          Added updateUserInfo for updating user
 *
 **********************************************************/
 package core;
@@ -410,4 +411,56 @@ public class UserSQL {
 		}
 	}
 	
+	/**
+	 * updates the user with the latest information
+	 * 
+	 * @param firstName is the first name of the user
+	 * @param lastName is the last name of the user
+	 * @param email is the email of the user
+	 * @param phone is the phone number of the user
+	 * @param description is the description of the user
+	 * @param password is the password of the user
+	 * @param password2 is the password of the user
+	 * @param userID is the user identification
+	 * @author Han Dong
+	 */
+	public static void updateUserInfo(String firstName, String lastName, String email,
+			String phone, String description, String password, String password2, int userID)
+	{
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try
+		{
+			// construct and execute the SQL call, updates database
+			Statement statement = dba_s.connection.createStatement();
+			
+			//if description is null, the user description will not be updated
+			if(description == null)
+			{
+				statement.executeUpdate("UPDATE cmsc345.users SET userpassword='"
+						+password+"', useremail='"+email+
+						"', userphone='"+phone+"', userfirstname='"
+						+firstName+"', userlastname='"+lastName+"' WHERE userid='"
+						+userID+"'");
+			}
+			else
+			{
+				statement.executeUpdate("UPDATE cmsc345.users SET userpassword='"
+						+password+"', useremail='"+email+
+						"', userphone='"+phone+"', userdescription='" +description+
+						"', userfirstname='"+firstName+"', userlastname='"+
+						lastName+"' WHERE userid='"
+						+userID+"'");
+			}
+			
+			statement.close();
+			dba_s.disconnect();
+		}
+		catch (SQLException e)
+		{
+			System.err.println (e.toString());
+			System.out.println("Failed to update.");
+			dba_s.disconnect();
+		}
+	}
 }
