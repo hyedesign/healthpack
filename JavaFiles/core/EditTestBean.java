@@ -1,12 +1,9 @@
 /**********************************************************
 * File: core.EditTestBean.java
 * Author: Han Dong
-* Date Created: 4/23/2009
+* Date Created: 4/28/2009
 *
-* Description: Verifies test info and updates SQL db
-*
-* Edited  : 
-* Changes : 
+* Description: Verifies test info and updates SQL database
 *
 **********************************************************/
 package core;
@@ -18,15 +15,19 @@ import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.HttpCache;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidationErrors;
 import net.sourceforge.stripes.validation.ValidationMethod;
 
+@HttpCache(allow=false)
 public class EditTestBean implements ActionBean
 {
-	private ActionBeanContext context;
+	//instance variables
+	private HPActionBeanContext context;
+	private int testID;
 	@Validate(required=true, maxlength=20) private String testName;
 	@Validate(required=true, maxlength=20) private String testResult;
 	@Validate(required=false) private String testDescription;
@@ -36,8 +37,15 @@ public class EditTestBean implements ActionBean
 	@Validate(required=true, maxlength=4, minlength=4) private int testYear;
 	
 	//getters and setters
-	public ActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+	public HPActionBeanContext getContext() 
+	{ 
+		return this.context; 
+	}
+    public void setContext(ActionBeanContext context) 
+    { 
+    	this.context = (HPActionBeanContext) context; 
+    }
+    
 	public String getTestName() { return testName; }
 	public void setTestName(String testName) { this.testName = testName; }
 	public String getTestResult() { return testResult; }
@@ -51,23 +59,58 @@ public class EditTestBean implements ActionBean
 	public int getTestYear() { return testYear; }
 	public void setTestYear(int testYear) { this.testYear = testYear; }
 	
-	/* Handles form validation */
+	/**
+	 * submit - updates test info for patient
+	 * @return
+	 */
 	@DefaultHandler
     public Resolution submit()
 	{
+		//converts the month, day, year the user inputs
+		//into a Date format for the SQL database
 		Calendar cal = Calendar.getInstance();
 		cal.set(this.testYear, this.testMonth-1, this.testDay);
 		this.testDate = new Date(cal.getTime().getTime());
-		new EditTestSQL(this.testName, this.testResult,
-				this.testDescription, this.testDate).updateTest(8);
+		
+		//updates database with info
+		EditTestSQL.updateTest(this.testName, this.testResult,
+				this.testDescription, this.testDate, this.testID);
+		
+		//forwards page to patient home page
 		return new ForwardResolution("patientHome.jsp");
 	}
     
-	//VALIDATION 
+	/**
+	 * checksTestInfo - validates inputs for test fields.
+	 * 					eg. apostrophe, special characters, valid date
+	 * @param errors
+	 */
     @ValidationMethod(on="submit")
-    public void dateFormat(ValidationErrors errors) 
+    public void checksTestInfo(ValidationErrors errors) 
     {	
-    	//test date
+    	//escapes all apostrophes for the SQL database
+    	this.testName = this.testName.replaceAll("\\'", "''");
+    	this.testResult = this.testResult.replaceAll("\\'", "''");
+    	this.testDescription = this.testDescription.replaceAll("\\'", "''");
+    	
+    	//checks for special characters
+    	if(hasSpecialCharacters(this.testName))
+		{
+			errors.add("testName", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+		}
+    	
+    	if(hasSpecialCharacters(this.testResult))
+		{
+			errors.add("Result", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+		}
+    	
+    	if(hasSpecialCharacters(this.testDescription))
+		{
+			errors.add("testDescription", new SimpleError("These characters are not allowed in Description: <> () [] \\ / | = + * @ $ # ^ : ; "));
+		}
+    	
+    	
+    	//checks the date to and make sure its valid
     	if (!(testMonth == 0 && testDay == 0 && testYear == 0)){
 	    	if(testMonth < 1 || testMonth > 12)
 	    		errors.add("birthMonth", new SimpleError("Invalid Birth Month"));
@@ -77,4 +120,16 @@ public class EditTestBean implements ActionBean
 	    		errors.add("birthYear", new SimpleError("Invalid Birth Year"));
     	}
     }
+    
+    /**
+	 * Checks the inputed string for illegal characters
+	 * and returns true if any are found. Otherwise it
+	 * returns false.
+	 * @param s
+	 * @return
+	 */
+	private boolean hasSpecialCharacters(String s) {
+		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
+		return false;
+	}
 }
