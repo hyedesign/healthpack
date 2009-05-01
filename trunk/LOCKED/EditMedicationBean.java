@@ -34,7 +34,7 @@ public class EditMedicationBean implements ActionBean {
     @Validate(required=false, maxlength=4) private int refillYear;
     @Validate(required=false, maxlength=255) private String description = 	"";
     
-    public ActionBeanContext getContext() { return context; }
+    public HPActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
 
 //    public int getAllergyID() {	return allergyID;	}

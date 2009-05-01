@@ -135,6 +135,7 @@ public class AddMedicationBean implements ActionBean {
     
     @DefaultHandler
     public Resolution submit() {
+    	int medicationid = 4;
     	int patientid = 10;
    		Calendar cal1 = Calendar.getInstance();
    		cal1.set(this.expirationYear, this.expirationMonth-1, this.expirationDay);
@@ -142,8 +143,13 @@ public class AddMedicationBean implements ActionBean {
    		Calendar cal2 = Calendar.getInstance();
    		cal2.set(this.refillYear, this.refillMonth-1, this.refillDay);
    		this.Refill = new Date(cal2.getTime().getTime());
-    	MedicationSQL.addNewMedication(patientid, this.medicationName, this.Expire, this.Refill, this.medicationDescription);
-        return new ForwardResolution("patientHome.jsp");
+   		if (medicationid == 0){
+   			MedicationSQL.addNewMedication(medicationid, patientid, this.medicationName, this.Expire, this.Refill, this.medicationDescription);
+   		}
+   		else{
+   			MedicationSQL.updateMedication(medicationid, patientid, this.medicationName, this.Expire, this.Refill, this.medicationDescription);
+   		}
+   		return new ForwardResolution("patientHome.jsp");
     }
     
     
