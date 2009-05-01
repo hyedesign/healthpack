@@ -60,7 +60,7 @@ public class ChangeDocForPatientBean implements ActionBean {
 		}
 	}
 
-	private ActionBeanContext context;
+	public ActionBeanContext context;
 	private ArrayList<String> allDoctorIds;
 	private int docId = 0;
 
@@ -100,13 +100,11 @@ public class ChangeDocForPatientBean implements ActionBean {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
-
-	public ActionBeanContext getContext() {
-		return context;
+	public HPActionBeanContext getContext() {
+		return this.context;
 	}
-
 	public void setContext(ActionBeanContext context) {
-		this.context = context;
+		this.context = (HPActionBeanContext) context;
 	}
 
 	@DefaultHandler
