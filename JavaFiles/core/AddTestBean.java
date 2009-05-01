@@ -25,7 +25,7 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 public class AddTestBean implements ActionBean
 {
 	//instance variables
-	private ActionBeanContext context;
+	private HPActionBeanContext context;
 	@Validate(required=true, maxlength=20) private String testName;
 	@Validate(required=true, maxlength=20) private String testResult;
 	@Validate(required=false) private String testDescription;
@@ -35,8 +35,15 @@ public class AddTestBean implements ActionBean
 	@Validate(required=true, maxlength=4, minlength=4) private int testYear;
 	
 	//getters and setters
-	public ActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+	public HPActionBeanContext getContext() 
+	{ 
+		return this.context; 
+	}
+    public void setContext(ActionBeanContext context) 
+    { 
+    	this.context = (HPActionBeanContext) context; 
+    }
+    
 	public String getTestName() { return testName; }
 	public void setTestName(String testName) { this.testName = testName; }
 	public String getTestResult() { return testResult; }
@@ -66,7 +73,7 @@ public class AddTestBean implements ActionBean
 		
 		//calls static addTest method to add new entry
 		EditTestSQL.addTest(this.testName, this.testResult,
-				this.testDescription, this.testDate, 8);
+				this.testDescription, this.testDate, context.getPatientId());
 		
 		//goes back to home page
 		return new ForwardResolution("patientHome.jsp");
