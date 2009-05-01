@@ -41,6 +41,7 @@
 <stripes:form beanclass="core.AllergiesBean" focus="">
 <stripes:errors/>
 <table>
+		<stripes:hidden name="allergyID" value="${actionBean.allergyID }"/>
 		<tr>
 			<td>Allergy Name:</td>
 			<td><stripes:text name="allergyName" value="${actionBean.allergyName}"/></td>
@@ -56,7 +57,7 @@
 	</table>
 </stripes:form>
 
-<p><a href="patientHome.jsp"> Return </a> </p>
+<p><a href="patientList.jsp"> Return To List</a> </p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>

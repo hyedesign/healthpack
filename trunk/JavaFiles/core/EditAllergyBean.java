@@ -25,8 +25,7 @@ public class EditAllergyBean implements ActionBean {
 	
 	//Private data members
     private ActionBeanContext context;
-    //@Validate(required=false) private int allergyID;
-    //@Validate(required=false) private int patientID;
+    private int allergyID;
     @Validate(required=false, maxlength=30) private String allergyName;
     @Validate(required=false, maxlength=255) private String description;
 
@@ -34,11 +33,8 @@ public class EditAllergyBean implements ActionBean {
     public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
 
-//    public int getAllergyID() {	return allergyID;	}
-//	public void setAllergyID(int allergyID) {this.allergyID = allergyID; }
-	
-	//public int getPatientID() {	return patientID;	}
-	//public void setPatientID(int patientID) {	this.patientID = patientID;	}
+    public int getAllergyID() {	return allergyID;	}
+    public void setAllergyID(int allergyID) {this.allergyID = allergyID; }
 	
 	public String getAllergyName() { return allergyName; }
     public void setAllergyName(String allergyName) { this.allergyName = allergyName; }
@@ -54,12 +50,14 @@ public class EditAllergyBean implements ActionBean {
      */
     @DefaultHandler
     public Resolution submit() {
-    	int allergyID = 4;
     	AllergiesSQL temp = new AllergiesSQL();
     	boolean loaded = temp.lookupAllergy(allergyID);
     	if(loaded == true)
+    	{
+    		allergyID = temp.getAllergyID();
     		allergyName = temp.getAllergyName();
     		description = temp.getDescription();
-        return new ForwardResolution("editAllergies.jsp");
+    	}
+    	return new ForwardResolution("editAllergies.jsp");
     }
 }

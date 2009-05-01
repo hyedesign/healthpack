@@ -58,12 +58,11 @@ public class AllergiesSQL
 	 * @param name
 	 * @param descript
 	 */
-	public static void addAllergies(String name, String descript)
+	public static void addAllergies(int pID, String name, String descript)
 	{
 		DBAccess dba_s = new DBAccess();
 		dba_s.connect(); // connect to the database
 		try {
-			int pID = 9;
 			// construct and execute the SQL call, retrieve the results
 			descript = descript.replaceAll("\\'", "''");
 			name = name.replaceAll("\\'", "''");
@@ -159,17 +158,9 @@ public class AllergiesSQL
 		try
 		{
 			Statement statement = dba.connection.createStatement();
-			if(description == null)
-			{
-				statement.executeUpdate("UPDATE allergies SET allergy_name='"+allergy+"' WHERE allergyid='"
-						+id+"'");
-			}
-			else
-			{
-				statement.executeUpdate("UPDATE allergies SET allergy_name='"+allergy+
+			statement.executeUpdate("UPDATE allergies SET allergy_name='"+allergy+
 						"', allergy_description='"+descript+"' WHERE allergyid='"
 						+id+"'");
-			}
 			statement.close();
 			dba.disconnect();
 		}
