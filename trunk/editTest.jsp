@@ -32,25 +32,25 @@
 <stripes:form beanclass="core.EditTestBean" focus="">
 	<stripes:errors/>
 	<table>
-	<div><input type="hidden" name="patientID" value="<%=8%>" /><%="Han"%></div>
+	<div><input type="hidden" name="patientID" value="<%=2%>" /></div>
 		<tr>
 			<td>Test Name:</td>
-			<td><stripes:text name="testName" size="20" /></td>
+			<td><stripes:text name="testName" size="20" value="${actionBean.testName}"/></td>
 		</tr>
 		<tr>
 			<td>Test Result:</td>
-			<td><stripes:text name="testResult" size="20" /></td>
+			<td><stripes:text name="testResult" size="20" value="${actionBean.testResult}"/></td>
 		</tr>
 		<tr>
 			<td>Test Description:</td>
-			<td><stripes:textarea name="testDescription" cols="45" rows="5" /></td>
+			<td><stripes:textarea name="testDescription" cols="45" rows="5" value="${actionBean.testDescription}"/></td>
 		</tr>
 		<tr>
 			<td>Test Date:</td>
 			<td>
-	    		<stripes:text name="testMonth" size="1" />/
-				<stripes:text name="testDay" size="1" />/
-				<stripes:text name="testYear" size="2" />
+	    		<stripes:text name="testMonth" size="1" value="${actionBean.testMonth}"/>/
+				<stripes:text name="testDay" size="1" value="${actionBean.testDay}"/>/
+				<stripes:text name="testYear" size="2" value="${actionBean.testYear}"/>
 			</td>
 		</tr>
 		<tr>
