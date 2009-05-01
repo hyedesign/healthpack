@@ -1,5 +1,5 @@
-<!-- Jam Packed Inventions
-  -- File: addDocToPatient
+<!-- Jam Packed Inventions -->
+<!-- File: addDocToPatient
   -- Date Modified: 04/26/09 
   -- Author: Vahan Kristosturyan 
   -- Description: Adds the doctor to a patient from a drop down box.
@@ -31,7 +31,6 @@
 <h1>Patient Doctor</h1>
 <p>Please Choose a doctor from the drop down list. This will make it 
 possible for the doctor to see your patient's data</p>
-
 
 <jsp:useBean id="docs" class="core.ChangeDocForPatientBean" scope="application" />
 <stripes:form beanclass="core.ChangeDocForPatientBean" focus="">
