@@ -40,6 +40,7 @@
 
 <p>Please enter your note for the patient</p>
 <stripes:form beanclass="core.AddDocNoteBean" focus="">
+	<stripes:hidden name="medicationid" value="${actionBean.medicationid}"/>
 	<stripes:errors/>
 	<table border="0">
 		<tr>

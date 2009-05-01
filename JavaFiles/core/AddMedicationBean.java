@@ -34,7 +34,7 @@ import net.sourceforge.stripes.validation.ValidationErrors;
 import net.sourceforge.stripes.validation.ValidationMethod;
 
 public class AddMedicationBean implements ActionBean {
-    private ActionBeanContext context;
+    private HPActionBeanContext context;
 	private Date Expire;
 	private Date Refill;
     private int patientId = 10;
@@ -47,8 +47,8 @@ public class AddMedicationBean implements ActionBean {
     @Validate(required=true, maxlength=4) private int refillYear;
     @Validate(required=false, maxlength=255) private String medicationDescription;
 
-    public ActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+    public HPActionBeanContext getContext() { return this.context; }
+    public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
 
 	public Date getExpire() {
 		return Expire;
@@ -135,16 +135,16 @@ public class AddMedicationBean implements ActionBean {
     
     @DefaultHandler
     public Resolution submit() {
-    	int medicationid = 4;
-    	int patientid = 10;
+    	int medicationid = -1;
+    	int patientid = this.context.getPatientId();
    		Calendar cal1 = Calendar.getInstance();
    		cal1.set(this.expirationYear, this.expirationMonth-1, this.expirationDay);
    		this.Expire = new Date(cal1.getTime().getTime());
    		Calendar cal2 = Calendar.getInstance();
    		cal2.set(this.refillYear, this.refillMonth-1, this.refillDay);
    		this.Refill = new Date(cal2.getTime().getTime());
-   		if (medicationid == 0){
-   			MedicationSQL.addNewMedication(medicationid, patientid, this.medicationName, this.Expire, this.Refill, this.medicationDescription);
+   		if (medicationid == -1){
+   			MedicationSQL.addNewMedication( patientid, this.medicationName, this.Expire, this.Refill, this.medicationDescription);
    		}
    		else{
    			MedicationSQL.updateMedication(medicationid, patientid, this.medicationName, this.Expire, this.Refill, this.medicationDescription);

@@ -22,11 +22,11 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 
 
 public class AddDocNoteBean implements ActionBean {
-    private ActionBeanContext context;
+    private HPActionBeanContext context;
     @Validate(required=false, maxlength=255) private String description;
 
-    public ActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+    public HPActionBeanContext getContext() { return context; }
+    public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
     
 	public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
