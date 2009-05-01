@@ -1,5 +1,5 @@
 /**********************************************************
-* File: core.UserInfoBean.java
+* File: core.UserInfo.java
 * Author: Han Dong
 * Date Created: 4/28/2009
 *
@@ -18,6 +18,7 @@ import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.validation.EmailTypeConverter;
 import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidationErrors;
@@ -26,7 +27,8 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 public class UserInfoBean implements ActionBean
 {
 	//instance variables
-	private ActionBeanContext context;
+	private HPActionBeanContext context;
+	private int userID;
 	@Validate(required=true, maxlength=20) private String firstName;
 	@Validate(required=true, maxlength=20) private String lastName;
 	@Validate(required=true, maxlength=20) private String email;
@@ -36,8 +38,14 @@ public class UserInfoBean implements ActionBean
 	@Validate(required=true, maxlength=20) private String password2;
 	
 	/* getters and setters for instance variables */
-	public ActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+	public HPActionBeanContext getContext() 
+	{ 
+		return this.context; 
+	}
+    public void setContext(ActionBeanContext context) 
+    { 
+    	this.context = (HPActionBeanContext) context; 
+    }
     public String getFirstName() { return firstName; }
 	public void setFirstName(String firstName) { this.firstName = firstName; }
 	public String getLastName() { return lastName; }
@@ -61,8 +69,8 @@ public class UserInfoBean implements ActionBean
     public Resolution submit() 
 	{
 		//calls static UserSQL function with necessary data
-		UserSQL.updateUserInfo(firstName, lastName, email, 
-				phone, description, password, password2, 3);
+		UserSQL.updateUserInfo(this.firstName, this.lastName, this.email, 
+				this.phone, this.description, this.password, this.password2, this.userID);
         return new ForwardResolution("userHomepage.jsp");
     }
 	
