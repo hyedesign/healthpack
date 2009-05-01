@@ -20,7 +20,7 @@ import net.sourceforge.stripes.action.Resolution;
 public class ViewTestBean implements ActionBean
 {
 	//instance variables corresponding to fields in editTest.jsp
-	private ActionBeanContext context;
+	private HPActionBeanContext context;
 	private int testID;
 	private String testName;
 	private String testResult;
@@ -31,8 +31,15 @@ public class ViewTestBean implements ActionBean
 	private int testYear;
 		
 	//getters and setters
-	public ActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+	public HPActionBeanContext getContext() 
+	{ 
+		return this.context; 
+	}
+    public void setContext(ActionBeanContext context) 
+    { 
+    	this.context = (HPActionBeanContext) context; 
+    }
+    
 	public int getTestID() { return testID; }
 	public void setTestID(int testID) { this.testID =testID; }
 	public String getTestName() { return testName; }
@@ -70,6 +77,9 @@ public class ViewTestBean implements ActionBean
 		this.testDescription = temp.getTestDescription();
 		this.testDate = temp.getTestDate();
 
+		/**
+		 * @author Taylor Evans
+		 */
 		//breaks up the date into 3 different fields
 		String s = testDate.toString();
 		int index = s.indexOf('-');
