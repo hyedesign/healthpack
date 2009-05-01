@@ -130,6 +130,7 @@
 		<td colspan="2">${actionBean.doctorNote}</td>
 	</tr>
 </table>
+<a href="addDocToPatient.jsp">Change Patient Doctor</a>
 
 <p>&nbsp;</p>
 <h2>APPOINTMENTS</h2>
