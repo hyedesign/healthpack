@@ -51,7 +51,7 @@ public class PatientTablesSQL {
 	private ArrayList<String> testNames;
 	private ArrayList<String> testDescriptions;
 	private ArrayList<String> testResults;
-	private ArrayList<Date> testDate;
+	private ArrayList<Date> testDates;
 	
 	//constructor
 	public PatientTablesSQL() {
@@ -83,7 +83,7 @@ public class PatientTablesSQL {
 		testNames = new ArrayList<String>();
 		testDescriptions = new ArrayList<String>();
 		testResults = new ArrayList<String>();
-		testDate = new ArrayList<Date>();
+		testDates = new ArrayList<Date>();
 	}
 	
 	/**
@@ -146,8 +146,8 @@ public class PatientTablesSQL {
 			ResultSet rs_al = st_al.executeQuery ("SELECT * FROM allergies WHERE patientid='"+patientId+"'");			
 			while (rs_al.next()) {
 				allergyIDs.add(rs_al.getInt("allergyid"));
-				allergyNames.add(rs_al.getString("allergyname"));
-				allergyDescriptions.add(rs_al.getString("allergydescription"));
+				allergyNames.add(rs_al.getString("allergy_name"));
+				allergyDescriptions.add(rs_al.getString("allergy_description"));
 			}
 			rs_al.close();
 			st_al.close();
@@ -171,9 +171,9 @@ public class PatientTablesSQL {
 			while (rs_te.next()) {
 				testIDs.add(rs_te.getInt("testid"));
 				testNames.add(rs_te.getString("testname"));
-				testDescriptions.add(rs_te.getString("testresult"));
-				testResults.add(rs_te.getString("testdescription"));
-				testDate.add(rs_te.getDate("testdate"));
+				testDescriptions.add(rs_te.getString("testdescription"));
+				testResults.add(rs_te.getString("testresult"));
+				testDates.add(rs_te.getDate("testdate"));
 			}
 			rs_te.close();
 			st_te.close();
@@ -272,7 +272,7 @@ public class PatientTablesSQL {
 		return testResults;
 	}
 
-	public ArrayList<Date> getTestDate() {
-		return testDate;
+	public ArrayList<Date> getTestDates() {
+		return testDates;
 	}
 }

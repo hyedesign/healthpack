@@ -1,7 +1,7 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.2
   -- File: patientHome
-  -- Date Modified: 04/28/09 
+  -- Date Modified: 04/30/09 
   -- Author: Taylor Evans
   -- Description: This file displays the specific user's 
   -- patient's homepage.
@@ -47,17 +47,16 @@
 </c:if>
 <table border="1">
 	<tr>
-		<td colspan="2"><b><u>MESSAGE FROM THE DOCTOR:</u></b></td>
-	</tr>
-	<tr>
-		<td colspan="2">TODO</td>
-	</tr>
-	<tr>
 		<td colspan="2"><b><u>REMINDERS:</u></b></td>
 	</tr>
-	<tr>
-		<td colspan="2">Annual Checkup - 05/05/05</td>
-	</tr>
+	<c:forEach items="${actionBean.appointmentReminders}" var="remindMe" varStatus="loop">
+		<c:if test="${remindMe}">
+			<tr>
+				<td>${actionBean.appointmentDates[ loop.index ]}</td>
+				<td>${actionBean.appointmentDescriptions[ loop.index ]}</td>
+			</tr>
+		</c:if>
+	</c:forEach>
 	<tr>
 		<td colspan="2"><b><u>PATIENT INFORMATION</u></b></td>
 	</tr>
@@ -109,76 +108,109 @@
 		<td>Social Security Number:</td>
 		<td>${actionBean.patientSSN}</td>
 	</tr>
+	<tr>
+		<td colspan="2"><b><u>DOCTOR'S INFORMATION</u></b></td>
+	</tr>
+	<tr>
+		<td>Name</td>
+		<td>${actionBean.doctorName}</td>
+	</tr>
+	<tr>
+		<td>Phone</td>
+		<td>${actionBean.doctorPhone}</td>
+	</tr>
+	<tr>
+		<td>Description</td>
+		<td>${actionBean.doctorDescription}</td>
+	</tr>
+		<tr>
+		<td colspan="2"><b><u>MESSAGE FROM THE DOCTOR:</u></b></td>
+	</tr>
+	<tr>
+		<td colspan="2">${actionBean.doctorNote}</td>
+	</tr>
 </table>
 
 <p>&nbsp;</p>
 <h2>APPOINTMENTS</h2>
-<table border="1">
-<tr>
-	<td><b>DATE</b></td>
-	<td><b>DESCRIPTION</b></td>
-	<td>&nbsp;</td>
-</tr>
-<tr>
-	<td>03/08/09</td>
-	<td>Dental</td>
-	<td>VIEW | EDIT | DELETE</td>
-</tr>
-</table>
 <a href="editAppointment.jsp">Edit Appointments</a>
+<table border="1">
+	<tr>
+		<td><b>Date</b></td>
+		<td><b>Description</b></td>
+		<td>&nbsp;</td>
+	</tr>
+	<c:forEach items="${actionBean.appointmentIDs}" var="id1" varStatus="loop1">
+		<tr>
+			<td>${actionBean.appointmentDates[ loop1.index ]}</td>
+			<td>${actionBean.appointmentDescriptions[ loop1.index ]}</td>
+			<td>${id1}</td>
+		</tr>
+	</c:forEach>
+</table>
+
 
 <p>&nbsp;</p>
 <h2>ALLERGIES</h2>
-<table border="1">
-<tr>
-	<td><b>DESCRIPTION</b></td>
-	<td>&nbsp;</td>
-</tr>
-<tr>
-	<td>Pollen</td>
-	<td>VIEW | EDIT | DELETE</td>
-</tr>
-</table>
-
 <a href="editAllergies.jsp">Edit Allergies</a>
+<table border="1">
+	<tr>
+		<td><b>Name</b></td>
+		<td><b>Description</b></td>
+		<td>&nbsp;</td>
+	</tr>
+	<c:forEach items="${actionBean.allergyIDs}" var="id2" varStatus="loop2">
+		<tr>
+			<td>${actionBean.allergyNames[ loop2.index ]}</td>
+			<td>${actionBean.allergyDescriptions[ loop2.index ]}</td>
+			<td>${id2}</td>
+		</tr>
+	</c:forEach>
+</table>
 
 <p>&nbsp;</p>
 <h2>MEDICATIONS</h2>
-<table border="1">
-<tr>
-	<td><b>DATE</b></td>
-	<td><b>DESCRIPTION</b></td>
-	<td>&nbsp;</td>
-</tr>
-<tr>
-	<td>03/08/09</td>
-	<td>Alieve</td>
-	<td>VIEW | EDIT | DELETE</td>
-</tr>
-</table>
-
 <a href="editMedications.jsp">Edit Medications</a>
+<table border="1">
+	<tr>
+		<td><b>Name</b></td>
+		<td><b>Description</b></td>
+		<td><b>Refill Date</b></td>
+		<td><b>Expiration Date</b></td>
+		<td>&nbsp;</td>
+	</tr>
+	<c:forEach items="${actionBean.medicationIDs}" var="id3" varStatus="loop3">
+		<tr>
+			<td>${actionBean.medicationNames[ loop3.index ]}</td>
+			<td>${actionBean.medicationDescriptions[ loop3.index ]}</td>
+			<td>${actionBean.medicationRefillDates[ loop3.index ]}</td>
+			<td>${actionBean.medicationExpirationDates[ loop3.index ]}</td>
+			<td>${id3}</td>
+		</tr>
+	</c:forEach>
+</table>
 
 <p>&nbsp;</p>
-<h2>DOCTORS</h2>
+<h2>TESTS</h2>
+<a href="editTests.jsp">Edit Tests</a>
 <table border="1">
-<tr>
-	<td><b>DATE</b></td>
-	<td><b>NAME</b></td>
-	<td>SPECIALTY</td>
-	<td>&nbsp;</td>
-</tr>
-<tr>
-	<td>03/08/09</td>
-	<td>Dr. No</td>
-	<td>Pissing off 007</td>
-	<td>VIEW | EDIT | DELETE</td>
-</tr>
+	<tr>
+		<td><b>Name</b></td>
+		<td><b>Description</b></td>
+		<td><b>Results</b></td>
+		<td><b>Date</b></td>
+		<td>&nbsp;</td>
+	</tr>
+	<c:forEach items="${actionBean.testIDs}" var="id4" varStatus="loop4">
+		<tr>
+			<td>${actionBean.testNames[ loop4.index ]}</td>
+			<td>${actionBean.testDescriptions[ loop4.index ]}</td>
+			<td>${actionBean.testResults[ loop4.index ]}</td>
+			<td>${actionBean.testDates[ loop4.index ]}</td>
+			<td>${id4}</td>
+		</tr>
+	</c:forEach>
 </table>
-
-<a href="editDoctorInfo.jsp"> Edit Doctors </a>
-
-
 
 <!-- ********************* STOP HERE !!!! ********************* -->
 
