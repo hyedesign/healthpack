@@ -46,6 +46,9 @@ public class ChangeDocForPatientBean implements ActionBean {
 		}
 	}
 
+	/*
+	 * CONSTRUCTOR
+	 */
 	public ChangeDocForPatientBean() {
 		allDoctorIds = UserSQL.getDoctorList();
 
@@ -60,7 +63,7 @@ public class ChangeDocForPatientBean implements ActionBean {
 		}
 	}
 
-	public ActionBeanContext context;
+	public HPActionBeanContext context;
 	private ArrayList<String> allDoctorIds;
 	private int docId = 0;
 
@@ -73,7 +76,6 @@ public class ChangeDocForPatientBean implements ActionBean {
 	}
 
 	private List<Doctors> allDoctors = new ArrayList<Doctors>();
-	private int patientId;
 
 	// GETTERS AND SETTERS
 
@@ -93,13 +95,6 @@ public class ChangeDocForPatientBean implements ActionBean {
 		this.allDoctors = allDoctors;
 	}
 
-	public int getPatientId() {
-		return patientId;
-	}
-
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
-	}
 	public HPActionBeanContext getContext() {
 		return this.context;
 	}
@@ -113,10 +108,11 @@ public class ChangeDocForPatientBean implements ActionBean {
 	}
 
 	public Resolution update() {
-		System.out.println("attempting to change patient: " + patientId
+		System.out.println("attempting to change patient: " + context.getPatientId()
 				+ " to doctor: " + docId);
-		PatientSQL.updatePatientDoctor(patientId, docId);
-		return new ForwardResolution("patientHome.jsp");
+		PatientSQL.updatePatientDoctor(context.getPatientId(), docId);
+		
+		return new ForwardResolution("patientList.jsp");
 	}
 
 }
