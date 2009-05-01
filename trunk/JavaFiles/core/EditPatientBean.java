@@ -38,8 +38,8 @@ public class EditPatientBean implements ActionBean {
 	@Validate(required=false, maxlength=30) private String insurance= "" ;
 	@Validate(required=false, maxlength=30) private String insuranceID = "";
 	@Validate(required=false, maxlength=11) private String SSN= "" ;
-	@Validate(required=true, maxlength=2, minlength=2) private int birthMonth;
-	@Validate(required=true, maxlength=2, minlength=2)  private int birthDay;
+	@Validate(required=true, maxlength=2, minlength=1) private int birthMonth;
+	@Validate(required=true, maxlength=2, minlength=1)  private int birthDay;
 	@Validate(required=true, maxlength=4, minlength=4) private int birthYear;
 		
 	//getters and setters
