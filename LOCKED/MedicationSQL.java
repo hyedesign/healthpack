@@ -191,7 +191,7 @@ public class MedicationSQL {
 		try {
 			// construct and execute the SQL call, retrieve the results
 			Statement statement = dba.connection.createStatement ();
-			ResultSet results = statement.executeQuery ("SELECT * FROM medications WHERE medicationid='"+medicationID+"'");
+			ResultSet results = statement.executeQuery ("SELECT * FROM medications WHERE medicationid=" + medicationID);
 			
 			// attempt to load the user from the ResultSet
 			boolean successfulLoad = loadMedication(results);
@@ -241,23 +241,15 @@ public class MedicationSQL {
 		}
 	}
 	
-	public void updateMedication(int id, String medicationName, Date expire, Date refill, String descript)
+	public static void updateMedication(int medicationid, int patientid, String medicationName, Date expire, Date refill, String descript)
 	{	
+		DBAccess dba = new DBAccess();
 		dba.connect(); // connect to the database
 		try
 		{
 			Statement statement = dba.connection.createStatement();
-			if(descript == null)
-			{
-				statement.executeUpdate("UPDATE medications SET medicationname='"+medicationName+"', medicationexpirationsdate='"+expire+"', medicationrefilldate='"+refill+"', " 
-						+ " WHERE medicationid='"+id+"'");
-			}
-			else
-			{
-				statement.executeUpdate("UPDATE medications SET medicationname='"+medicationName+
-						"', medicationdescription='"+descript+"' WHERE medicationid='"
-						+id+"'");
-			}
+			String s = "UPDATE medications SET medicationname='"+medicationName+"', medicationdescription='"+descript+"' " + " WHERE medicationid=" + medicationid;
+			statement.executeUpdate(s);
 			statement.close();
 			dba.disconnect();
 		}
