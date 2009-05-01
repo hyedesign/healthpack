@@ -18,8 +18,9 @@ import net.sourceforge.stripes.action.Resolution;
 
 public class DeleteTestBean implements ActionBean
 {
-	//instance varialbes
+	//instance variables
 	private ActionBeanContext context;
+	private int testID;
 	
 	//getters and setters
 	public ActionBeanContext getContext() { return context; }
@@ -34,8 +35,7 @@ public class DeleteTestBean implements ActionBean
     public Resolution submit()
 	{
     	//deletes
-    	int testID = 1;
-    	EditTestSQL.deleteTest(testID);
+    	EditTestSQL.deleteTest(this.testID);
     	
     	//goes back to home page
 		return new ForwardResolution("patientHome.jsp");
