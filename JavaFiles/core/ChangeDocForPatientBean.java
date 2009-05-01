@@ -104,7 +104,7 @@ public class ChangeDocForPatientBean implements ActionBean {
 
 	@DefaultHandler
 	public Resolution cancel() {
-		return new ForwardResolution("patientHome.jsp");
+		return new ForwardResolution("patientList.jsp");
 	}
 
 	public Resolution update() {
