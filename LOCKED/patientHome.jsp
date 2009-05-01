@@ -134,7 +134,7 @@
 
 <p>&nbsp;</p>
 <h2>APPOINTMENTS</h2>
-<a href="editAppointment.jsp">Edit Appointments</a>
+<a href="addAppointment.jsp">Add New Appointment</a>
 <table border="1">
 	<tr>
 		<td><b>Date</b></td>
@@ -153,7 +153,7 @@
 
 <p>&nbsp;</p>
 <h2>ALLERGIES</h2>
-<a href="editAllergies.jsp">Edit Allergies</a>
+<a href="addAllergies.jsp">Add New Allergy</a>
 <table border="1">
 	<tr>
 		<td><b>Name</b></td>
@@ -171,7 +171,7 @@
 
 <p>&nbsp;</p>
 <h2>MEDICATIONS</h2>
-<a href="editMedications.jsp">Edit Medications</a>
+<a href="addMedications.jsp">Add New Medication</a>
 <table border="1">
 	<tr>
 		<td><b>Name</b></td>
@@ -193,7 +193,7 @@
 
 <p>&nbsp;</p>
 <h2>TESTS</h2>
-<a href="editTests.jsp">Edit Tests</a>
+<a href="addTest.jsp">Add New Test</a>
 <table border="1">
 	<tr>
 		<td><b>Name</b></td>
