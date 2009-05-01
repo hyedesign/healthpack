@@ -32,7 +32,6 @@
 <stripes:form beanclass="core.AddTestBean" focus="">
 	<stripes:errors/>
 	<table>
-	<div><input type="hidden" name="patientID" value="<%=8%>" /></div>
 		<tr>
 			<td>Test Name:</td>
 			<td><stripes:text name="testName" size="20" /></td>
