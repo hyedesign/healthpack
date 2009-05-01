@@ -53,13 +53,10 @@ public class ChangeDocForPatientBean implements ActionBean {
 		allDoctorIds = UserSQL.getDoctorList();
 
 		// populates all of their names
-		System.out.println("ChangeDocForPatientBean: IM HERE !!!!!!!");
 		for (int i = 0; i < allDoctorIds.size(); i++) {
 			Doctors d = new Doctors(allDoctorIds.get(i), UserSQL
 					.getUserFirstAndLastName(allDoctorIds.get(i)));
 			allDoctors.add(d);
-			System.out.println("doctor name: " + allDoctors.get(i).getName()
-					+ " doctor id: " + allDoctors.get(i).getId());
 		}
 	}
 
@@ -108,8 +105,6 @@ public class ChangeDocForPatientBean implements ActionBean {
 	}
 
 	public Resolution update() {
-		System.out.println("attempting to change patient: " + context.getPatientId()
-				+ " to doctor: " + docId);
 		PatientSQL.updatePatientDoctor(context.getPatientId(), docId);
 		
 		return new ForwardResolution("patientList.jsp");

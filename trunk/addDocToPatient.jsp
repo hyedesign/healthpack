@@ -42,11 +42,6 @@ possible for the doctor to see your patient's data</p>
 	<stripes:submit name="cancel" value="Cancel" />
 </stripes:form>
 
-
-
-
-
-
 </div>
 <div id="footer"> 
 <%@include file="FooterInc.jsp" %>
