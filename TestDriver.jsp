@@ -32,7 +32,6 @@
 <h1>Test Manager</h1>
 
 <stripes:form action="addTest.jsp" focus="">
-	<input type="hidden" name="testID" value="<%=2%>" />
 	<stripes:submit name="submit" value="Add" />
 </stripes:form> 
 
