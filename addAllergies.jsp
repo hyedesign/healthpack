@@ -1,10 +1,11 @@
 <!-- Jam Packed Inventions
   -- Healthpack v0.3
   -- File: addAllergies
-  -- Date Modified: 04/26/09 
+  -- Date Created: 04/24/09 
   -- Author: Taylor Evans
   -- Description: This file allows the user add 
-  -- his or her's allergies   
+  -- his or her's allergies
+  -- Last Edited by: Taylor Evans    
   -->
   
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
@@ -50,12 +51,11 @@
 		</tr>
 		<tr>
 			<td><stripes:submit name="submit" value="Submit"/>
-			    <stripes:reset name ="reset" value="Reset"/></td>
 		</tr>
 	</table>
 </stripes:form>
 
-<p><a href="patientHome.jsp"> Return </a> </p>
+<p><a href="patientList.jsp"> Return to List </a> </p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>

@@ -26,15 +26,19 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 
 public class AllergiesBean implements ActionBean {
 	//private data members
-    private ActionBeanContext context;
+    private HPActionBeanContext context;
+    private int allergyID;
     @Validate(required=true, maxlength=30) private String allergyName;
     @Validate(required=false, maxlength=255) private String description;
 
     //GETTERS AND SETTERS
-    public ActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+    public HPActionBeanContext getContext() { return context; }
+    public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext)context; }
+    
+    public int getAllergyID() {		return allergyID;	}
+	public void setAllergyID(int allergyID) {		this.allergyID = allergyID; }
 
-    public String getAllergyName() { return allergyName; }
+	public String getAllergyName() { return allergyName; }
     public void setAllergyName(String allergyName) { this.allergyName = allergyName; }
     
 	public String getDescription() { return description; }
@@ -49,9 +53,8 @@ public class AllergiesBean implements ActionBean {
      */
     @DefaultHandler
     public Resolution submit() {
-    	int allergyID = 4;
     	if(allergyID == 0)
-    		AllergiesSQL.addAllergies(allergyName, description);
+    		AllergiesSQL.addAllergies(context.getPatientId(), allergyName, description);
     	else
     	{
     		AllergiesSQL temp = new AllergiesSQL();
