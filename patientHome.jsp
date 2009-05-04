@@ -140,7 +140,9 @@
 
 <p>&nbsp;</p>
 <h2>APPOINTMENTS</h2>
-<a href="addAppointment.jsp">Add New Appointment</a>
+<c:if test="${!sessionScope.userisdoctor}">
+	<a href="addAppointment.jsp">Add New Appointment</a>
+</c:if>
 <table border="1">
 	<tr>
 		<td><b>Date</b></td>
@@ -166,7 +168,9 @@
 
 <p>&nbsp;</p>
 <h2>ALLERGIES</h2>
-<a href="addAllergies.jsp">Add New Allergy</a>
+<c:if test="${!sessionScope.userisdoctor}">
+	<a href="addAllergies.jsp">Add New Allergy</a>
+</c:if>
 <table border="1">
 	<tr>
 		<td><b>Name</b></td>
@@ -191,7 +195,9 @@
 
 <p>&nbsp;</p>
 <h2>MEDICATIONS</h2>
-<a href="addMedications.jsp">Add New Medication</a>
+<c:if test="${!sessionScope.userisdoctor}">
+	<a href="addMedications.jsp">Add New Medication</a>
+</c:if>
 <table border="1">
 	<tr>
 		<td><b>Name</b></td>
@@ -220,7 +226,9 @@
 
 <p>&nbsp;</p>
 <h2>TESTS</h2>
-<a href="addTest.jsp">Add New Test</a>
+<c:if test="${!sessionScope.userisdoctor}">
+	<a href="addTest.jsp">Add New Test</a>
+</c:if>
 <table border="1">
 	<tr>
 		<td><b>Name</b></td>
