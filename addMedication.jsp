@@ -1,5 +1,5 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.2
+<!-- Jam Packed Inventions -->
+<!-- Healthpack v0.2
   -- File: addMedications
   -- Date Modified: 04/24/09 
   -- Author: Jon Conti-Vock
@@ -9,6 +9,8 @@
   
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -20,7 +22,7 @@
 <body>
 <div id="container">
 <div id="header"></div>
-<div id="message">UserName</div>
+<div id="message">${sessionScope.username}</div>
 <div id="navigation">
   <%@include file="LinksInc.jsp" %>
 </div>
@@ -30,6 +32,13 @@
 <div id="text">
 
 <!-- ************ THIS IS YOUR AREA.... GO CRAZY HERE ************ -->
+<c:if test="${empty sessionScope.userid}">
+	<jsp:forward page="login.jsp" />
+</c:if>
+<c:if test="${sessionScope.userisdoctor}">
+	<jsp:forward page="login.jsp" />
+</c:if>
+
 <h1>Add Medication</h1>
 
 <div></div>

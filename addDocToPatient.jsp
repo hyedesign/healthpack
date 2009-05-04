@@ -21,13 +21,21 @@
 
 <div id="container">
 <div id="header"></div>
-<div id="message">UserName</div>
+<div id="message">${sessionScope.username}</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation"> 
    <%@include file="LinksInc.jsp" %>
 </div>
 <div id="content">
 <div id="text">
+
+<c:if test="${empty sessionScope.userid}">
+	<jsp:forward page="login.jsp" />
+</c:if>
+<c:if test="${sessionScope.userisdoctor}">
+	<jsp:forward page="login.jsp" />
+</c:if>
+
 <h1>Patient Doctor</h1>
 <p>Please Choose a doctor from the drop down list. This will make it 
 possible for the doctor to see your patient's data</p>
