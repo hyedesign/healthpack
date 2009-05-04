@@ -23,6 +23,7 @@ import net.sourceforge.stripes.validation.ValidationMethod;
 
 public class AddDocNoteBean implements ActionBean {
     private HPActionBeanContext context;
+    
     @Validate(required=false, maxlength=255) private String description;
 
     public HPActionBeanContext getContext() { return context; }
@@ -33,13 +34,10 @@ public class AddDocNoteBean implements ActionBean {
     
     @DefaultHandler
     public Resolution submit() {
-    	int doctorpatientid = 7;
-    	int patientid = 4;
-		int userid = 10;
-//    	if(doctorpatientid == 0)
-    	DocNoteSQL.addDocNote(userid, patientid, description);
+
+    	DocNoteSQL.updateDocNote(context.getPatientId(), description);
     		
-        return new ForwardResolution("patientHome.jsp");
+        return new ForwardResolution("patientList.jsp");
     }
     @ValidationMethod(on="submit")
     public void checkSpecialChars(ValidationErrors errors) 
