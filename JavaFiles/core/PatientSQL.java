@@ -333,6 +333,38 @@ public class PatientSQL {
 		}
 	}
 	
+	public static ArrayList<Integer> lookupDoctorsPatients(int UserId) {
+		DBAccess dba = new DBAccess();
+		dba.connect(); // connect to the database
+		
+		try {
+			ArrayList<Integer> arrayOfIds = new ArrayList<Integer>();
+			
+			// construct and execute the SQL call, retrieve the results
+			Statement statement = dba.connection.createStatement ();
+			ResultSet results = statement.executeQuery ("SELECT patientid FROM doctorpatient WHERE userid='"+UserId+"'");
+			
+			// attempt to load the patient from the ResultSet
+			while (results.next()){
+				arrayOfIds.add(results.getInt("patientid"));
+
+			}
+			
+			// close connections
+			results.close();
+			statement.close();
+			dba.disconnect();
+			//return true if user was found
+			return arrayOfIds;
+			
+		} catch (SQLException e) {
+            System.err.println ("Error in lookupPatientsByUserID (Patient.java)");
+            System.err.println (e.toString());
+			dba.disconnect();
+            return null;
+		}
+	}
+	
 	public static String lookupPatientNamebyID(int id){
 		String returnString;
 		DBAccess dba_s = new DBAccess();
