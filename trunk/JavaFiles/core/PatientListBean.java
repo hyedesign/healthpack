@@ -28,7 +28,12 @@ public class PatientListBean {
 		return patientIds;
 	}
 	public ArrayList<String> getPatientNames() {
-		patientIds = PatientSQL.lookupPatientsByUserID(userId);
+		HPActionBeanContext context = new HPActionBeanContext();
+		
+		if (context.getUserIsDoctor()) {
+			patientIds = PatientSQL.lookupDoctorsPatients(userId);
+		}
+		else patientIds = PatientSQL.lookupPatientsByUserID(userId);
 		for (Integer i : patientIds)
 			patientNames.add(PatientSQL.lookupPatientNamebyID(i));
 		return patientNames;
