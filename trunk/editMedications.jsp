@@ -37,7 +37,7 @@
 <div></div>
 <stripes:form beanclass="core.AddMedicationBean" focus="">
 <stripes:errors/>
-<stripes:hidden name="medicationid" value="${actionBean.medicationid}"/>
+<stripes:hidden name="medicationId" value="${actionBean.medicationId}"/>
 <table>
 		<tr>
 			<td>Medication Name:</td>

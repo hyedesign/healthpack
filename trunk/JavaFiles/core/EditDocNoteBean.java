@@ -17,33 +17,33 @@ import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.validation.Validate;
 
-
 public class EditDocNoteBean implements ActionBean {
     private ActionBeanContext context;
-    //@Validate(required=false) private int userID;
-    //@Validate(required=false) private int patientID;
+    private int patientID;
     @Validate(required=false, maxlength=255) private String description;
 
     public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
-
-//    public int getAllergyID() {	return allergyID;	}
-//	public void setAllergyID(int allergyID) {this.allergyID = allergyID; }
 	
-	//public int getPatientID() {	return patientID;	}
-	//public void setPatientID(int patientID) {	this.patientID = patientID;	}
+	public int getPatientID() {	return patientID;	}
+	public void setPatientID(int patientID) {	this.patientID = patientID;	}
     
 	public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
     
+    @ValidationMethod(on="submit")
+    public void dateFormat(ValidationErrors errors) 
+    {    	
+    	if (hasSpecialCharacters(description))
+	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    }
+    
     @DefaultHandler
     public Resolution submit() {
-    	int doctorpatientid = 7;
+    	patientID = context.getPatientID();
     	DocNoteSQL temp = new DocNoteSQL();
-    	boolean loaded = temp.lookupDocNote(doctorpatientid);
+    	boolean loaded = temp.lookupDocNote(patientID);
     	if(loaded == true){
-//    		userid = temp.getUserID();         taken from session
-//    		patientid = temp.getPatientID();   taken from session
     		description = temp.getDescription();}
         return new ForwardResolution("editDocNote.jsp");
     }
