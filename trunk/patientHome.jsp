@@ -198,7 +198,7 @@
 <p>&nbsp;</p>
 <h2>MEDICATIONS</h2>
 <c:if test="${!sessionScope.userisdoctor}">
-	<a href="addMedications.jsp">Add New Medication</a>
+	<a href="addMedication.jsp">Add New Medication</a>
 </c:if>
 <table border="1">
 	<tr>
@@ -247,7 +247,7 @@
 			<td>${actionBean.testDates[ loop4.index ]}</td>
 			<td>
 				<c:if test="${!sessionScope.userisdoctor}">
-					<stripes:form beanclass="core.EditTestBean">
+					<stripes:form beanclass="core.GetTestBean">
 						<stripes:hidden name="testID" value="${id4}"/>
 						<stripes:submit name="submit" value="Edit"/>
 					</stripes:form>
