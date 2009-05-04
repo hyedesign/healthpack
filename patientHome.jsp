@@ -42,9 +42,16 @@
 <h1>Patient Info</h1>
 <h2>${actionBean.patientFirstName} ${actionBean.patientLastName}</h2>
 
-<c:if test="${!sessionScope.userisdoctor}">
-	<a href="editPatient.jsp">Edit Patient Information</a>
-</c:if>
+<c:choose>
+	<c:when test="${!sessionScope.userisdoctor}">
+		<a href="editPatient.jsp">Edit Patient Information</a><br/>
+		<a href="addDocToPatient.jsp">Change Patient's Doctor</a><br/>
+	</c:when>
+	<c:otherwise>
+		<a href="EditDocNoteBean">Change This Patient's Note</a><br/>
+	</c:otherwise>
+</c:choose>
+
 <table border="1">
 	<tr>
 		<td colspan="2"><b><u>REMINDERS:</u></b></td>
@@ -130,7 +137,6 @@
 		<td colspan="2">${actionBean.doctorNote}</td>
 	</tr>
 </table>
-<a href="addDocToPatient.jsp">Change Patient's Doctor</a>
 
 <p>&nbsp;</p>
 <h2>APPOINTMENTS</h2>
