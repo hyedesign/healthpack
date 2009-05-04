@@ -1,5 +1,5 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.3
+<!-- Jam Packed Inventions -->
+<!-- Healthpack v0.3
   -- File: addAllergies
   -- Date Created: 04/24/09 
   -- Author: Taylor Evans
@@ -50,7 +50,7 @@
 			<td><stripes:textarea name="description" /></td>
 		</tr>
 		<tr>
-			<td><stripes:submit name="submit" value="Submit"/>
+			<td><stripes:submit name="submit" value="Submit"/></td>
 		</tr>
 	</table>
 </stripes:form>
