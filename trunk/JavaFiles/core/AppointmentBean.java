@@ -27,9 +27,10 @@ import net.sourceforge.stripes.validation.ValidationErrors;
 import net.sourceforge.stripes.validation.ValidationMethod;
 
 public class AppointmentBean implements ActionBean {
-    private ActionBeanContext context;
+    private HPActionBeanContext context;
 
     //Initial Stripes validation methods
+    int appointmentID;
     @Validate(required=true, maxlength=2) private int appointmentMonth;
     @Validate(required=true, maxlength=2) private int appointmentDay;
     @Validate(required=true, maxlength=4) private int appointmentYear;
@@ -37,10 +38,13 @@ public class AppointmentBean implements ActionBean {
 	@Validate(required=false)private boolean reminder;
 	
 	//GETTERS AND SETTERS
-    public ActionBeanContext getContext() { return context; }
-    public void setContext(ActionBeanContext context) { this.context = context; }
+    public HPActionBeanContext getContext() { return context; }
+    public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
     
-    public boolean isReminder() { return reminder;	}
+    public int getAppointmentID(){return appointmentID;}
+    public void setAppointmentID(int appointmentID) { this.appointmentID = appointmentID;}
+    
+    public boolean getReminder() { return reminder;	}
 	public void setReminder(boolean reminder) {	this.reminder = reminder;	}
 
 	public int getAppointmentDay() { return appointmentDay; }
@@ -101,19 +105,19 @@ public class AppointmentBean implements ActionBean {
      */
     @DefaultHandler
     public Resolution submit() {
-    	int appointmentID = 4;
     	Calendar cal = Calendar.getInstance();
 		cal.set(this.appointmentYear, this.appointmentMonth-1, this.appointmentDay);
 		Date date = new Date(cal.getTime().getTime());
+		System.out.println(reminder);
     	if(appointmentID == 0)
     	{
-    		AppointmentSQL.addAppointment(date, description, reminder);
+    		AppointmentSQL.addAppointment(context.getPatientId(), date, description, reminder);
     	}
     	else
     	{
     		AppointmentSQL temp = new AppointmentSQL();
     		temp.updateAppointment(appointmentID, date, description, reminder);
     	}
-    	return new ForwardResolution("patientHome.jsp");
+    	return new ForwardResolution("patientList.jsp");
     }
 }

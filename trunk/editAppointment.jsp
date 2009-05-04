@@ -1,5 +1,5 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.2
+<!-- Jam Packed Inventions -->
+<!-- Healthpack v0.2
   -- File: editAppointment
   -- Date Modified: 04/19/09 
   -- Author: Han Dong
@@ -41,6 +41,7 @@
 <stripes:form beanclass="core.AppointmentBean" focus="">
 <stripes:errors/>
 <table>
+	<stripes:hidden name="appointmentID" value="${actionBean.appointmentID }"/>
 		<tr>
 			<td>Appointment Date</td>
 		</tr>
@@ -55,7 +56,7 @@
 			<td><stripes:textarea name="description" value="${actionBean.description}"/></td>
 		</tr>
 		<tr>
-			<td colspan="3"><stripes:checkbox name="reminder" value="${actionBean.reminder}"/> Would you like to be reminded of this appointment?</td>
+			<td colspan="3"><stripes:checkbox name="reminder" value="true" checked="${actionBean.reminder }"/> Would you like to be reminded of this appointment?</td>
 		</tr>
 		<tr>
 			<td><stripes:submit name="submit" value="Submit"/>
@@ -63,8 +64,7 @@
 		</tr>
 	</table>
 </stripes:form>
-
-<p><a href="patientHome.jsp"> Return </a> </p>
+<p><a href="patientList.jsp"> Return to List </a> </p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>

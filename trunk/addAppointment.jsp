@@ -1,5 +1,5 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.2
+<!-- Jam Packed Inventions -->
+<!-- Healthpack v0.2
   -- File: addAppointment
   -- Date Modified: 04/27/09 
   -- Author: Taylor Evans
@@ -61,7 +61,7 @@
 	</table>
 </stripes:form>
 
-<p><a href="patientHome.jsp"> Return </a> </p>
+<p><a href="patientList.jsp"> Return to List</a> </p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
