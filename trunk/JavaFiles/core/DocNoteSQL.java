@@ -141,7 +141,7 @@ public class DocNoteSQL
 			if (description2 != null)
 			{
 				statement.executeUpdate("UPDATE doctorpatient SET notedescription='"+description2+"' " +
-						"WHERE doctorpatientid='"+id+"'");
+						"WHERE patientid='"+id+"'");
 			}
 			statement.close();
 			dba.disconnect();

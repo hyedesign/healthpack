@@ -48,7 +48,9 @@
 		<a href="addDocToPatient.jsp">Change Patient's Doctor</a><br/>
 	</c:when>
 	<c:otherwise>
-		<a href="EditDocNoteBean">Change This Patient's Note</a><br/>
+		<stripes:form beanclass="core.EditDocNoteBean">
+			<stripes:submit name="submit" value="Edit This Patient's Note"/>
+		</stripes:form>
 	</c:otherwise>
 </c:choose>
 
