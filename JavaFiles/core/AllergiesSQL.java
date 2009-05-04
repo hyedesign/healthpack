@@ -157,6 +157,8 @@ public class AllergiesSQL
 		dba.connect(); // connect to the database
 		try
 		{
+			descript = descript.replaceAll("\\'", "''");
+			allergy = allergy.replaceAll("\\'", "''");
 			Statement statement = dba.connection.createStatement();
 			statement.executeUpdate("UPDATE allergies SET allergy_name='"+allergy+
 						"', allergy_description='"+descript+"' WHERE allergyid='"
