@@ -84,7 +84,7 @@ public class DocNoteSQL
 		try {
 			// construct and execute the SQL call, retrieve the results
 			Statement statement = dba.connection.createStatement ();
-			ResultSet results = statement.executeQuery ("SELECT * FROM doctorpatient WHERE doctorpatientid='"+id+"'");
+			ResultSet results = statement.executeQuery ("SELECT * FROM doctorpatient WHERE patientid='"+id+"'");
 			
 			// attempt to load the user from the ResultSet
 			boolean successfulLoad = loadDocNote(results);
