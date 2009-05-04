@@ -61,7 +61,7 @@ public class AllergiesBean implements ActionBean {
     		temp.updateAllergy(allergyID, allergyName, description);
     	}
     		
-        return new ForwardResolution("patientHome.jsp");
+        return new ForwardResolution("patientList.jsp");
     }
     
     /**
