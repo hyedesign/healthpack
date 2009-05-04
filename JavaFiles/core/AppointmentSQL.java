@@ -79,13 +79,12 @@ public class AppointmentSQL {
 	 * 
 	 * Taylor Evans
 	 */
-	public static void addAppointment(Date date, String descript, boolean remind)
+	public static void addAppointment(int pID, Date date, String descript, boolean remind)
 	{
 		DBAccess dba_s = new DBAccess();
 		dba_s.connect(); // connect to the database
 		try {
 			// construct and execute the SQL call, retrieve the results
-			int pID = 9;
 			String remember = "0";
 			if(remind == true)
 				remember = "1";
@@ -163,9 +162,12 @@ public class AppointmentSQL {
 				date = rs.getDate("appointmentdate");
 				description = rs.getString("appointmentdescription");
 				int bool = rs.getInt("appointmentreminder");
+				System.out.println(bool);
 				if(bool == 0)
+				{
 					reminder = false;
-				else reminder = true;
+				}
+					else reminder = true;
 				return true;
 			}
 			// the resultset is empty, no data loaded
@@ -197,6 +199,7 @@ public class AppointmentSQL {
 			String remember = "0";
 			if(remind == true)
 				remember = "1";
+			descript = descript.replaceAll("\\'", "''");
 			Statement statement = dba.connection.createStatement();
 			if(description == null)
 			{
@@ -207,8 +210,8 @@ public class AppointmentSQL {
 			{
 				descript = descript.replaceAll("\\'", "''");
 				statement.executeUpdate("UPDATE appointments SET appointmentdate='"+date+
-						"', appointmentdescription='"+descript+"', appointmentreminder='"+remember+
-						"' WHERE appointmentid='" +id+"'");
+						"', appointmentdescription='"+descript+"', appointmentreminder="+remember+
+						" WHERE appointmentid='" +id+"'");
 			}
 			statement.close();
 			dba.disconnect();

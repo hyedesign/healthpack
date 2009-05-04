@@ -26,7 +26,7 @@ public class EditAppointmentBean implements ActionBean {
  
 	//Private data members
 	private ActionBeanContext context;
-
+	int appointmentID;
     @Validate(required=false) private int appointmentMonth;
     @Validate(required=false) private int appointmentDay;
     @Validate(required=false) private int appointmentYear;
@@ -37,7 +37,10 @@ public class EditAppointmentBean implements ActionBean {
     public ActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = context; }
     
-    public boolean isReminder() {	return reminder;	}
+    public int getAppointmentID(){return appointmentID;}
+    public void setAppointmentID(int appointmentID) { this.appointmentID = appointmentID;}
+    
+    public boolean getReminder() {	return reminder;	}
 	public void setReminder(boolean reminder) {	this.reminder = reminder;	}
 	
 	public int getAppointmentDay() {	return appointmentDay;	}
@@ -61,7 +64,6 @@ public class EditAppointmentBean implements ActionBean {
      */
     @DefaultHandler
     public Resolution submit() {
-    	int appointmentID = 4;
     	AppointmentSQL temp = new AppointmentSQL();
     	boolean loaded = temp.lookupAppointment(appointmentID);
     	if(loaded == true){	
@@ -75,6 +77,7 @@ public class EditAppointmentBean implements ActionBean {
     		appointmentDay = Integer.parseInt(s.substring(index + 1, s.length()));
     		description = temp.getDescription();
     		reminder = temp.isReminder();
+    		System.out.println(reminder);
     	}
         return new ForwardResolution("editAppointment.jsp");
     }
