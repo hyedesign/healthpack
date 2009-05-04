@@ -71,12 +71,16 @@ public class AddTestBean implements ActionBean
 		cal.set(this.testYear, this.testMonth-1, this.testDay);
 		this.testDate = new Date(cal.getTime().getTime());
 		
+		if(this.testDescription == null)
+		{
+			this.testDescription = "";
+		}
 		//calls static addTest method to add new entry
 		EditTestSQL.addTest(this.testName, this.testResult,
 				this.testDescription, this.testDate, context.getPatientId());
 		
 		//goes back to home page
-		return new ForwardResolution("patientHome.jsp");
+		return new ForwardResolution("patientList.jsp");
 	}
     
 	/**
@@ -90,7 +94,6 @@ public class AddTestBean implements ActionBean
     	//escapes all apostrophes for the SQL database
     	this.testName = this.testName.replaceAll("\\'", "''");
     	this.testResult = this.testResult.replaceAll("\\'", "''");
-    	this.testDescription = this.testDescription.replaceAll("\\'", "''");
     	
     	//checks for special characters
     	if(hasSpecialCharacters(this.testName))
@@ -103,10 +106,17 @@ public class AddTestBean implements ActionBean
 			errors.add("Result", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
 		}
     	
-    	if(hasSpecialCharacters(this.testDescription))
-		{
-			errors.add("testDescription", new SimpleError("These characters are not allowed in Description: <> () [] \\ / | = + * @ $ # ^ : ; "));
-		}
+    	if(this.testDescription == null)
+    	{
+    	}
+    	else
+    	{
+    		this.testDescription = this.testDescription.replaceAll("\\'", "''");
+    		if(hasSpecialCharacters(this.testDescription))
+    		{
+    			errors.add("testDescription", new SimpleError("These characters are not allowed in Description: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    		}
+    	}
     	
     	
     	//checks the date to and make sure its valid
