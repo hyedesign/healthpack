@@ -1,5 +1,5 @@
-<!-- Jam Packed Inventions
-  -- Healthpack
+<!-- Jam Packed Inventions -->
+<!-- Healthpack
   -- File: editTest
   -- Date Modified: 04/27/09 
   -- Author: Han Dong
