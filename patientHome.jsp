@@ -145,7 +145,14 @@
 		<tr>
 			<td>${actionBean.appointmentDates[ loop1.index ]}</td>
 			<td>${actionBean.appointmentDescriptions[ loop1.index ]}</td>
-			<td>${id1}</td>
+			<td>
+				<c:if test="${!sessionScope.userisdoctor}">
+					<stripes:form beanclass="core.EditAppointmentBean">
+						<stripes:hidden name="appointmentID" value="${id1}"/>
+						<stripes:submit name="submit" value="Edit"/>
+					</stripes:form>
+				</c:if>
+			</td>
 		</tr>
 	</c:forEach>
 </table>
@@ -168,11 +175,10 @@
 				<c:if test="${!sessionScope.userisdoctor}">
 					<stripes:form beanclass="core.EditAllergyBean">
 						<stripes:hidden name="allergyID" value="${id2}"/>
-						<stripes:submit name="submit" value="edit"/>
+						<stripes:submit name="submit" value="Edit"/>
 					</stripes:form>
 				</c:if>
 			</td>
-			<td>${id2}</td>
 		</tr>
 	</c:forEach>
 </table>
@@ -194,7 +200,14 @@
 			<td>${actionBean.medicationDescriptions[ loop3.index ]}</td>
 			<td>${actionBean.medicationRefillDates[ loop3.index ]}</td>
 			<td>${actionBean.medicationExpirationDates[ loop3.index ]}</td>
-			<td>${id3}</td>
+			<td>
+				<c:if test="${!sessionScope.userisdoctor}">
+					<stripes:form beanclass="core.EditMedicationBean">
+						<stripes:hidden name="medicationId" value="${id3}"/>
+						<stripes:submit name="submit" value="Edit"/>
+					</stripes:form>
+				</c:if>
+			</td>
 		</tr>
 	</c:forEach>
 </table>
@@ -216,7 +229,14 @@
 			<td>${actionBean.testDescriptions[ loop4.index ]}</td>
 			<td>${actionBean.testResults[ loop4.index ]}</td>
 			<td>${actionBean.testDates[ loop4.index ]}</td>
-			<td>${id4}</td>
+			<td>
+				<c:if test="${!sessionScope.userisdoctor}">
+					<stripes:form beanclass="core.EditTestBean">
+						<stripes:hidden name="testID" value="${id4}"/>
+						<stripes:submit name="submit" value="Edit"/>
+					</stripes:form>
+				</c:if>
+			</td>
 		</tr>
 	</c:forEach>
 </table>
