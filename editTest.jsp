@@ -7,6 +7,8 @@
   -->
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
@@ -19,7 +21,7 @@
 <body>
 <div id="container">
 <div id="header"></div>
-<div id="message">UserName</div>
+<div id="message">${sessionScope.username}</div>
 <!----------------------- NAVIGATION  ----------------------->
 <div id="navigation">    
    <%@include file="LinksInc.jsp" %>
@@ -27,6 +29,14 @@
 
 <div id="content">
 <div id="text">
+
+<c:if test="${empty sessionScope.userid}">
+	<jsp:forward page="login.jsp" />
+</c:if>
+<c:if test="${sessionScope.userisdoctor}">
+	<jsp:forward page="login.jsp" />
+</c:if>
+
 <h1>Edit Test</h1>
 <p>Please enter test information</p>
 <stripes:form beanclass="core.EditTestBean" focus="">
