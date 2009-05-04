@@ -167,7 +167,7 @@
 			<td>
 				<c:if test="${!sessionScope.userisdoctor}">
 					<stripes:form beanclass="core.EditAllergyBean">
-						<stripes:hidden name="allergyId" value="${id2}"/>
+						<stripes:hidden name="allergyID" value="${id2}"/>
 						<stripes:submit name="submit" value="edit"/>
 					</stripes:form>
 				</c:if>
