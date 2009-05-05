@@ -43,9 +43,9 @@ public class DownloadServlet extends HttpServlet
 		res.setContentType("application/octet-stream");
 		res.setHeader("Content-Disposition","attachment;filename=PatientInfo.csv");
 
-		//HttpSession session = req.getSession();
-		//int userID = Integer.parseInt(session.getAttribute("userid").toString());
-		int userID = 1;
+		HttpSession session = req.getSession();
+		int userID = Integer.parseInt(session.getAttribute("userid").toString());
+		//int userID = 1;
 		
 		//tries to output file to user screen
 		try 
