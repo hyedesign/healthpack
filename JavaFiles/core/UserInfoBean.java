@@ -57,8 +57,8 @@ public class UserInfoBean implements ActionBean
 	@DefaultHandler
     public Resolution submit() 
 	{
-		new UserInfoSQL(this.firstName, this.lastName, this.email,
-				this.phone, this.description, this.password, this.password2).updateUserInfo(context.getUserId());
+		UserSQL.updateUserInfo(this.firstName, this.lastName, this.email,
+				this.phone, this.description, this.password, this.password2, context.getUserId());
 
         return new ForwardResolution("userHomepage.jsp");
     }
