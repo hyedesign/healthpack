@@ -34,30 +34,6 @@ public class EditDocNoteBean implements ActionBean {
 	public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    /*
-    @ValidationMethod(on="submit")
-    public void dateFormat(ValidationErrors errors) 
-    {    	
-    	if (hasSpecialCharacters(description))
-	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
-    }
-    
-    /**
-	 * Base level function that returns true when the given
-	 * input string contains a character that could be used for
-	 * a SQL injection attack
-	 *
-	 * @param s the user created string to be checked
-	 * @return true when the string contains special
-	 * characters and false if it does not
-	 * @author Alex Bassett
-	 */
-    /*
-	private boolean hasSpecialCharacters(String s) {
-		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
-		return false;
-	}
-    */
     @DefaultHandler
     public Resolution submit() {
     	patientID = context.getPatientId();

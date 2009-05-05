@@ -134,6 +134,12 @@ public class AddMedicationBean implements ActionBean {
     	if(refillYear < 2009)
     		errors.add("refillYear", new SimpleError("Invalid Refill Year"));
     }
+	
+	
+	private boolean hasSpecialCharacters(String s) {
+			if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
+			return false;
+	}
     
     @DefaultHandler
     public Resolution submit() {
