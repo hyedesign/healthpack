@@ -115,15 +115,19 @@ public class DownloadServlet extends HttpServlet
 			//creates new sql query and executes
 			Statement statement = dba.connection.createStatement();
 			ResultSet results = statement.executeQuery("SELECT * FROM cmsc345.patients WHERE" +
-			" userid='3'");
+			" userid="+userID);
 			
+			String midName = "null";
 			//loops through all patient
 			while(results.next())
 			{
+				midName = results.getString("patientmiddlename");
+				if(midName.equals("null")) { midName = ""; }
+				
 				//gets patient data
 				patientID = results.getInt("patientid");
-				patientName = results.getString("patientfirstname")+" "+
-				results.getString("patientmiddlename")+". "+results.getString("patientlastname");
+				patientName = results.getString("patientfirstname")+" "+midName
+				+" "+results.getString("patientlastname");
 				patientDOB = results.getDate("patientdob");
 				patientWeight = results.getInt("patientweight");
 				patientHeight = results.getInt("patientheight");
@@ -160,19 +164,19 @@ public class DownloadServlet extends HttpServlet
 				{
 					sb.append("F\n");
 				}
-				if(emContactName == null) {emContactName = "";}
+				if(emContactName.equals("null")) {emContactName = "";}
 				sb.append("Emergency Contact: ,");
 				sb.append(emContactName+"\n");
 
-				if(emContactNum == null) {emContactNum = "";}
+				if(emContactNum.equals("null")) {emContactNum = "";}
 				sb.append("Emergency Contact Number: ,");
 				sb.append(emContactNum+"\n");
 
-				if(insProvider == null) {insProvider = "";}
+				if(insProvider.equals("null")) {insProvider = "";}
 				sb.append("Insurance Provider: ,");
 				sb.append(insProvider+"\n");
 
-				if(insID == null) {insID = "";}
+				if(insID.equals("null")) {insID = "";}
 				sb.append("Insurance ID: ,");
 				sb.append(insID+"\n\n");
 
@@ -224,7 +228,7 @@ public class DownloadServlet extends HttpServlet
 			while(results.next())
 			{
 				//appends all doctor's note
-				if(note == null) {note = "";}
+				if(note.equals("null")) {note = "";}
 				sb.append("Doctors Note: ,");
 				sb.append(note+"\n\n");
 			}
@@ -269,7 +273,7 @@ public class DownloadServlet extends HttpServlet
 				allergyDescription = results.getString("allergy_description");
 				sb.append("Allergy Name: ,");
 				sb.append(allergyName+"\n");
-				if(allergyDescription == null) {allergyDescription = "";}
+				if(allergyDescription.equals("null")) {allergyDescription = "";}
 				sb.append("Allergy Description: ,");
 				sb.append(allergyDescription+"\n\n");
 			}
@@ -319,7 +323,7 @@ public class DownloadServlet extends HttpServlet
 				medicationRefillDate = results.getDate("medicationrefilldate").toString();
 				sb.append("Medication Name: ,");
 				sb.append(medicationName+"\n");
-				if(medicationDescription == null) {medicationDescription = "";}
+				if(medicationDescription.equals("null")) {medicationDescription = "";}
 				sb.append("Medication Description: ,");
 				sb.append(medicationDescription+"\n");
 				sb.append("Expiration Date: ,");
@@ -369,7 +373,7 @@ public class DownloadServlet extends HttpServlet
 				appDescription = results.getString("appointmentdescription");
 				sb.append("Appointment Date: ,");
 				sb.append(appDate+"\n");
-				if(appDescription == null) {appDescription = "";}
+				if(appDescription.equals("null")) {appDescription = "";}
 				sb.append("Appointment Description: ,");
 				sb.append(appDescription+"\n\n");
 			}
@@ -421,7 +425,7 @@ public class DownloadServlet extends HttpServlet
 				sb.append(testName+"\n");
 				sb.append("Test Date: ,");
 				sb.append(testDate+"\n");
-				if(testDescription == null) {testDescription = "";}
+				if(testDescription.equals("null")) {testDescription = "";}
 				sb.append("Test Description: ,");
 				sb.append(testDescription+"\n");
 				sb.append("Test Result: ,");
