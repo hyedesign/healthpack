@@ -51,7 +51,7 @@ public class AddMedicationBean implements ActionBean {
     public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
 
     
-    
+    // getters and setters
 	public int getMedicationId() {
 		return medicationId;
 	}
@@ -120,7 +120,10 @@ public class AddMedicationBean implements ActionBean {
 	}
 	@ValidationMethod(on="submit")
     public void dateFormat(ValidationErrors errors) 
-    {
+    {  	if (hasSpecialCharacters(medicationName))
+    		errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    	if (hasSpecialCharacters(description))
+    		errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
     	if(expirationMonth < 1 || expirationMonth > 12)
     		errors.add("expirationMonth", new SimpleError("Invalid Expiration Month"));
     	if(expirationDay < 1 || expirationDay > 31)
@@ -132,10 +135,19 @@ public class AddMedicationBean implements ActionBean {
     	if(expirationYear < 2009)
     		errors.add("expirationYear", new SimpleError("Invalid Expiration Year"));
     	if(refillYear < 2009)
-    		errors.add("refillYear", new SimpleError("Invalid Refill Year"));
+    		errors.add("refillYear", new SimpleError("Invalid Refill Year"));   	
     }
 	
-	
+	/**
+	 * Base level function that returns true when the given
+	 * input string contains a character that could be used for
+	 * a SQL injection attack
+	 *
+	 * @param s the user created string to be checked
+	 * @return true when the string contains special
+	 * characters and false if it does not
+	 * @author Alex Bassett
+	 */
 	private boolean hasSpecialCharacters(String s) {
 			if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
 			return false;

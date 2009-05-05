@@ -25,6 +25,7 @@ public class EditDocNoteBean implements ActionBean {
     private int patientID;
     @Validate(required=false, maxlength=255) private String description;
 
+    // getters and setters
     public HPActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
 	
