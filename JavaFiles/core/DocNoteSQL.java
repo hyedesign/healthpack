@@ -22,6 +22,11 @@ public class DocNoteSQL
 	private int patientID;
 	private String description;
 	
+	/**
+	 * Constructor for the DocNoteSQL class.
+	 *
+	 * @author Alex Bassett
+	 */
 	public DocNoteSQL()
 	{
 		dba = new DBAccess();
@@ -30,6 +35,7 @@ public class DocNoteSQL
 		description = "";
 	}
 
+	// getters and setters
 	public int getPatientID() {
 		return patientID;
 	}

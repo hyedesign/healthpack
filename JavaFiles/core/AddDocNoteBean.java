@@ -26,6 +26,7 @@ public class AddDocNoteBean implements ActionBean {
     
     @Validate(required=false, maxlength=255) private String description;
 
+    // getters and setters
     public HPActionBeanContext getContext() { return context; }
     public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
     
@@ -39,6 +40,7 @@ public class AddDocNoteBean implements ActionBean {
     		
         return new ForwardResolution("patientList.jsp");
     }
+    
     @ValidationMethod(on="submit")
     public void checkSpecialChars(ValidationErrors errors) 
     {
@@ -48,6 +50,17 @@ public class AddDocNoteBean implements ActionBean {
     	if (hasSpecialCharacters(description))
 	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
     }
+    
+    /**
+	 * Base level function that returns true when the given
+	 * input string contains a character that could be used for
+	 * a SQL injection attack
+	 *
+	 * @param s the user created string to be checked
+	 * @return true when the string contains special
+	 * characters and false if it does not
+	 * @author Alex Bassett
+	 */
     private boolean hasSpecialCharacters(String s) {
 		if (s != s.replaceAll("([^A-Za-z0-9.,!?~`'\"% _-]+)", "")) return true;
 		return false;

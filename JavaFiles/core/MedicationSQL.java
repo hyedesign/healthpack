@@ -86,7 +86,7 @@ public class MedicationSQL {
 	}
 
 	//SQL CALLS
-	private boolean deleteMedication(){
+/*	private boolean deleteMedication(){
 		dba.connect(); // connect to the database
 		try {
 			// construct and execute the SQL call, retrieve the results
@@ -105,12 +105,26 @@ public class MedicationSQL {
 			dba.disconnect();
 			return false;
 		}		
-		
+	
 		
 	}
+*/	
 	
 	/*
 	 * Static Calls
+	 */
+	
+	/**
+	 * addNewMedication takes in the input data fields and adds
+	 * a new medication entry into the database.
+	 * 
+	 * @param patientId
+	 * @param medicationName
+	 * @param medicationExpirationDate
+	 * @param medicationRefillDate
+	 * @param medicationDescription
+	 * 
+	 * Jon Conti-Vock
 	 */
 	public static void addNewMedication(int patientId, String medicationName, 
 			Date medicationExpirationDate, Date medicationRefillDate, 
@@ -137,6 +151,18 @@ public class MedicationSQL {
 		}
 	}
 	
+	/**
+	 * editMedication takes in the input data fields and edits
+	 * a medication entry in the database.
+	 * 
+	 * @param patientId
+	 * @param medicationName
+	 * @param medicationExpirationDate
+	 * @param medicationRefillDate
+	 * @param medicationDescription
+	 * 
+	 * Jon Conti-Vock
+	 */
 	private static void editMedication(int patientId, String medicationName, 
 			Date medicationExpirationDate, Date medicationRefillDate, 
 			String medicationDesription) {
@@ -186,6 +212,17 @@ public class MedicationSQL {
 	}
 */
 
+	/**
+	 * Looks up the medication ID in the database.
+	 * The result set must be the result of a query to the medications
+	 * table.
+	 * 
+	 * @param successfulLoad A boolean that tells whether the load was successful or not.
+	 * @return true when the data is loaded, false when the ResultSet is
+	 * empty and there is no data to load
+	 * 
+	 * @author Jon Conti-Vock
+	 */
 	public boolean lookupMedication(int medicationID) {
 		dba.connect(); // connect to the database
 		try {
@@ -219,6 +256,7 @@ public class MedicationSQL {
 	 * @param rs the result set that contains a single medication's data
 	 * @return true when the data is loaded, false when the ResultSet is
 	 * empty and there is no data to load
+	 * 
 	 * @author Jon Conti-Vock
 	 */
 	private boolean loadMedication(ResultSet rs) {
@@ -241,6 +279,18 @@ public class MedicationSQL {
 		}
 	}
 	
+	/**
+	 * Updates a medication in the database which is specified by the medication ID.
+	 * 
+	 * @param medicationid the unique ID of a single medication's data
+	 * @param patientid the unique ID of a single patient's data
+	 * @param medicationName the medication's name
+	 * @param expire the medication's expiration date
+	 * @param refill the medication's refill date
+	 * @param description the description of a medication
+	 * 
+	 * @author Jon Conti-Vock
+	 */
 	public static void updateMedication(int medicationid, int patientid, String medicationName, Date expire, Date refill, String descript)
 	{	
 		DBAccess dba = new DBAccess();
