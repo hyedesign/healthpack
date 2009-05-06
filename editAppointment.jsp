@@ -1,6 +1,6 @@
 <!-- Jam Packed Inventions -->
-<!-- Healthpack v0.2
-  -- File: editAppointment
+<!-- Healthpack v0.2 -->
+<!-- File: editAppointment
   -- Date Modified: 04/19/09 
   -- Author: Han Dong
   -- Description: This file allows the user to view and edit 

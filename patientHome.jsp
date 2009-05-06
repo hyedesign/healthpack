@@ -160,6 +160,7 @@
 					<stripes:form beanclass="core.EditAppointmentBean">
 						<stripes:hidden name="appointmentID" value="${id1}"/>
 						<stripes:submit name="submit" value="Edit"/>
+						<stripes:submit name="delete" value="Delete"/>
 					</stripes:form>
 				</c:if>
 			</td>
@@ -188,6 +189,7 @@
 					<stripes:form beanclass="core.EditAllergyBean">
 						<stripes:hidden name="allergyID" value="${id2}"/>
 						<stripes:submit name="submit" value="Edit"/>
+						<stripes:submit name="delete" value="Delete"/>
 					</stripes:form>
 				</c:if>
 			</td>
@@ -219,6 +221,7 @@
 					<stripes:form beanclass="core.EditMedicationBean">
 						<stripes:hidden name="medicationId" value="${id3}"/>
 						<stripes:submit name="submit" value="Edit"/>
+						<stripes:submit name="delete" value="Delete"/>
 					</stripes:form>
 				</c:if>
 			</td>
@@ -250,6 +253,7 @@
 					<stripes:form beanclass="core.GetTestBean">
 						<stripes:hidden name="testID" value="${id4}"/>
 						<stripes:submit name="submit" value="Edit"/>
+						<stripes:submit name="delete" value="Delete"/>
 					</stripes:form>
 				</c:if>
 			</td>
