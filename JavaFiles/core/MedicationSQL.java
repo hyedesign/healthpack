@@ -310,4 +310,30 @@ public class MedicationSQL {
 			dba.disconnect();
 		}
 	}
+	
+	/**
+	 * deletes a medication from the 'medications' table in the mySQL database
+	 * @param medicationId is the id of the medication
+	 * @author Han Dong
+	 */
+	public static void deleteMedication(int medicationId)
+	{
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try
+		{	
+			// construct and execute the SQL call, deletes the allergy
+			Statement statement = dba_s.connection.createStatement();
+			statement.executeUpdate("DELETE FROM cmsc345.medications" +
+					" WHERE medicationid='"+medicationId+"';");
+			statement.close();
+			dba_s.disconnect();
+		}
+		catch (SQLException e)
+		{
+			System.err.println (e.toString());
+			dba_s.disconnect();
+		}
+	}
+
 }

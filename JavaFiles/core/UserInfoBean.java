@@ -62,6 +62,7 @@ public class UserInfoBean implements ActionBean
 
         return new ForwardResolution("userHomepage.jsp");
     }
+	
     public Resolution cancel() 
 	{
         return new ForwardResolution("userHomepage.jsp");
@@ -74,10 +75,33 @@ public class UserInfoBean implements ActionBean
 	@ValidationMethod(on="submit")
 	public void checksUserInfo(ValidationErrors errors) 
 	{	    
+		//required fields
+		this.firstName = this.firstName.replaceAll("\\'", "''");
+		this.lastName = this.lastName.replaceAll("\\'", "''");
+		
+		if(this.description == null)
+		{
+		}
+		else
+		{
+			this.description = this.description.replaceAll("\\'", "''");
+			if(hasSpecialCharacters(this.description))
+				errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * $ # ^ : ; "));
+		}
+		
+		if(this.phone == null)
+		{
+		}
+		else
+		{
+			this.phone = this.phone.replaceAll("\\'", "''");
+			if(hasSpecialCharacters(this.phone))
+				errors.add("phone", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * $ # ^ : ; "));
+		}
+		
 		// Check for flagged characters
 	    if (hasSpecialCharacters(this.firstName) || hasSpecialCharacters(this.lastName) ||
-	    		hasSpecialCharacters(this.email) || hasSpecialCharacters(this.phone) ||
-	    		hasSpecialCharacters(this.description) || hasSpecialCharacters(this.password) ||
+	    		hasSpecialCharacters(this.email) || hasSpecialCharacters(this.password) || 
 	    		hasSpecialCharacters(this.password2))
 	        errors.addGlobalError(new SimpleError("These characters are not allowed: <> () [] \\ / | = + * $ # ^ : ; "));
 	    

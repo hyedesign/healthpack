@@ -38,7 +38,7 @@ public class DeleteTestBean implements ActionBean
     	EditTestSQL.deleteTest(this.testID);
     	
     	//goes back to home page
-		return new ForwardResolution("patientHome.jsp");
+		return new ForwardResolution("patientList.jsp");
 	}
 
 }

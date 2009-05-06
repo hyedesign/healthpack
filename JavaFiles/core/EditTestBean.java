@@ -86,6 +86,18 @@ public class EditTestBean implements ActionBean
 	}
     
 	/**
+     * deletes the test specified by the testID
+     * from the mySQL database
+     * 
+     * @author Han Dong
+     */
+    public Resolution delete()
+    {
+    	EditTestSQL.deleteTest(this.testID);
+    	return new ForwardResolution("patientList.jsp");
+    }
+    
+	/**
 	 * checksTestInfo - validates inputs for test fields.
 	 * 					eg. apostrophe, special characters, valid date
 	 * @param errors
@@ -96,7 +108,6 @@ public class EditTestBean implements ActionBean
     	//escapes all apostrophes for the SQL database
     	this.testName = this.testName.replaceAll("\\'", "''");
     	this.testResult = this.testResult.replaceAll("\\'", "''");
-    	this.testDescription = this.testDescription.replaceAll("\\'", "''");
     	
     	//checks for special characters
     	if(hasSpecialCharacters(this.testName))
@@ -109,10 +120,15 @@ public class EditTestBean implements ActionBean
 			errors.add("Result", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
 		}
     	
-    	if(hasSpecialCharacters(this.testDescription))
-		{
-			errors.add("testDescription", new SimpleError("These characters are not allowed in Description: <> () [] \\ / | = + * @ $ # ^ : ; "));
-		}
+    	if(this.testDescription == null) {}
+    	else
+    	{
+    		this.testDescription = this.testDescription.replaceAll("\\'", "''");
+    		if(hasSpecialCharacters(this.testDescription))
+    		{
+    			errors.add("testDescription", new SimpleError("These characters are not allowed in Description: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    		}
+    	}
     	
     	
     	//checks the date to and make sure its valid

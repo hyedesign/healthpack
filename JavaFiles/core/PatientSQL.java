@@ -386,11 +386,16 @@ public class PatientSQL {
 				
 				// Construct the name string
 				char middleInitial;
-				if (middleName.length() > 0) {
+				if (middleName.equals("null")) { 
+					returnString = firstName + " " + lastName; 
+				}
+				else if (middleName.length() > 0) {
 					middleInitial = middleName.charAt(0);
 					returnString = firstName + " " + middleInitial + " " + lastName;
 				}
-				else returnString = firstName + " " + lastName;
+				else { 
+					returnString = firstName + " " + lastName;
+				}
 			}
 			else returnString = "No Patient Found";
 			
@@ -446,15 +451,16 @@ public class PatientSQL {
 		dba.connect(); // connect to the database
 		
 		try {
+			System.out.println(patId+" "+docId);
 			// construct and execute the SQL call, retrieve the results
 			Statement statement = dba.connection.createStatement ();
-			ResultSet results = statement.executeQuery ("SELECT * FROM doctorpatient WHERE patientid="+patId+";");
+			ResultSet results = statement.executeQuery ("SELECT * FROM doctorpatient WHERE patientid="+patId);
 			
 			if (results.first()) statement.executeUpdate("UPDATE doctorpatient" +
 														 " SET 	 userid ="+docId+
-														 " WHERE patientid = " + patId +";");
-			else statement.executeUpdate("INSERT INTO doctorpatient" +
-					"VALUES (0, "+docId+", "+patId + ", '');");
+														 " WHERE patientid = " + patId);
+			else statement.executeUpdate("INSERT INTO doctorpatient (userid, patientid)"+
+					" VALUES ('"+docId+"', '"+patId+"')");
 			System.out.println("SUCCESS !!!");
 			statement.close();
 			dba.disconnect();

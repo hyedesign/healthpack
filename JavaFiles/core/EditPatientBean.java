@@ -155,6 +155,18 @@ public class EditPatientBean implements ActionBean {
 		this.birthYear = birthYear;
 	}
    
+	/**
+     * deletes the patient specified by the patientID
+     * from the mySQL database
+     * 
+     * @author Han Dong
+     */
+    public Resolution delete()
+    {
+    	PatientSQL.deletePatient(this.patientId);
+    	return new ForwardResolution("patientList.jsp");
+    }
+    
     @DefaultHandler
     public Resolution submit() {
     	

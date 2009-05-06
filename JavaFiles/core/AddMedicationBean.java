@@ -120,10 +120,20 @@ public class AddMedicationBean implements ActionBean {
 	}
 	@ValidationMethod(on="submit")
     public void dateFormat(ValidationErrors errors) 
-    {  	if (hasSpecialCharacters(medicationName))
+    {  
+		medicationName = medicationName.replaceAll("\\'", "''");
+		if (hasSpecialCharacters(medicationName))
     		errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
-    	if (hasSpecialCharacters(description))
-    		errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    	
+		if(description == null)
+		{
+		}
+		else
+		{	
+			description = description.replaceAll("\\'", "''");
+			if (hasSpecialCharacters(description))
+	    		errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+		}
     	if(expirationMonth < 1 || expirationMonth > 12)
     		errors.add("expirationMonth", new SimpleError("Invalid Expiration Month"));
     	if(expirationDay < 1 || expirationDay > 31)
@@ -171,5 +181,15 @@ public class AddMedicationBean implements ActionBean {
    		return new ForwardResolution("patientList.jsp");
     }
     
-    
+    /**
+     * deletes the medication specified by the medication id
+     * from the mySQL database
+     * 
+     * @author Han Dong
+     */
+    public Resolution delete()
+    {
+    	MedicationSQL.deleteMedication(this.medicationId);
+    	return new ForwardResolution("patientList.jsp");
+    }
 }

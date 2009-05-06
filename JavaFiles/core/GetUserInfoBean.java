@@ -66,7 +66,9 @@ public class GetUserInfoBean implements ActionBean
 		this.lastName = temp.getUserLastName();
 		this.email = temp.getUserEmail();
 		this.phone = temp.getUserPhone();
+		if(this.phone.equals("null")) { this.phone = ""; }
 		this.description = temp.getUserDescription();
+		if(this.description.equals("null")) { this.description = ""; }
 		
 		//forwards to next page
         return new ForwardResolution("editUserInfo.jsp");

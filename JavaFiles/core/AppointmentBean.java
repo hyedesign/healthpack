@@ -77,8 +77,16 @@ public class AppointmentBean implements ActionBean {
     		errors.add("appointmentDay", new SimpleError("Invalid Appointment Day"));
     	if(appointmentYear < 2009)
     		errors.add("appointmentYear", new SimpleError("Invalid Appointment Year"));
-    	if (hasSpecialCharacters(description))
-	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    	if(description == null)
+    	{
+    	}
+    	else
+    	{	
+    		description = description.replaceAll("\\'", "''");
+    		if (hasSpecialCharacters(description))
+    			errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    
+    	}
     }
     
     /**
@@ -118,6 +126,18 @@ public class AppointmentBean implements ActionBean {
     		AppointmentSQL temp = new AppointmentSQL();
     		temp.updateAppointment(appointmentID, date, description, reminder);
     	}
+    	return new ForwardResolution("patientList.jsp");
+    }
+    
+    /**
+     * deletes the appointment specified by the appointmentID
+     * from the mySQL database
+     * 
+     * @author Han Dong
+     */
+    public Resolution delete()
+    {
+    	AppointmentSQL.deleteAppointment(this.appointmentID);
     	return new ForwardResolution("patientList.jsp");
     }
 }
