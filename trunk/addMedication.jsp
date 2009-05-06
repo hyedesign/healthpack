@@ -1,6 +1,6 @@
 <!-- Jam Packed Inventions -->
-<!-- Healthpack v0.2
-  -- File: addMedications
+<!-- Healthpack v0.2 -->
+<!-- File: addMedications
   -- Date Modified: 04/24/09 
   -- Author: Jon Conti-Vock
   -- Description: This file allows the user to add a new medication
