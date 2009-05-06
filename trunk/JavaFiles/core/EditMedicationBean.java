@@ -126,8 +126,11 @@ public class EditMedicationBean implements ActionBean {
     		
     		setDescription(temp.getMedicationDescription());
     		description = temp.getMedicationDescription();
+    		if(description.equals("null")) { description = ""; }
     	}	
     	return new ForwardResolution("editMedications.jsp");
         
     }
+	
+	
 }

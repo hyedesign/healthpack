@@ -76,6 +76,7 @@ public class EditAppointmentBean implements ActionBean {
     		appointmentMonth = Integer.parseInt(s.substring(0,index));
     		appointmentDay = Integer.parseInt(s.substring(index + 1, s.length()));
     		description = temp.getDescription();
+    		if(description.equals("null")) { description = ""; }
     		reminder = temp.isReminder();
     		System.out.println(reminder);
     	}

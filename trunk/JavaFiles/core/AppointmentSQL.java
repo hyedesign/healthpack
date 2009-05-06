@@ -89,8 +89,7 @@ public class AppointmentSQL {
 			if(remind == true)
 				remember = "1";
 			
-			descript = descript.replaceAll("\\'", "''");
-			
+			// construct and execute the SQL call, retrieve the results
 			String s = "INSERT INTO appointments (patientid, appointmentdate, appointmentdescription, appointmentreminder)" +
 			"VALUES (" + pID + ", '"+ date + "', '" + descript + "', " + remember + ")";
 			System.out.println(s);
@@ -195,11 +194,11 @@ public class AppointmentSQL {
 		dba.connect(); // connect to the database
 		try
 		{
-			System.out.println(date.toString());
+			//System.out.println(date.toString());
 			String remember = "0";
 			if(remind == true)
 				remember = "1";
-			descript = descript.replaceAll("\\'", "''");
+			// construct and execute the SQL call, retrieve the results
 			Statement statement = dba.connection.createStatement();
 			if(description == null)
 			{
@@ -208,7 +207,6 @@ public class AppointmentSQL {
 			}
 			else
 			{
-				descript = descript.replaceAll("\\'", "''");
 				statement.executeUpdate("UPDATE appointments SET appointmentdate='"+date+
 						"', appointmentdescription='"+descript+"', appointmentreminder="+remember+
 						" WHERE appointmentid='" +id+"'");
@@ -221,6 +219,31 @@ public class AppointmentSQL {
 			System.err.println (e.toString());
 			System.out.println("Failed to update from AppointmentSQL.java.");
 			dba.disconnect();
+		}
+	}
+	
+	/**
+	 * deletes a appointment from the 'appointments' table in the mySQL database
+	 * @param appointmentID is the id of the specified appointment
+	 * @author Han Dong
+	 */
+	public static void deleteAppointment(int appointmentID)
+	{
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try
+		{	
+			// construct and execute the SQL call, deletes the allergy
+			Statement statement = dba_s.connection.createStatement();
+			statement.executeUpdate("DELETE FROM cmsc345.appointments" +
+					" WHERE appointmentid='"+appointmentID+"';");
+			statement.close();
+			dba_s.disconnect();
+		}
+		catch (SQLException e)
+		{
+			System.err.println (e.toString());
+			dba_s.disconnect();
 		}
 	}
 

@@ -44,11 +44,15 @@ public class AddDocNoteBean implements ActionBean {
     @ValidationMethod(on="submit")
     public void checkSpecialChars(ValidationErrors errors) 
     {
-    	if (description == null){
-    		description = "";
+    	if (description == null)
+    	{
     	}
-    	if (hasSpecialCharacters(description))
-	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    	else
+    	{	
+    		description = description.replaceAll("\\'", "''");
+    		if (hasSpecialCharacters(description))
+    	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    	}
     }
     
     /**

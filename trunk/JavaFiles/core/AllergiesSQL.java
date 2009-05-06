@@ -7,6 +7,7 @@
 *              AllergiesBean to connect to the Database
 *
 * Edited  : 4/28/2009 by Taylor Evans
+* Edited  : 5/05/2009 by Han Dong
 *
 **********************************************************/
 
@@ -64,8 +65,6 @@ public class AllergiesSQL
 		dba_s.connect(); // connect to the database
 		try {
 			// construct and execute the SQL call, retrieve the results
-			descript = descript.replaceAll("\\'", "''");
-			name = name.replaceAll("\\'", "''");
 			String s = "INSERT INTO allergies (patientid, allergy_name, allergy_description) " +
 			"VALUES ("+ pID +", '" + name + "', '" + descript + "')";
 			Statement statement = dba_s.connection.createStatement ();
@@ -157,8 +156,7 @@ public class AllergiesSQL
 		dba.connect(); // connect to the database
 		try
 		{
-			descript = descript.replaceAll("\\'", "''");
-			allergy = allergy.replaceAll("\\'", "''");
+			// construct and execute the SQL call, retrieve the results
 			Statement statement = dba.connection.createStatement();
 			statement.executeUpdate("UPDATE allergies SET allergy_name='"+allergy+
 						"', allergy_description='"+descript+"' WHERE allergyid='"
@@ -171,6 +169,31 @@ public class AllergiesSQL
 			System.err.println (e.toString());
 			System.out.println("Failed to update in AllergySQL.java.");
 			dba.disconnect();
+		}
+	}
+	
+	/**
+	 * deletes a allergy from the 'allergies' table in the mySQL database
+	 * @param allergyID is the id of the allergy
+	 * @author Han Dong
+	 */
+	public static void deleteAllergy(int allergyID)
+	{
+		DBAccess dba_s = new DBAccess();
+		dba_s.connect(); // connect to the database
+		try
+		{	
+			// construct and execute the SQL call, deletes the allergy
+			Statement statement = dba_s.connection.createStatement();
+			statement.executeUpdate("DELETE FROM cmsc345.allergies" +
+					" WHERE allergyid='"+allergyID+"';");
+			statement.close();
+			dba_s.disconnect();
+		}
+		catch (SQLException e)
+		{
+			System.err.println (e.toString());
+			dba_s.disconnect();
 		}
 	}
 

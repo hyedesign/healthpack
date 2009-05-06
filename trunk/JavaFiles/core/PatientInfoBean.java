@@ -50,6 +50,7 @@ public class PatientInfoBean {
 			this.insuranceID = p.getInsuranceID();
 			this.SSN = p.getSSN();
 			
+			checkNullStrings();
 			// convert the date
 			Date date = p.getPatientDOB();
 			String s = date.toString();
@@ -122,5 +123,21 @@ public class PatientInfoBean {
 	}
 	public String getSSN() {
 		return SSN;
+	}
+	
+	/**
+	 * replaces all null strings with empty strings
+	 * 
+	 * @author Han Dong
+	 */
+	private void checkNullStrings()
+	{	 
+		if(this.middleName.equals("null")) { this.middleName = ""; }
+		if(this.ECName.equals("null")) { this.ECName = ""; }
+		if(this.ECPhone.equals("null")) { this.ECPhone = ""; }
+		if(this.insurance.equals("null")) { this.insurance = ""; }
+		if(this.insuranceID.equals("null")) { this.insuranceID = ""; }
+		if(this.SSN.equals("null")) { this.SSN = ""; }
+
 	}
 }

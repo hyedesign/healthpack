@@ -74,10 +74,31 @@ public class AllergiesBean implements ActionBean {
     @ValidationMethod(on="submit")
     public void checkSpecialChars(ValidationErrors errors) 
     {
+    	this.allergyName = this.allergyName.replaceAll("\\'", "''");
     	if (hasSpecialCharacters(allergyName))
 	    	errors.add("allergyName", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
-    	if (hasSpecialCharacters(description))
-	    	errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    	
+    	if(this.description == null)
+    	{
+    	}
+    	else
+    	{
+    		this.description = this.description.replaceAll("\\'", "''");
+    		if (hasSpecialCharacters(description))
+    			errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    	}
+    }
+    
+    /**
+     * deletes the allergy specified by the allergyID
+     * from the mySQL database
+     * 
+     * @author Han Dong
+     */
+    public Resolution delete()
+    {
+    	AllergiesSQL.deleteAllergy(this.allergyID);
+    	return new ForwardResolution("patientList.jsp");
     }
     
     /**

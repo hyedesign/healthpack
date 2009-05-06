@@ -71,10 +71,6 @@ public class AddTestBean implements ActionBean
 		cal.set(this.testYear, this.testMonth-1, this.testDay);
 		this.testDate = new Date(cal.getTime().getTime());
 		
-		if(this.testDescription == null)
-		{
-			this.testDescription = "";
-		}
 		//calls static addTest method to add new entry
 		EditTestSQL.addTest(this.testName, this.testResult,
 				this.testDescription, this.testDate, context.getPatientId());

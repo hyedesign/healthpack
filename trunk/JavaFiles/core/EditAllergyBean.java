@@ -57,6 +57,7 @@ public class EditAllergyBean implements ActionBean {
     		allergyID = temp.getAllergyID();
     		allergyName = temp.getAllergyName();
     		description = temp.getDescription();
+    		if(description.equals("null")) { description = ""; }
     	}
     	return new ForwardResolution("editAllergies.jsp");
     }

@@ -214,6 +214,12 @@ public class PatientSelectBean implements ActionBean {
 			 this.patientSSN = p.getSSN();
 			 if (p.getPatientSex() == 1) this.patientSex = "Female";
 			 else this.patientSex = "Male";
+			
+			/* 
+			 this.checkNullStrings();*/
+			 //System.out.println(this.patientMiddleName.equals("null"));
+			 //this.patientMiddleName = "FAIL";
+			 
 		 }
 		 // patient can't be loaded
 		 else {
@@ -221,37 +227,42 @@ public class PatientSelectBean implements ActionBean {
 			 return new ForwardResolution("patientList.jsp");
 		 }
 		 
+		 //replaces null strings with empty strings
+		 checkNullStrings();
+		 
 		 // load patient's subtable data
 		 PatientTablesSQL pt = new PatientTablesSQL();
 		 pt.getAllSubtables(patientId);
-		 
+
 		 this.doctorName = pt.getDoctorName();
 		 this.doctorPhone = pt.getDoctorPhone();
+		 if(this.doctorPhone.equals("null")) { this.doctorPhone = ""; }
 		 this.doctorEmail = pt.getDoctorEmail();
 		 this.doctorDescription = pt.getDoctorDescription();
+		 if(this.doctorDescription.equals("null")) { this.doctorDescription = ""; }
 		 this.doctorNote = pt.getDoctorNote();
-		 
-		this.appointmentReminders = pt.getAppointmentReminders();
-		
-		this.appointmentIDs = pt.getAppointmentIDs();
-		this.appointmentDescriptions = pt.getAppointmentDescriptions();
-		this.appointmentDates = pt.getAppointmentDates();
-		
-		this.allergyIDs = pt.getAllergyIDs();
-		this.allergyNames = pt.getAllergyNames();
-		this.allergyDescriptions = pt.getAllergyDescriptions();
-		
-		this.medicationIDs = pt.getMedicationIDs();
-		this.medicationNames = pt.getMedicationNames();
-		this.medicationDescriptions = pt.getMedicationDescriptions();
-		this.medicationRefillDates = pt.getMedicationRefillDates();
-		this.medicationExpirationDates = pt.getMedicationExpirationDates();
-		
-		this.testIDs = pt.getTestIDs();
-		this.testNames = pt.getTestNames();
-		this.testDescriptions = pt.getTestDescriptions();
-		this.testResults = pt.getTestResults();
-		this.testDates = pt.getTestDates();
+
+		 this.appointmentReminders = pt.getAppointmentReminders();
+
+		 this.appointmentIDs = pt.getAppointmentIDs();
+		 this.appointmentDescriptions = pt.getAppointmentDescriptions();
+		 this.appointmentDates = pt.getAppointmentDates();
+
+		 this.allergyIDs = pt.getAllergyIDs();
+		 this.allergyNames = pt.getAllergyNames();
+		 this.allergyDescriptions = pt.getAllergyDescriptions();
+
+		 this.medicationIDs = pt.getMedicationIDs();
+		 this.medicationNames = pt.getMedicationNames();
+		 this.medicationDescriptions = pt.getMedicationDescriptions();
+		 this.medicationRefillDates = pt.getMedicationRefillDates();
+		 this.medicationExpirationDates = pt.getMedicationExpirationDates();
+
+		 this.testIDs = pt.getTestIDs();
+		 this.testNames = pt.getTestNames();
+		 this.testDescriptions = pt.getTestDescriptions();
+		 this.testResults = pt.getTestResults();
+		 this.testDates = pt.getTestDates();
 
 		 // forward to patientHome
 		 return new ForwardResolution("patientHome.jsp");
@@ -268,5 +279,21 @@ public class PatientSelectBean implements ActionBean {
 	public Resolution delete() {
 		PatientSQL.deletePatient(patientId);
 		return new ForwardResolution("patientList.jsp");
+	}
+	
+	/**
+	 * replaces all null strings with empty strings
+	 * 
+	 * @author Han Dong
+	 */
+	private void checkNullStrings()
+	{	 
+		if(this.patientMiddleName.equals("null")) { this.patientMiddleName = ""; }
+		if(this.patientEmergencyContactName.equals("null")) { this.patientEmergencyContactName = ""; }
+		if(this.patientEmergencyContactNumber.equals("null")) { this.patientEmergencyContactNumber = ""; }
+		if(this.patientInsuranceProvider.equals("null")) { this.patientInsuranceProvider = ""; }
+		if(this.patientInsuranceID.equals("null")) { this.patientInsuranceID = ""; }
+		if(this.patientSSN.equals("null")) { this.patientSSN = ""; }
+
 	}
 }

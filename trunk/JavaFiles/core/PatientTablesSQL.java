@@ -127,12 +127,15 @@ public class PatientTablesSQL {
 				st_doc2.close();
 			}
 			
+			String appointmentDescription = "null";
 			// Load appointments data
 			Statement st_ap = dba_s.connection.createStatement ();
 			ResultSet rs_ap = st_ap.executeQuery ("SELECT * FROM appointments WHERE patientid='"+patientId+"'");			
 			while (rs_ap.next()) {
 				appointmentIDs.add(rs_ap.getInt("appointmentid"));
-				appointmentDescriptions.add(rs_ap.getString("appointmentdescription"));
+				appointmentDescription = rs_ap.getString("appointmentdescription");
+				if(appointmentDescription.equals("null")) { appointmentDescription = ""; }
+				appointmentDescriptions.add(appointmentDescription);
 				appointmentDates.add(rs_ap.getDate("appointmentdate"));
 				if (rs_ap.getInt("appointmentreminder") == 1)
 					appointmentReminders.add(true);
@@ -141,24 +144,30 @@ public class PatientTablesSQL {
 			rs_ap.close();
 			st_ap.close();
 			
+			String allergyDescription = "null";
 			// Load allergies data
 			Statement st_al = dba_s.connection.createStatement ();
 			ResultSet rs_al = st_al.executeQuery ("SELECT * FROM allergies WHERE patientid='"+patientId+"'");			
 			while (rs_al.next()) {
 				allergyIDs.add(rs_al.getInt("allergyid"));
 				allergyNames.add(rs_al.getString("allergy_name"));
-				allergyDescriptions.add(rs_al.getString("allergy_description"));
+				allergyDescription = rs_al.getString("allergy_description");
+				if(allergyDescription.equals("null")) { allergyDescription = ""; }
+				allergyDescriptions.add(allergyDescription);
 			}
 			rs_al.close();
 			st_al.close();
 			
+			String medicationDescription = "null";
 			// Load medications data
 			Statement st_me = dba_s.connection.createStatement ();
 			ResultSet rs_me = st_me.executeQuery ("SELECT * FROM medications WHERE patientid='"+patientId+"'");			
 			while (rs_me.next()) {
 				medicationIDs.add(rs_me.getInt("medicationid"));
 				medicationNames.add(rs_me.getString("medicationname"));
-				medicationDescriptions.add(rs_me.getString("medicationdescription"));
+				medicationDescription = rs_me.getString("medicationdescription");
+				if(medicationDescription.equals("null")) { medicationDescription = ""; }
+				medicationDescriptions.add(medicationDescription);
 				medicationRefillDates.add(rs_me.getDate("medicationexpirationsdate"));
 				medicationExpirationDates.add(rs_me.getDate("medicationrefilldate"));
 			}
