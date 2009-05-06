@@ -1,5 +1,5 @@
 /**********************************************************
-* File: core.EditAllergyBean.java
+* File: core.EditDocNoteBean.java
 * Author: Jon Conti-Vock
 * Date Created: 4/26/2009
 *
