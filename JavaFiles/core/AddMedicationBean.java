@@ -45,7 +45,7 @@ public class AddMedicationBean implements ActionBean {
     @Validate(required=true, maxlength=2) private int refillMonth;
     @Validate(required=true, maxlength=2) private int refillDay;
     @Validate(required=true, maxlength=4) private int refillYear;
-    @Validate(required=false, maxlength=255) private String description;
+    @Validate(required=false, maxlength=255) private String medicationDescription;
 
     public HPActionBeanContext getContext() { return this.context; }
     public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
@@ -112,27 +112,30 @@ public class AddMedicationBean implements ActionBean {
 	public void setRefillYear(int refillYear) {
 		this.refillYear = refillYear;
 	}
-	public String getDescription() {
-		return description;
+	
+	public String getMedicationDescription() {
+		return medicationDescription;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setMedicationDescription(String medicationDescription) {
+		this.medicationDescription = medicationDescription;
 	}
+	
 	@ValidationMethod(on="submit")
     public void dateFormat(ValidationErrors errors) 
     {  
 		medicationName = medicationName.replaceAll("\\'", "''");
 		if (hasSpecialCharacters(medicationName))
-    		errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+    		errors.add("medicationName", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
     	
-		if(description == null)
+		if(medicationDescription == "")
 		{
+			System.out.println("true");
 		}
 		else
 		{	
-			description = description.replaceAll("\\'", "''");
-			if (hasSpecialCharacters(description))
-	    		errors.add("description", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
+			medicationDescription = medicationDescription.replaceAll("\\'", "''");
+			if (hasSpecialCharacters(medicationDescription))
+	    		errors.add("medicationDescription", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
 		}
     	if(expirationMonth < 1 || expirationMonth > 12)
     		errors.add("expirationMonth", new SimpleError("Invalid Expiration Month"));
@@ -173,10 +176,10 @@ public class AddMedicationBean implements ActionBean {
    		cal2.set(this.refillYear, this.refillMonth-1, this.refillDay);
    		this.Refill = new Date(cal2.getTime().getTime());
    		if (medicationId == 0){
-   			MedicationSQL.addNewMedication( patientid, this.medicationName, this.Expire, this.Refill, this.description);
+   			MedicationSQL.addNewMedication( patientid, this.medicationName, this.Expire, this.Refill, this.medicationDescription);
    		}
    		else{
-   			MedicationSQL.updateMedication(medicationId, patientid, this.medicationName, this.Expire, this.Refill, this.description);
+   			MedicationSQL.updateMedication(medicationId, patientid, this.medicationName, this.Expire, this.Refill, this.medicationDescription);
    		}
    		return new ForwardResolution("patientList.jsp");
     }
