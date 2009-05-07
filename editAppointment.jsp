@@ -1,13 +1,11 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: editAppointment
-  -- Date Modified: 04/19/09 
-  -- Author: Han Dong
-  -- Description: This file allows the user to view and edit 
-  -- patient appointments
-  --
-  -- Last Edited by: Taylor Evans
-  -->
+<!-- Jam Packed Inventions 										-->
+<!-- HealthPack v1.0											-->
+<!-- File: editAppointment										-->
+<!-- Date Modified: 04/19/09 									-->
+<!-- Author: Han Dong											-->
+<!-- Description: This file allows the user to view and edit 	-->
+<!-- patient appointments										-->
+<!-- Last Edited by: Taylor Evans								-->
 
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>   
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>

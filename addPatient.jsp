@@ -1,11 +1,10 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: addPatient
-  -- Date Modified: 04/28/09 
-  -- Author: Alex Bassett
-  -- Description: This file allows users to add new patients
-  -- Last Edited By: Taylor Evans
-  -->
+<!-- Jam Packed Inventions 										-->
+<!-- HealthPack v1.0											-->
+<!-- File: addPatient											-->
+<!-- Date Modified: 04/28/09 									-->
+<!-- Author: Alex Bassett										-->
+<!-- Description: This file allows users to add new patients	-->
+<!-- Last Edited By: Taylor Evans								-->
 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>

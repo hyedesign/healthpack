@@ -1,12 +1,12 @@
-<!-- Jam Packed Inventions  -->
-<!-- HealthPack v1.0
-  -- File: editUserInfo
-  -- Date Modified: 04/14/09 
-  -- Author: Taylor Evans
-  -- Description: This file allows the user to edit its
-  -- personal information.
-  -- Last edited by: Han Dong
-  -->
+<!-- Jam Packed Inventions  								-->
+<!-- HealthPack v1.0										-->
+<!-- File: editUserInfo										-->
+<!-- Date Modified: 04/14/09 								-->
+<!-- Author: Taylor Evans									-->
+<!-- Description: This file allows the user to edit its		-->
+<!-- personal information.									-->
+<!-- Last edited by: Han Dong								-->
+
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>

@@ -1,13 +1,11 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: addAppointment
-  -- Date Modified: 04/27/09 
-  -- Author: Taylor Evans
-  -- Description: This file allows the user to add 
-  -- patient appointments
-  --
-  -- Last Edited by: Taylor Evans
-  -->
+<!-- Jam Packed Inventions 							-->
+<!-- HealthPack v1.0								-->
+<!-- File: addAppointment							-->
+<!-- Date Modified: 04/27/09 						-->
+<!-- Author: Taylor Evans							-->
+<!-- Description: This file allows the user to add 	-->
+<!-- patient appointments							-->
+<!-- Last Edited by: Taylor Evans					-->
 
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>   
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>

@@ -1,13 +1,11 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: editMedications
-  -- Date Modified: 04/29/09 
-  -- Author: Han Dong
-  -- Description: This file allows the user to view and edit
-  -- his or her's Medications.
-  --
-  -- Last Edited by: Jon Conti-Vock
-  -->
+<!-- Jam Packed Inventions 										-->
+<!-- HealthPack v1.0											-->
+<!-- File: editMedications										-->
+<!-- Date Modified: 04/29/09 									-->
+<!-- Author: Han Dong											-->
+<!-- Description: This file allows the user to view and edit	-->
+<!-- his or her's Medications.									-->
+<!-- Last Edited by: Jon Conti-Vock								-->
   
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>

@@ -1,12 +1,11 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: logout.jsp
-  -- Date Modified: 04/30/09 
-  -- Author: Han Domg
-  -- Description: This file logs the user out
-  -- and returns him to index.
-  -- Last edited by: Taylor Evans
-  -->
+<!-- Jam Packed Inventions 						-->
+<!-- HealthPack v1.0							-->
+<!-- File: logout.jsp							-->
+<!-- Date Modified: 04/30/09 					-->
+<!-- Author: Han Domg							-->
+<!-- Description: This file logs the user out	-->
+<!-- and returns him to index.					-->
+<!-- Last edited by: Taylor Evans				-->
 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
