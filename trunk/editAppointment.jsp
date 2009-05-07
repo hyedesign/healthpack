@@ -50,7 +50,7 @@
 <table>
 	<stripes:hidden name="appointmentID" value="${actionBean.appointmentID }"/>
 		<tr>
-			<td>Appointment Date</td>
+			<td>*Appointment Date</td>
 		</tr>
 		<tr>
 			<td>(MM/DD/YYYY):</td>

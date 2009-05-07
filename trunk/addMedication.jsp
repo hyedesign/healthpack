@@ -47,18 +47,18 @@
 <stripes:errors/>
 <table>
 		<tr>
-			<td>Medication Name:</td>
+			<td>*Medication Name:</td>
 			<td><stripes:text name="medicationName"/></td>
 		</tr>
 		<tr>
-			<td>Expiration Date (MM/DD/YYYY):</td>
+			<td>*Expiration Date (MM/DD/YYYY):</td>
 			<td><stripes:text name="expirationMonth" size="1"/>/
 			    <stripes:text name="expirationDay" size="1"/>/ 
 			    <stripes:text name="expirationYear" size="2"/></td>
 		</tr>
 
 		<tr>
-			<td>Refill Date (MM/DD/YYYY):</td>
+			<td>*Refill Date (MM/DD/YYYY):</td>
 			<td><stripes:text name="refillMonth" size = "1"/>/
 			    <stripes:text name="refillDay" size="1"/>/ 
 			    <stripes:text name="refillYear" size="2"/></td>

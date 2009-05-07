@@ -49,18 +49,18 @@
 <stripes:hidden name="medicationId" value="${actionBean.medicationId}"/>
 <table>
 		<tr>
-			<td>Medication Name:</td>
+			<td>*Medication Name:</td>
 			<td><stripes:text name="medicationName" value="${actionBean.medicationName}"/></td>
 		</tr>
 		<tr>
-			<td>Expiration Date (MM/DD/YYYY):</td>
+			<td>*Expiration Date (MM/DD/YYYY):</td>
 			<td><stripes:text name="expirationMonth" size="1" value="${actionBean.expirationMonth}"/>/
 			    <stripes:text name="expirationDay" size="1" value="${actionBean.expirationDay}"/>/ 
 			    <stripes:text name="expirationYear" size="2" value="${actionBean.expirationYear}"/></td>
 		</tr>
 
 		<tr>
-			<td>Refill Date (MM/DD/YYYY):</td>
+			<td>*Refill Date (MM/DD/YYYY):</td>
 			<td><stripes:text name="refillMonth" size = "1" value="${actionBean.refillMonth}"/>/
 			    <stripes:text name="refillDay" size="1" value="${actionBean.refillDay}"/>/ 
 			    <stripes:text name="refillYear" size="2" value="${actionBean.refillYear}"/></td>
