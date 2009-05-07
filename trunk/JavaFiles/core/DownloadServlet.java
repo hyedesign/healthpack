@@ -228,7 +228,7 @@ public class DownloadServlet extends HttpServlet
 			while(results.next())
 			{
 				//appends all doctor's note
-				if(note.equals("null")) {note = "";}
+				if(note == null) {note = "";}
 				sb.append("Doctors Note: ,");
 				sb.append(note+"\n\n");
 			}
