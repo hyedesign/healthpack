@@ -1,12 +1,11 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: addAllergies
-  -- Date Created: 04/24/09 
-  -- Author: Taylor Evans
-  -- Description: This file allows the user add 
-  -- his or her's allergies
-  -- Last Edited by: Taylor Evans    
-  -->
+<!-- Jam Packed Inventions 						-->
+<!-- HealthPack v1.0 							-->
+<!-- File: addAllergies 						-->
+<!-- Date Created: 04/24/09 					--> 
+<!-- Author: Taylor Evans 						-->
+<!-- Description: This file allows the user add --> 
+<!-- his or her's allergies     				-->
+<!-- Last Edited by: Taylor Evans  				-->
   
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
@@ -50,7 +49,7 @@
 			<td><stripes:text name="allergyName"/></td>
 		</tr>
 		<tr>
-			<td>*Description:</td>
+			<td>Description:</td>
 			<td><stripes:textarea name="description" /></td>
 		</tr>
 		<tr>

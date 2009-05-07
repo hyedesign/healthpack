@@ -1,12 +1,11 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: editAllergies
-  -- Date Modified: 04/19/09 
-  -- Author: Han Dong 
-  -- Description: This file allows the user to view and edit 
-  -- his or her's allergies  
-  -- Last Edited By: Taylor Evans 04/27/09 
-  -->
+<!-- Jam Packed Inventions 										-->
+<!-- HealthPack v1.0											-->
+<!-- File: editAllergies										-->
+<!-- Date Modified: 04/19/09 									-->
+<!-- Author: Han Dong 											-->
+<!-- Description: This file allows the user to view and edit 	-->
+<!-- his or her's allergies  									-->
+<!-- Last Edited By: Taylor Evans 04/27/09 						-->
   
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>

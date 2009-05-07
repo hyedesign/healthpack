@@ -1,15 +1,11 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: index
-  -- Date Modified: 04/14/09 
-  -- Author: Taylor Evans
-  -- Description: This file displays the projects 
-  -- main page.
-  --
-  -- Edited  : 4/17/2009 by Jon Conti-Vock
-  -- Changes : added personal information
-  --		   fixed some spelling and grammar
-  -->
+<!-- Jam Packed Inventions 							-->
+<!-- HealthPack v1.0								-->
+<!-- File: index									-->
+<!-- Date Modified: 04/14/09 						-->
+<!-- Author: Taylor Evans							-->
+<!-- Description: This file displays the projects	--> 
+<!-- main page.										-->
+<!-- Last Edited By: Taylor Evans					-->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">

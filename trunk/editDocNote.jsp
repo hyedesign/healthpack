@@ -1,14 +1,11 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: editDocNote
-  -- Date Modified: 04/27/09 
-  -- Author: Taylor Evans 
-  -- Description: This file allows the a doctor to edit his
-  -- or her note to a patient.
-  --
-  -- Edited by: Jon Conti-Vock
-  -- 
-  -->
+<!-- Jam Packed Inventions 										-->
+<!-- HealthPack v1.0											-->
+<!-- File: editDocNote											-->
+<!-- Date Modified: 04/27/09 									-->
+<!-- Author: Taylor Evans 										-->
+<!-- Description: This file allows the a doctor to edit his		-->
+<!-- or her note to a patient.									-->
+<!-- Edited by: Jon Conti-Vock 									-->
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>

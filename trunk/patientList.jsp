@@ -1,13 +1,11 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: patientList
-  -- Date Modified: 04/28/09 
-  -- Author: Taylor Evans
-  -- Description: This file displays the list of patients 
-  -- created by the user.
-  -- 
-  -- last edited by Alex
-  -->
+<!-- Jam Packed Inventions	 								-->	
+<!-- HealthPack v1.0										-->
+<!-- File: patientList										-->
+<!-- Date Modified: 04/28/09 								-->
+<!-- Author: Taylor Evans									-->
+<!-- Description: This file displays the list of patients 	-->
+<!-- created by the user.									-->
+<!-- last edited by: Alex Bassett							-->
 
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>

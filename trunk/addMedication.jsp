@@ -1,12 +1,11 @@
-<!-- Jam Packed Inventions -->
-<!-- HealthPack v1.0
-  -- File: addMedication
-  -- Date Modified: 04/24/09 
-  -- Author: Jon Conti-Vock
-  -- Description: This file allows the user to add a new medication
-  -- his or her's Medications.
-  -- Last Edited By: Taylor Evans
-  -->
+<!-- Jam Packed Inventions 							-->
+<!-- HealthPack v1.0								-->
+<!-- File: addMedication							-->
+<!-- Date Modified: 04/24/09 						-->
+<!-- Author: Jon Conti-Vock							-->
+<!-- Description: This file allows the user to add 	-->
+<!-- a new medication his or her's Medications.		-->
+<!-- Last Edited By: Taylor Evans 					-->
   
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%> 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
