@@ -1,5 +1,5 @@
 <!-- Jam Packed Inventions -->
-<!-- Healthpack v0.3
+<!-- HealthPack v1.0
   -- File: addAllergies
   -- Date Created: 04/24/09 
   -- Author: Taylor Evans
@@ -46,11 +46,11 @@
 <stripes:errors/>
 <table>
 		<tr>
-			<td>Allergy Name:</td>
+			<td>*Allergy Name:</td>
 			<td><stripes:text name="allergyName"/></td>
 		</tr>
 		<tr>
-			<td>Description:</td>
+			<td>*Description:</td>
 			<td><stripes:textarea name="description" /></td>
 		</tr>
 		<tr>

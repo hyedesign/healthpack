@@ -1,9 +1,10 @@
 <!-- Jam Packed Inventions -->
-<!-- Healthpack
+<!-- HealthPack v1.0
   -- File: editTest
   -- Date Modified: 04/27/09 
   -- Author: Han Dong
   -- Description: This file allows user to add new tests
+  -- Last Edited By: Han Dong
   -->
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>
@@ -42,11 +43,11 @@
 	<stripes:errors/>
 	<table>
 		<tr>
-			<td>Test Name:</td>
+			<td>*Test Name:</td>
 			<td><stripes:text name="testName" size="20" /></td>
 		</tr>
 		<tr>
-			<td>Test Result:</td>
+			<td>*Test Result:</td>
 			<td><stripes:text name="testResult" size="20" /></td>
 		</tr>
 		<tr>
@@ -54,7 +55,7 @@
 			<td><stripes:textarea name="testDescription" cols="45" rows="5" /></td>
 		</tr>
 		<tr>
-			<td>Test Date:</td>
+			<td>*Test Date: (MM/DD/YYYY)</td>
 			<td>
 	    		<stripes:text name="testMonth" size="1" />/
 				<stripes:text name="testDay" size="1" />/
@@ -62,8 +63,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td><stripes:submit name="submit" value="Submit" />
-				<stripes:reset name="reset" value="Reset" /></td>
+			<td><stripes:submit name="submit" value="Submit" /></td>
 		</tr>
 	</table>
 </stripes:form>

@@ -1,12 +1,12 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.2
+<!-- Jam Packed Inventions -->
+<!-- HealthPack v1.0
   -- File: patientHome
   -- Date Modified: 04/30/09 
   -- Author: Taylor Evans
   -- Description: This file displays the specific user's 
   -- patient's homepage.
   --
-  -- Last edited by: Alex
+  -- Last edited by: Taylor Evans
   -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

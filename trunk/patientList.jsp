@@ -1,5 +1,5 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.2
+<!-- Jam Packed Inventions -->
+<!-- HealthPack v1.0
   -- File: patientList
   -- Date Modified: 04/28/09 
   -- Author: Taylor Evans

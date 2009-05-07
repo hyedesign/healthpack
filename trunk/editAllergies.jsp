@@ -1,5 +1,5 @@
 <!-- Jam Packed Inventions -->
-<!-- Healthpack v0.3
+<!-- HealthPack v1.0
   -- File: editAllergies
   -- Date Modified: 04/19/09 
   -- Author: Han Dong 

@@ -1,5 +1,5 @@
 <!-- Jam Packed Inventions  -->
-<!-- Healthpack v0.2
+<!-- HealthPack v1.0
   -- File: editUserInfo
   -- Date Modified: 04/14/09 
   -- Author: Taylor Evans
