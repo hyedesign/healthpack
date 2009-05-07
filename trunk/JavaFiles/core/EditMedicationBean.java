@@ -132,5 +132,17 @@ public class EditMedicationBean implements ActionBean {
         
     }
 	
+	 /**
+     * deletes the medication specified by the medication id
+     * from the mySQL database
+     * 
+     * @author Han Dong
+     */
+    public Resolution delete()
+    {
+    	MedicationSQL.deleteMedication(this.medicationId);
+    	return new ForwardResolution("patientList.jsp");
+    }
+	
 	
 }

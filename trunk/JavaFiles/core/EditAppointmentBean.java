@@ -83,5 +83,16 @@ public class EditAppointmentBean implements ActionBean {
         return new ForwardResolution("editAppointment.jsp");
     }
     
+    /**
+     * deletes the appointment specified by the appointmentID
+     * from the mySQL database
+     * 
+     * @author Han Dong
+     */
+    public Resolution delete()
+    {
+    	AppointmentSQL.deleteAppointment(this.appointmentID);
+    	return new ForwardResolution("patientList.jsp");
+    }
     
 }

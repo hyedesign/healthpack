@@ -82,7 +82,18 @@ public class GetTestBean implements ActionBean
 		this.testMonth = Integer.parseInt(s.substring(0,index));
 		this.testDay = Integer.parseInt(s.substring(index + 1, s.length()));
 
-		return new ForwardResolution("editTest.jsp");
-		
+		return new ForwardResolution("editTest.jsp");	
+    }
+	
+	/**
+     * deletes the test specified by the testID
+     * from the mySQL database
+     * 
+     * @author Han Dong
+     */
+    public Resolution delete()
+    {
+    	EditTestSQL.deleteTest(this.testID);
+    	return new ForwardResolution("patientList.jsp");
     }
 }
