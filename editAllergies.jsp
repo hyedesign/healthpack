@@ -50,7 +50,7 @@
 <table>
 		<stripes:hidden name="allergyID" value="${actionBean.allergyID }"/>
 		<tr>
-			<td>Allergy Name:</td>
+			<td>*Allergy Name:</td>
 			<td><stripes:text name="allergyName" value="${actionBean.allergyName}"/></td>
 		</tr>
 		<tr>

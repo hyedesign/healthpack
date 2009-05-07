@@ -127,7 +127,7 @@ public class AddMedicationBean implements ActionBean {
 		if (hasSpecialCharacters(medicationName))
     		errors.add("medicationName", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
     	
-		if(medicationDescription == "")
+		if(medicationDescription == null)
 		{
 			System.out.println("true");
 		}
