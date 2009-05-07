@@ -61,4 +61,16 @@ public class EditAllergyBean implements ActionBean {
     	}
     	return new ForwardResolution("editAllergies.jsp");
     }
+    
+    /**
+     * deletes the allergy specified by the allergyID
+     * from the mySQL database
+     * 
+     * @author Han Dong
+     */
+    public Resolution delete()
+    {
+    	AllergiesSQL.deleteAllergy(this.allergyID);
+    	return new ForwardResolution("patientList.jsp");
+    }
 }

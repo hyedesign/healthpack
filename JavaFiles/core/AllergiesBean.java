@@ -90,18 +90,6 @@ public class AllergiesBean implements ActionBean {
     }
     
     /**
-     * deletes the allergy specified by the allergyID
-     * from the mySQL database
-     * 
-     * @author Han Dong
-     */
-    public Resolution delete()
-    {
-    	AllergiesSQL.deleteAllergy(this.allergyID);
-    	return new ForwardResolution("patientList.jsp");
-    }
-    
-    /**
      * Checks the inputed string for illegal characters
      * and returns true if any are found. Otherwise it
      * returns false.
