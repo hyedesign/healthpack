@@ -1,5 +1,5 @@
 <!-- Jam Packed Inventions -->
-<!-- Healthpack v0.2
+<!-- HealthPack v1.0
   -- File: addAppointment
   -- Date Modified: 04/27/09 
   -- Author: Taylor Evans
@@ -46,7 +46,7 @@
 <stripes:errors/>
 <table>
 		<tr>
-			<td>Appointment Date</td>
+			<td>*Appointment Date</td>
 		</tr>
 		<tr>
 			<td>(MM/DD/YYYY):</td>
@@ -62,8 +62,7 @@
 			<td colspan="3"><stripes:checkbox name="reminder"/> Would you like to be reminded of this appointment?</td>
 		</tr>
 		<tr>
-			<td><stripes:submit name="submit" value="Submit"/>
-			    <stripes:reset name ="reset" value="Reset"/></td>
+			<td><stripes:submit name="submit" value="Submit"/></td>
 		</tr>
 	</table>
 </stripes:form>

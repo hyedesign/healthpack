@@ -1,5 +1,5 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.2
+<!-- Jam Packed Inventions -->
+<!-- HealthPack v1.0
   -- File: index
   -- Date Modified: 04/14/09 
   -- Author: Taylor Evans
@@ -56,11 +56,13 @@ background is in Java and C++. Basic knowledge of JSP, SQL, HTML, C, Assembly, P
 </p>
 
 <p>
-<b><i> Vahan Kristosturyan</i></b> - Acting design lead for Jam Packed Inventions. 
+<b><i> Vahan Kristosturyan</i></b> -  Acting design lead for Jam Packed Inventions. Major coding background 
+is in Java, SQL, HTML, C, Assembly, VB, and CSS. 
 </p>
 
 <p>
-<b><i> Alex Bassett </i></b> - Acting implementation and code lead for Jam Packed Inventions.
+<b><i> Alex Bassett </i></b> - Acting implementation and code lead for Jam Packed Inventions. Major coding
+background is in Java, SQL, HTML. Basic Knowledge of C and C++.
 </p>
 
 <p>

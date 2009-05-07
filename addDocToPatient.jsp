@@ -1,9 +1,10 @@
-<!-- Jam Packed Inventions -->
-<!-- File: addDocToPatient
+<!-- Jam Packed Inventions -->   
+<!-- HealthPack v1.0 
+  -- File: addDocToPatient
   -- Date Modified: 04/26/09 
   -- Author: Vahan Kristosturyan 
   -- Description: Adds the doctor to a patient from a drop down box.
-  --
+  -- Lasted Edited By: Taylor Evans
   -->
   
  <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>

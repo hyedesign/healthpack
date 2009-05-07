@@ -1,10 +1,11 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.2
+<!-- Jam Packed Inventions -->
+<!-- HealthPack v1.0
   -- File: regSuccess
   -- Date Modified: 04/14/09 
   -- Author: Alex Bassett
   -- Description: This file displays that the 
   -- user has successfully registered.
+  -- Last Edited By: Taylor Evans
   -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

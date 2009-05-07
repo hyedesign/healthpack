@@ -1,10 +1,11 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.2
+<!-- Jam Packed Inventions -->
+<!-- HealthPack v1.0
   -- File: register
   -- Date Modified: 04/17/09 
   -- Author: Alex Bassett
   -- Description: This file allows a user to 
   -- register as a doctor or regular user.
+  -- Last Edited By: Taylor Evans
   -->
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>

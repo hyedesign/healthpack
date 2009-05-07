@@ -1,9 +1,10 @@
 <!-- Jam Packed Inventions -->
-<!-- Healthpack v0.9
+<!-- Healthpack v1.0
   -- File: editPatient
   -- Date Modified: 04/30/09 
   -- Author: Alex Bassett
   -- Description: This file allows users to edit existing patients
+  -- Last Edited By: Taylor Evans
   -->
 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>

@@ -1,5 +1,5 @@
-<!-- Jam Packed Inventions
-  -- Healthpack v0.2
+<!-- Jam Packed Inventions -->
+<!-- HealthPack v1.0
   -- File: editDocNote
   -- Date Modified: 04/27/09 
   -- Author: Taylor Evans 
@@ -54,7 +54,9 @@
 			<td><stripes:textarea name="description" value="${actionBean.description}"/></td>
 		</tr>
 		<tr>
-            <td colspan="2"><stripes:submit name="submit" value="Submit"/></td>
+            <td colspan="2">
+            	<stripes:submit name="submit" value="Submit"/>
+            	<stripes:reset name ="reset" value="Reset"/></td>
         </tr>
 	</table>
 </stripes:form>

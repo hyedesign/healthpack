@@ -1,9 +1,10 @@
 <!-- Jam Packed Inventions -->
-<!-- Healthpack v0.6
+<!-- HealthPack v1.0
   -- File: addPatient
   -- Date Modified: 04/28/09 
   -- Author: Alex Bassett
   -- Description: This file allows users to add new patients
+  -- Last Edited By: Taylor Evans
   -->
 
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>

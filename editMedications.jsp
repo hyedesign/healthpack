@@ -1,5 +1,5 @@
 <!-- Jam Packed Inventions -->
-<!-- Healthpack v0.2
+<!-- HealthPack v1.0
   -- File: editMedications
   -- Date Modified: 04/29/09 
   -- Author: Han Dong

@@ -1,9 +1,10 @@
 <!-- Jam Packed Inventions -->
-<!-- Healthpack v0.2
+<!-- HealthPack v1.0
   -- File: editTest
   -- Date Modified: 04/23/09 
   -- Author: Han Dong
   -- Description: This file allows user to edit tests
+  -- Last Edited By: Taylor Evans
   -->
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld"%>
@@ -42,13 +43,13 @@
 <stripes:form beanclass="core.EditTestBean" focus="">
 	<stripes:errors/>
 	<table>
-	<div><input type="hidden" name="testID" value="${actionBean.testID}" /></div>
+	<stripes:hidden name="testID" value="${actionBean.testID }"/>
 		<tr>
-			<td>Test Name:</td>
+			<td>*Test Name:</td>
 			<td><stripes:text name="testName" size="20" value="${actionBean.testName}"/></td>
 		</tr>
 		<tr>
-			<td>Test Result:</td>
+			<td>*Test Result:</td>
 			<td><stripes:text name="testResult" size="20" value="${actionBean.testResult}"/></td>
 		</tr>
 		<tr>
@@ -56,7 +57,7 @@
 			<td><stripes:textarea name="testDescription" cols="45" rows="5" value="${actionBean.testDescription}"/></td>
 		</tr>
 		<tr>
-			<td>Test Date:</td>
+			<td>*Test Date:</td>
 			<td>
 	    		<stripes:text name="testMonth" size="1" value="${actionBean.testMonth}"/>/
 				<stripes:text name="testDay" size="1" value="${actionBean.testDay}"/>/
