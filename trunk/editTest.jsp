@@ -57,7 +57,7 @@
 			<td><stripes:textarea name="testDescription" cols="45" rows="5" value="${actionBean.testDescription}"/></td>
 		</tr>
 		<tr>
-			<td>*Test Date:</td>
+			<td>*Test Date(mm/dd/yyyy):</td>
 			<td>
 	    		<stripes:text name="testMonth" size="1" value="${actionBean.testMonth}"/>/
 				<stripes:text name="testDay" size="1" value="${actionBean.testDay}"/>/
