@@ -73,7 +73,6 @@
 		</tr>
 	</table>
 </stripes:form>
-<p><a href="patientHome.jsp"> Return </a> </p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
