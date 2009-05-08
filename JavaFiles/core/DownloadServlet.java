@@ -20,15 +20,12 @@ import java.sql.Statement;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-//import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class DownloadServlet extends HttpServlet
 {
 	//dba access allows access to mySQL database
 	private DBAccess dba = new DBAccess();
-	//temporarily here
-	//private ArrayList<Integer> patientAry = new ArrayList<Integer>();
 	//keeps track of patient number
 	public static String patientNum = "";
 
