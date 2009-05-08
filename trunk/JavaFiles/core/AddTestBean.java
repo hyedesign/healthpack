@@ -118,11 +118,11 @@ public class AddTestBean implements ActionBean
     	//checks the date to and make sure its valid
     	if (!(testMonth == 0 && testDay == 0 && testYear == 0)){
 	    	if(testMonth < 1 || testMonth > 12)
-	    		errors.add("birthMonth", new SimpleError("Invalid Birth Month"));
+	    		errors.add("birthMonth", new SimpleError("Invalid Test Month"));
 	    	if(testDay < 1 || testDay > 31)
-	    		errors.add("birthDay", new SimpleError("Invalid Birth Day"));
+	    		errors.add("birthDay", new SimpleError("Invalid Test Day"));
 	    	if(testYear > 2009 || testYear == 0)
-	    		errors.add("birthYear", new SimpleError("Invalid Birth Year"));
+	    		errors.add("birthYear", new SimpleError("Invalid Test Year"));
     	}
     }
     
