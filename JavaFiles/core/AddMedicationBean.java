@@ -127,6 +127,7 @@ public class AddMedicationBean implements ActionBean {
 		if (hasSpecialCharacters(medicationName))
     		errors.add("medicationName", new SimpleError("These characters are not allowed: <> () [] \\ / | = + * @ $ # ^ : ; "));
     	
+		System.out.println(medicationDescription);
 		if(medicationDescription == null)
 		{
 			System.out.println("true");
@@ -184,15 +185,5 @@ public class AddMedicationBean implements ActionBean {
    		return new ForwardResolution("patientList.jsp");
     }
     
-    /**
-     * deletes the medication specified by the medication id
-     * from the mySQL database
-     * 
-     * @author Han Dong
-     */
-    public Resolution delete()
-    {
-    	MedicationSQL.deleteMedication(this.medicationId);
-    	return new ForwardResolution("patientList.jsp");
-    }
+   
 }

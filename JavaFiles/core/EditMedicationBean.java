@@ -34,7 +34,7 @@ public class EditMedicationBean implements ActionBean {
     @Validate(required=false, maxlength=2) private int refillDay;
     @Validate(required=false, maxlength=2) private int refillMonth;
     @Validate(required=false, maxlength=4) private int refillYear;
-    @Validate(required=false, maxlength=255) private String description = 	"";
+    @Validate(required=false, maxlength=255) private String medicationDescription = 	"";
     
     public HPActionBeanContext getContext() { return this.context; }
     public void setContext(ActionBeanContext context) { this.context = (HPActionBeanContext) context; }
@@ -88,13 +88,13 @@ public class EditMedicationBean implements ActionBean {
 	public void setRefillYear(int refillYear) {
 		this.refillYear = refillYear;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public String getMedicationDescription() {
+		return medicationDescription;
 	}
-	public String getDescription() {
-		return description;
+	public void setMedicationDescription(String medicationDescription) {
+		this.medicationDescription = medicationDescription;
 	}
-
+	
 	@DefaultHandler
     public Resolution submit() {
     	MedicationSQL temp = new MedicationSQL();
@@ -124,9 +124,9 @@ public class EditMedicationBean implements ActionBean {
     		refillMonth = Integer.parseInt(t.substring(0,index2));
     		refillDay = Integer.parseInt(t.substring(index2 + 1, t.length()));
     		
-    		setDescription(temp.getMedicationDescription());
-    		description = temp.getMedicationDescription();
-    		if(description.equals("null")) { description = ""; }
+    		setMedicationDescription(temp.getMedicationDescription());
+    		medicationDescription = temp.getMedicationDescription();
+    		if(medicationDescription.equals("null")) { medicationDescription = ""; }
     	}	
     	return new ForwardResolution("editMedications.jsp");
         
