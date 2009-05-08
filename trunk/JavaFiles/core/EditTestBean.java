@@ -32,8 +32,8 @@ public class EditTestBean implements ActionBean
 	@Validate(required=true, maxlength=20) private String testResult;
 	@Validate(required=false) private String testDescription;
 	private Date testDate;
-	@Validate(required=true, maxlength=2, minlength=2) private int testMonth;
-	@Validate(required=true, maxlength=2, minlength=2)  private int testDay;
+	@Validate(required=true, maxlength=2, minlength=1) private int testMonth;
+	@Validate(required=true, maxlength=2, minlength=1)  private int testDay;
 	@Validate(required=true, maxlength=4, minlength=4) private int testYear;
 	
 	//getters and setters

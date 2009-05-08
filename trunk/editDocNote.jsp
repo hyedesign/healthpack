@@ -57,6 +57,7 @@
         </tr>
 	</table>
 </stripes:form>
+<a href="patientList.jsp"> Return to List </a>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
