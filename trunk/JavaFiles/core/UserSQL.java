@@ -202,7 +202,7 @@ public class UserSQL {
 			// construct and execute the SQL call, retrieve the results
 			Statement statement = dba_s.connection.createStatement ();
 			ResultSet results = statement.executeQuery ("SELECT * FROM users WHERE username='"+username+
-							"' AND userpassword='"+password+"'");
+							"' AND userpassword=sha1('"+password+"')");
 			
 			// attempt to load the userId from the ResultSet
 			int loadedId = NO_MATCHING_USER;
@@ -323,7 +323,7 @@ public class UserSQL {
 			if (isDoctor) isDoc = "1";
 			String s = "INSERT INTO users (username, userpassword, useremail," +
 					"userphone, userfirstname, userlastname, userisdoctor) " +
-					"VALUES ('" + name + "', '" + password + "', '" + email +
+					"VALUES ('" + name + "', sha1('" + password + "'), '" + email +
 					"', '" + phone + "', '" + firstName + "', '" + lastName +
 					"', '" + isDoc + "')";
 			Statement statement = dba_s.connection.createStatement ();
@@ -434,24 +434,15 @@ public class UserSQL {
 			// construct and execute the SQL call, updates database
 			Statement statement = dba_s.connection.createStatement();
 			
-			//if description is null, the user description will not be updated
-			if(description == null)
-			{
-				statement.executeUpdate("UPDATE cmsc345.users SET userpassword='"
-						+password+"', useremail='"+email+
-						"', userphone='"+phone+"', userfirstname='"
-						+firstName+"', userlastname='"+lastName+"' WHERE userid='"
-						+userID+"'");
-			}
-			else
-			{
-				statement.executeUpdate("UPDATE cmsc345.users SET userpassword='"
-						+password+"', useremail='"+email+
-						"', userphone='"+phone+"', userdescription='" +description+
-						"', userfirstname='"+firstName+"', userlastname='"+
-						lastName+"' WHERE userid='"
-						+userID+"'");
-			}
+			System.out.println(userID);
+			//updates
+			statement.executeUpdate("UPDATE cmsc345.users SET userpassword=sha1('"
+					+password+"'), useremail='"+email+
+					"', userphone='"+phone+"', userdescription='" +description+
+					"', userfirstname='"+firstName+"', userlastname='"+
+					lastName+"' WHERE userid='"
+					+userID+"'");
+		
 			
 			statement.close();
 			dba_s.disconnect();
