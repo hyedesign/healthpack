@@ -278,7 +278,7 @@ public class PatientSelectBean implements ActionBean {
 	 */
 	public Resolution delete() {
 		PatientSQL.deletePatient(patientId);
-		return new ForwardResolution("patientList.jsp");
+		return new ForwardResolution("userHomepage.jsp");
 	}
 	
 	/**
