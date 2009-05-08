@@ -11,15 +11,12 @@
 package core;
 
 import java.sql.Date;
-import java.util.Calendar;
 
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.HandlesEvent;
 import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.validation.Validate;
 
 public class GetTestBean implements ActionBean
 {
