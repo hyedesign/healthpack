@@ -70,6 +70,7 @@
 		</tr>
 	</table>
 </stripes:form>
+<a href="patientList.jsp"> Return to List </a>
 </div>
 <div id="footer"> 
 <%@include file="FooterInc.jsp" %>

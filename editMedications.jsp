@@ -65,7 +65,7 @@
 		</tr>
 		<tr>
 			<td>Description:</td>
-			<td><stripes:textarea name="description" value="${actionBean.description}"/></td>
+			<td><stripes:textarea name="medicationDescription" value="${actionBean.medicationDescription}"/></td>
 		</tr>
 		<tr>
 			<td><stripes:submit name="submit" value="Submit"/>
@@ -73,7 +73,7 @@
 		</tr>
 	</table>
 </stripes:form>
-<p><a href="patientHome.jsp"> Return </a> </p>
+<p><a href="patientList.jsp"> Return to List</a> </p>
 <!-- ********************* STOP HERE !!!! ********************* -->
 
 </div>
